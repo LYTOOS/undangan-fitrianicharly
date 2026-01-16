@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Walimatul ‘Urs</title>
+<title>Undangan Pernikahan</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -18,52 +16,54 @@
 
 body{
 margin:0;
-font-family:'Poppins',sans-serif;
+font-family:Poppins,sans-serif;
 background:var(--krim);
 color:var(--gelap);
-scroll-behavior:smooth;
 }
 
 section{
-padding:110px 20px;
+padding:90px 20px;
 text-align:center;
 }
 
 h1,h2{
 font-family:'Playfair Display',serif;
 color:var(--emas);
-letter-spacing:1px;
 }
 
 .hero{
-height:100vh;
-background:url('foto/cover.jpg') center/cover fixed;
+min-height:100vh;
+background:#222;
 display:flex;
 align-items:center;
 justify-content:center;
 color:#fff;
-position:relative;
-}
-
-.hero::after{
-content:"";
-position:absolute;
-inset:0;
-background:rgba(0,0,0,.55);
-}
-
-.hero-inner{
-position:relative;
-z-index:2;
 }
 
 .card{
 background:#fff;
-max-width:760px;
+max-width:820px;
 margin:40px auto;
-padding:55px 35px;
+padding:45px;
 border-radius:26px;
-box-shadow:0 28px 80px rgba(0,0,0,.14);
+box-shadow:0 20px 60px rgba(0,0,0,.15);
+}
+
+.lock{
+position:fixed;
+inset:0;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:999;
+}
+
+.lock-box{
+background:rgba(255,255,255,.1);
+padding:40px;
+border-radius:20px;
+color:#fff;
 }
 
 .btn{
@@ -72,146 +72,105 @@ border-radius:50px;
 border:none;
 background:linear-gradient(135deg,#d4af37,#b8962e);
 color:#fff;
-font-size:16px;
 }
 
-.lock{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.85);
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:999;
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
 }
 
-.lock-box{
-background:rgba(255,255,255,.12);
-backdrop-filter:blur(10px);
-padding:45px;
-border-radius:24px;
-color:#fff;
-text-align:center;
-}
-
-.swiper{
-width:90%;
-max-width:900px;
-border-radius:24px;
-overflow:hidden;
-}
-
-.swiper-slide img{
-width:100%;
-height:420px;
-object-fit:cover;
-}
-
-.rekening{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:14px 18px;
-margin:12px 0;
-border:1px solid #eee;
-border-radius:14px;
-cursor:pointer;
-transition:.3s;
-}
-
-.rekening:hover{
-background:#faf7ef;
-}
-
-.rekening span{
-font-size:13px;
-color:var(--emas);
+@media(max-width:640px){
+.grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOCK SCREEN -->
+<!-- LOCK -->
 <div class="lock" id="lock">
-<div class="lock-box" data-aos="zoom-in">
+<div class="lock-box">
 <h1>Charly Handani<br>& Pasangan</h1>
 <p>Kepada Yth.<br><b id="tamu"></b></p>
 <button class="btn" onclick="buka()">Buka Undangan</button>
 </div>
 </div>
 
-<!-- MUSIK -->
-<audio id="musik" loop>
-<source src="musik/lagu.mp3">
-</audio>
+<audio id="musik" loop></audio>
 
 <!-- HERO -->
 <section class="hero">
-<div class="hero-inner" data-aos="fade-up">
-<h1>Walimatul ‘Urs</h1>
+<div>
+<h1>THE ENGAGEMENT OF</h1>
 <p>Charly Handani & Pasangan</p>
 <p>Sabtu, 20 April 2026</p>
 </div>
 </section>
 
-<!-- VIDEO -->
-<section data-aos="fade-up">
+<!-- ADAT -->
+<section>
 <div class="card">
-<video autoplay muted loop style="width:100%;border-radius:18px">
-<source src="foto/video.mp4">
-</video>
-</div>
-</section>
-
-<!-- GALERI -->
-<section>
-<h2 data-aos="fade-up">Galeri Bahagia</h2>
-<div class="swiper" data-aos="zoom-in">
-<div class="swiper-wrapper">
-<div class="swiper-slide"><img src="foto/galeri1.jpg"></div>
-<div class="swiper-slide"><img src="foto/galeri2.jpg"></div>
-<div class="swiper-slide"><img src="foto/galeri3.jpg"></div>
-<div class="swiper-slide"><img src="foto/galeri4.jpg"></div>
-</div>
-</div>
-</section>
-
-<!-- TANDA KASIH -->
-<section>
-<h2 data-aos="fade-up">Tanda Kasih</h2>
-<p style="max-width:520px;margin:0 auto 35px;font-size:15px;color:#666">
-Doa restu Anda merupakan anugerah terindah bagi kami.
-Namun apabila berkenan memberikan tanda kasih, dapat melalui:
+<h2>Adat Melayu</h2>
+<p>
+Dengan menjunjung tinggi adat dan syariat Melayu Riau,
+pernikahan ini dilaksanakan dalam suasana penuh marwah,
+berlandaskan adat bersendi syarak,
+syarak bersendi Kitabullah.
 </p>
+</div>
+</section>
 
+<!-- AKAD & RESEPSI -->
+<section>
 <div class="card">
+<h2>Rangkaian Acara</h2>
 
-<img src="foto/qris.png" style="max-width:220px;border-radius:18px;margin-bottom:30px">
-
-<div style="max-width:380px;margin:0 auto;text-align:left">
-
-<div class="rekening" data-bank="DANA" data-no="082261467360">
-<b>DANA</b><br>082261467360
-<span>Salin</span>
+<div class="grid">
+<div>
+<h3>Akad Nikah</h3>
+<p>
+Sabtu, 20 April 2026<br>
+Pukul 08.00 WIB<br>
+Kediaman Mempelai Wanita
+</p>
 </div>
 
-<div class="rekening" data-bank="GoPay" data-no="082261467360">
-<b>GoPay</b><br>082261467360
-<span>Salin</span>
+<div>
+<h3>Resepsi</h3>
+<p>
+Sabtu, 20 April 2026<br>
+Pukul 11.00 – 16.00 WIB<br>
+Gedung Balai Adat Melayu
+</p>
+</div>
 </div>
 
-<div class="rekening" data-bank="SeaBank" data-no="901163062173">
-<b>SeaBank</b><br>9011 6306 2173
-<span>Salin</span>
 </div>
+</section>
 
+<!-- LOKASI -->
+<section>
+<div class="card">
+<h2>Lokasi Acara</h2>
+<p>Gedung Balai Adat Melayu, Indragiri Hilir, Riau</p>
+<iframe 
+src="https://www.google.com/maps?q=Balai+Adat+Melayu+Indragiri+Hilir&output=embed"
+width="100%" height="320" style="border-radius:18px;border:0" loading="lazy">
+</iframe>
 </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section>
+<div class="card">
+<h2>Menuju Hari Bahagia</h2>
+<p id="countdown"></p>
 </div>
 </section>
 
 <!-- PENUTUP -->
-<section data-aos="fade-up">
+<section>
 <p>
 Merupakan suatu kehormatan dan kebahagiaan bagi kami
 apabila Bapak/Ibu/Saudara/i berkenan hadir
@@ -220,28 +179,28 @@ serta memberikan doa restu.
 <p><i>Wassalamu’alaikum Warahmatullahi Wabarakatuh</i></p>
 </section>
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
 <script>
-AOS.init({once:true,duration:1300});
-new Swiper('.swiper',{loop:true,autoplay:{delay:2800}});
-
 const q=new URLSearchParams(location.search);
 document.getElementById("tamu").innerText=q.get("to")||"Tamu Undangan";
 
 function buka(){
 document.getElementById("lock").style.display="none";
-document.getElementById("musik").play();
+const m=document.getElementById("musik");
+m.src="musik/lagu.mp3";
+m.play().catch(()=>{});
 }
 
-document.querySelectorAll('.rekening').forEach(item=>{
-item.onclick=()=>{
-navigator.clipboard.writeText(item.dataset.no);
-const wa=`https://wa.me/6282261467360?text=Assalamu’alaikum,%20Saya%20telah%20mengirim%20tanda%20kasih%20melalui%20${item.dataset.bank}.`;
-setTimeout(()=>window.open(wa,'_blank'),500);
-}
-});
+const target=new Date("2026-04-20T08:00:00").getTime();
+setInterval(()=>{
+const now=new Date().getTime();
+const d=target-now;
+if(d<0)return;
+const hari=Math.floor(d/(1000*60*60*24));
+const jam=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+const menit=Math.floor((d%(1000*60*60))/(1000*60));
+document.getElementById("countdown").innerText=
+hari+" Hari • "+jam+" Jam • "+menit+" Menit";
+},1000);
 </script>
 
 </body>
