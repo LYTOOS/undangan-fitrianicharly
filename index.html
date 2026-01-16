@@ -104,8 +104,10 @@ small{color:#888}
 
 <section>
 <h2>Lokasi Acara</h2>
-<iframe src="https://www.google.com/maps?q=Balai+Adat+Melayu+Indragiri+Hilir&output=embed"
-width="100%" height="320" style="border:0;border-radius:18px"></iframe>
+<iframe
+src="https://www.google.com/maps?q=Balai+Adat+Melayu+Indragiri+Hilir&output=embed"
+width="100%" height="320" style="border:0;border-radius:18px">
+</iframe>
 </section>
 
 <section>
@@ -119,11 +121,9 @@ width="100%" height="320" style="border:0;border-radius:18px"></iframe>
 <section>
 <div class="card">
 <h2>Ucapan & Doa</h2>
-
 <input id="nama" placeholder="Nama">
 <textarea id="pesan" placeholder="Tulis ucapan..."></textarea>
-<button onclick="kirim()">Kirim Ucapan</button>
-
+<button onclick="kirimUcapan()">Kirim Ucapan</button>
 <div id="listUcapan"></div>
 </div>
 </section>
@@ -133,6 +133,7 @@ width="100%" height="320" style="border:0;border-radius:18px"></iframe>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
 <script>
+// ===== FIREBASE INIT =====
 const firebaseConfig = {
   apiKey: "AIzaSyCr2VF6hZ3pLWU5eORdrtdM1c5L_AcLVH4",
   authDomain: "undangan-pernikahan-f6d5e.firebaseapp.com",
@@ -142,27 +143,61 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
+// ===== MUSIK =====
 function play(){
-document.getElementById('musik').play();
+document.getElementById("musik").play();
 }
 
-function kirim(){
-const nama = document.getElementById('nama').value;
-const pesan = document.getElementById('pesan').value;
-if(!nama || !pesan) return alert("Lengkapi nama & ucapan");
+// ===== ANTI SPAM =====
+const deviceKey = localStorage.getItem("deviceKey") ||
+("dev-" + Math.random().toString(36).substr(2,9));
+localStorage.setItem("deviceKey", deviceKey);
+
+const LIMIT = 3;
+const DELAY = 30000;
+
+// ===== KIRIM UCAPAN =====
+function kirimUcapan(){
+const nama = document.getElementById("nama").value.trim();
+const pesan = document.getElementById("pesan").value.trim();
+
+if(nama.length < 3) return alert("Nama minimal 3 huruf");
+if(pesan.length < 5) return alert("Ucapan terlalu singkat");
+
+db.ref("ucapan").orderByChild("device").equalTo(deviceKey)
+.once("value", snap=>{
+if(snap.numChildren() >= LIMIT)
+return alert("Batas ucapan tercapai");
+
+db.ref("ucapan").orderByChild("waktu").limitToLast(1)
+.once("value", last=>{
+let lastTime = 0;
+last.forEach(s=>lastTime = s.val().waktu);
+if(Date.now() - lastTime < DELAY)
+return alert("Tunggu 30 detik sebelum kirim lagi");
+
 db.ref("ucapan").push({
 nama:nama,
 pesan:pesan,
-waktu:Date.now()
+waktu:Date.now(),
+device:deviceKey
 });
-document.getElementById('pesan').value="";
+
+document.getElementById("pesan").value="";
+});
+});
 }
 
-db.ref("ucapan").on("child_added",snap=>{
-const d=snap.val();
-const div=document.createElement("div");
-div.className="ucapan";
-div.innerHTML=`<b>${d.nama}</b><br>${d.pesan}<br><small>${new Date(d.waktu).toLocaleString()}</small>`;
+// ===== LOAD UCAPAN REALTIME =====
+db.ref("ucapan").on("child_added", snap=>{
+const d = snap.val();
+const div = document.createElement("div");
+div.className = "ucapan";
+div.innerHTML = `
+<b>${d.nama}</b><br>
+${d.pesan}<br>
+<small>${new Date(d.waktu).toLocaleString()}</small>
+`;
 document.getElementById("listUcapan").prepend(div);
 });
 </script>
