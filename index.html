@@ -13,83 +13,16 @@ body{margin:0;font-family:Poppins;background:#fffaf2;color:#2b261f}
 section{padding:90px 20px;text-align:center}
 h1,h2{font-family:'Playfair Display',serif;color:#c9a24d}
 .hero{min-height:100vh;background:url('foto/cover.jpg') center/cover fixed;display:flex;align-items:center;justify-content:center;color:#fff}
-#gate{
-position:fixed;
-inset:0;
-background:
-linear-gradient(135deg,#1c1b18,#2b261f),
-url('foto/cover.jpg') center/cover;
-z-index:9999;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-}
-
-.gate{
-position:absolute;
-top:0;
-width:50%;
-height:100%;
-background:linear-gradient(135deg,#d4af37,#b8962e);
-transition:1.2s ease-in-out;
-}
-
-.gate.left{left:0}
-.gate.right{right:0}
-
+#gate{position:fixed;inset:0;background:linear-gradient(135deg,#1c1b18,#2b261f),url('foto/cover.jpg') center/cover;z-index:9999;display:flex;align-items:center;justify-content:center}
+.gate{position:absolute;top:0;width:50%;height:100%;background:linear-gradient(135deg,#d4af37,#b8962e);transition:1.2s}
+.gate.left{left:0}.gate.right{right:0}
 #gate.open .left{transform:translateX(-100%)}
 #gate.open .right{transform:translateX(100%)}
-
-.gate-text{
-position:relative;
-z-index:2;
-text-align:center;
-color:#fff;
-}
-.songket{
-background:
-linear-gradient(120deg,
-rgba(212,175,55,.15) 25%,
-rgba(255,215,0,.25) 50%,
-rgba(212,175,55,.15) 75%);
-background-size:200% 200%;
-animation:songket 6s infinite linear;
-}
-
-@keyframes songket{
-0%{background-position:0% 50%}
-100%{background-position:200% 50%}
-}
-.qris-protect{
-filter:blur(12px);
-transition:.3s;
-}
-.qris-protect:hover{
-filter:none;
-}
 .card{background:#fff;max-width:900px;margin:40px auto;padding:50px;border-radius:26px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
-.grid img{width:100%;height:220px;object-fit:cover;border-radius:18px}
-.slider{
-display:flex;
-gap:16px;
-overflow-x:auto;
-scroll-snap-type:x mandatory;
-}
-.slider img{
-width:280px;
-border-radius:20px;
-scroll-snap-align:center;
-}
-input,textarea{width:100%;padding:14px;border-radius:12px;border:1px solid #ddd;margin-bottom:14px}
-button{padding:14px 36px;border-radius:40px;border:none;background:linear-gradient(135deg,#d4af37,#b8962e);color:#fff;cursor:pointer}
-.ucapan{text-align:left;border-bottom:1px solid #eee;padding:12px 0}
-.copy{cursor:pointer;color:#c9a24d;font-weight:600}
-.qris{max-width:220px;cursor:pointer}
-#popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);align-items:center;justify-content:center}
-#popup img{max-width:300px;border-radius:20px}
-small{color:#888}
+.slider{display:flex;gap:16px;overflow-x:auto}
+.slider img{width:280px;border-radius:20px}
+.songket{background:linear-gradient(120deg,rgba(212,175,55,.15),rgba(255,215,0,.25));animation:songket 6s infinite}
+@keyframes songket{to{background-position:200%}}
 </style>
 </head>
 
@@ -98,8 +31,8 @@ small{color:#888}
 <div id="gate">
 <div class="gate left"></div>
 <div class="gate right"></div>
-<div class="gate-text">
-<h1>Walimatul ‘Urs</h1>
+<div>
+<h1 style="color:#fff">Walimatul ‘Urs</h1>
 <button onclick="openGate()">Buka Undangan</button>
 </div>
 </div>
@@ -110,55 +43,26 @@ small{color:#888}
 <div data-aos="zoom-in">
 <h1>Walimatul ‘Urs</h1>
 <p id="tamu">Tamu Undangan</p>
-<p>Minggu, 15 Februari 2026</p>
+<p>15 Februari 2026</p>
 </div>
 </section>
 
-<section class="songket" data-aos="fade-up">
+<section class="songket">
 <h2>Adat Melayu Riau</h2>
-<p>
-Dengan memohon ridho Allah SWT,  
-kami melaksanakan pernikahan sesuai adat Melayu Riau,  
-didahului dengan tepuk tepung tawar  
-sebagai tanda restu keluarga dan adat.
-</p>
-<p><i>“Takkan Melayu hilang di bumi.”</i></p>
+<p>Takkan Melayu hilang di bumi.</p>
 </section>
 
-<section data-aos="fade-up">
-<h2>Pantun Adat Melayu</h2>
-<p id="pantun" style="font-style:italic;font-size:18px"></p>
+<section>
+<h2>Pantun</h2>
+<p id="pantun"></p>
 </section>
 
-<section data-aos="fade-up">
-<h2>Keluarga Besar</h2>
-<p>
-Putra dari pasangan<br>
-<b>Bapak Zaili</b> & <b>Ibu Erni Wati</b>
-</p>
-<br>
-<p>
-Putri dari pasangan<br>
-<b>Bapak Raja Pian</b> & <b>Ibu Yati</b>
-</p>
-</section>
-
-<section data-aos="fade-up">
+<section>
 <h2>Menuju Hari Bahagia</h2>
-<div id="countdown" style="font-size:28px;font-weight:600"></div>
+<div id="countdown"></div>
 </section>
 
-<section data-aos="fade-up">
-<h2>Akad Nikah</h2>
-<p>07.00 WIB<br>Kantor KUA Kec. Concong</p>
-</section>
-
-<section data-aos="fade-up">
-<h2>Resepsi</h2>
-<p>11.00 – 17.00 WIB<br>Kediaman Mempelai Wanita</p>
-</section>
-
-<section data-aos="fade-up">
+<section>
 <h2>Galeri</h2>
 <div class="slider">
 <img src="foto/galeri1.jpg">
@@ -168,160 +72,56 @@ Putri dari pasangan<br>
 </div>
 </section>
 
-<section data-aos="fade-up">
-<h2>Tanda Kasih</h2>
+<section>
 <div class="card">
-<img src="foto/qris.png"
-class="qris qris-protect"
-onclick="popup(true)">
-<p><small>Sentuh & tahan untuk melihat QR</small></p>
-<p class="copy" onclick="copy('082261467360')">DANA: 082261467360</p>
-<p class="copy" onclick="copy('082261467360')">GoPay: 082261467360</p>
-<p class="copy" onclick="copy('901163062173')">SeaBank: 901163062173</p>
-</div>
-</section>
-
-<section data-aos="fade-up">
-<div class="card">
-<h2>Ucapan & Doa</h2>
+<h2>Ucapan</h2>
 <input id="nama" placeholder="Nama">
-<textarea id="pesan" placeholder="Tulis ucapan"></textarea>
+<textarea id="pesan"></textarea>
 <button onclick="kirim()">Kirim</button>
 <div id="listUcapan"></div>
 </div>
 </section>
-
-<div id="popup" onclick="popup(false)">
-<img src="foto/qris.png">
-</div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script>
-AOS.init({duration:1200,once:true});
+AOS.init();
 
-const firebaseConfig={
+firebase.initializeApp({
 apiKey:"AIzaSyCr2VF6hZ3pLWU5eORdrtdM1c5L_AcLVH4",
 authDomain:"undangan-pernikahan-f6d5e.firebaseapp.com",
 databaseURL:"https://undangan-pernikahan-f6d5e-default-rtdb.asia-southeast1.firebasedatabase.app",
 projectId:"undangan-pernikahan-f6d5e"
-};
-firebase.initializeApp(firebaseConfig);
-const db=firebase.database();
+});
 
-const pantunList = [
-"Pergi ke hulu mencari sepat,  
-singgah sebentar di tepi paya.  
-Jika niat sudah terpatri di hati,  
-akad nikah jadi penyempurna cinta.",
+const db = firebase.database();
+const listUcapan = document.getElementById("listUcapan");
 
-"Songket disulam benang emas,  
-dipakai raja di hari mulia.  
-Restu orang tua doa terikhlas,  
-rumah tangga bahagia selamanya.",
-
-"Kalau berlayar ke Indragiri,  
-jangan lupa membawa bekal.  
-Bila akad telah diikrari,  
-cinta halal jadi modal kekal."
-];
-
-document.getElementById("pantun").innerText =
-pantunList[Math.floor(Math.random()*pantunList.length)];
-
-const WA_NUMBER="6282261467360";
-const WA_APIKEY="APIKEY_KAMU";
-
-const device = localStorage.device || ("dev-"+Math.random().toString(36).substr(2,9));
-localStorage.device = device;
-
-function play(){document.getElementById("musik").play()}
-function popup(show){
-document.getElementById("popup").style.display = show ? "flex" : "none";
-}
-function copy(t){navigator.clipboard.writeText(t);alert("Disalin")}
+const pantun=["Takkan Melayu hilang di bumi"];
+pantunEl.innerText=pantun[0];
 
 function kirim(){
-if(localStorage.ucapanTerkirim)
-return alert("Ucapan sudah terkirim 🙏");
-
-const n=nama.value.trim(), p=pesan.value.trim();
-if(n.length<3||p.length<5) return alert("Lengkapi");
-
-const data={nama:n,pesan:p,waktu:Date.now(),device};
-db.ref("ucapan").push(data);
-
-localStorage.ucapanTerkirim=true;
-
-fetch(`https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20Baru%20${n}%20:%20${p}&apikey=${WA_APIKEY}`);
-
-pesan.value="";
+const n=nama.value,p=pesan.value;
+db.ref("ucapan").push({n,p});
 }
 
 db.ref("ucapan").on("child_added",s=>{
 const d=s.val();
-listUcapan.prepend(Object.assign(document.createElement("div"),{
-className:"ucapan",
-innerHTML:`<b>${d.nama}</b><br>${d.pesan}<br><small>${new Date(d.waktu).toLocaleString()}</small>`
-}));
+listUcapan.innerHTML+=`<p><b>${d.n}</b>: ${d.p}</p>`;
 });
 
-const params=new URLSearchParams(location.search);
-if(params.get("to")) document.getElementById("tamu").innerText="Yth. "+params.get("to");
-</script>
-  
-<script>
-const isAdmin =
-location.hash === "#admin-rahasia-2026";
-
-if(isAdmin){
-document.body.style.outline="5px dashed gold";
-console.log("ADMIN MODE AKTIF");
-}
-</script>
-
-<script>
 function openGate(){
-document.getElementById("gate").classList.add("open");
-document.getElementById("musik").play();
-setTimeout(()=>{
 document.getElementById("gate").remove();
-},1300);
+document.getElementById("musik").play();
 }
-</script>
 
-<script>
-const target = new Date("2026-02-15T07:00:00").getTime();
-
+const target=new Date("2026-02-15").getTime();
 setInterval(()=>{
-  const now = Date.now();
-  const d = target - now;
-
-  if(d < 0){
-    countdown.innerHTML = "Hari Ini";
-    return;
-  }
-
-  const days = Math.floor(d / 86400000);
-  const h = Math.floor(d % 86400000 / 3600000);
-  const m = Math.floor(d % 3600000 / 60000);
-  const s = Math.floor(d % 60000 / 1000);
-
-  countdown.innerHTML =
-  `${days} hari ${h} jam ${m} menit ${s} detik`;
+const d=target-Date.now();
+countdown.innerHTML=Math.floor(d/86400000)+" hari";
 },1000);
-</script>
-
-<script>
-window.addEventListener("scroll",()=>{
-const sc=window.pageYOffset;
-const hero = document.querySelector(".hero");
-if(hero){
-hero.style.backgroundPositionY = sc*0.4 + "px";
-}
-});
 </script>
 
 </body>
