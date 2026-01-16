@@ -5,20 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Charly & Pasangan</title>
 
-<!-- FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-
-<!-- AOS ANIMATION -->
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-<!-- SWIPER -->
 <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
 
 <style>
 :root{
 --gold:#c9a24d;
+--gold-soft:#e6d8a8;
 --cream:#fffaf2;
---dark:#2f2a22;
+--dark:#2b2620;
 }
 
 body{
@@ -26,10 +22,11 @@ margin:0;
 font-family:'Poppins',sans-serif;
 background:var(--cream);
 color:var(--dark);
+scroll-behavior:smooth;
 }
 
 section{
-padding:100px 20px;
+padding:120px 20px;
 text-align:center;
 }
 
@@ -39,68 +36,85 @@ color:var(--gold);
 letter-spacing:1px;
 }
 
-.cover{
-height:100vh;
-background:url('https://images.unsplash.com/photo-1519741497674-611481863552') center/cover fixed;
+.lock{
+position:fixed;
+inset:0;
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url('https://images.unsplash.com/photo-1519741497674-611481863552') center/cover;
+z-index:999;
 display:flex;
-flex-direction:column;
-justify-content:center;
 align-items:center;
+justify-content:center;
 color:#fff;
 }
 
-.overlay{
-background:rgba(0,0,0,.55);
-position:absolute;
-inset:0;
+.lock-content{
+background:rgba(255,255,255,.1);
+backdrop-filter:blur(8px);
+padding:50px;
+border-radius:20px;
 }
 
-.cover-content{
+.btn{
+padding:14px 40px;
+border-radius:50px;
+border:none;
+font-size:16px;
+background:linear-gradient(135deg,#d4af37,#b8962e);
+color:#fff;
+}
+
+.hero{
+height:100vh;
+background:url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e') center/cover fixed;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#fff;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.55);
+}
+
+.hero-content{
 position:relative;
 z-index:2;
 }
 
-.btn{
-padding:14px 38px;
-border-radius:40px;
-background:linear-gradient(135deg,#d4af37,#b8962e);
-color:#fff;
-border:none;
-font-size:16px;
-}
-
 .card{
 background:#fff;
-max-width:720px;
-margin:30px auto;
-padding:50px 30px;
-border-radius:20px;
-box-shadow:0 25px 60px rgba(0,0,0,.12);
+max-width:780px;
+margin:40px auto;
+padding:60px 40px;
+border-radius:24px;
+box-shadow:0 30px 80px rgba(0,0,0,.15);
 }
 
-/* SWIPER */
+.parallax{
+height:400px;
+background:url('https://images.unsplash.com/photo-1520854221256-17451cc331bf') center/cover fixed;
+}
+
 .swiper{
 width:90%;
-max-width:900px;
-margin:auto;
-border-radius:20px;
+max-width:960px;
+border-radius:24px;
 overflow:hidden;
 }
+
 .swiper-slide img{
 width:100%;
-height:400px;
+height:420px;
 object-fit:cover;
-}
-
-/* PARALLAX IMAGE */
-.parallax{
-background:url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e') center/cover fixed;
-height:350px;
 }
 
 input,textarea{
 width:100%;
-padding:14px;
+padding:16px;
 margin:10px 0;
 border-radius:14px;
 border:1px solid #ddd;
@@ -110,19 +124,26 @@ border:1px solid #ddd;
 
 <body>
 
-<!-- COVER -->
-<section class="cover">
-<div class="overlay"></div>
-<div class="cover-content" data-aos="fade-up">
+<!-- LOCK SCREEN -->
+<div class="lock" id="lock">
+<div class="lock-content" data-aos="zoom-in">
 <h1>Charly & Pasangan</h1>
 <p>Kepada Yth.<br><b id="tamu"></b></p>
 <button class="btn" onclick="buka()">Buka Undangan</button>
 </div>
-</section>
+</div>
 
 <audio id="musik" loop>
 <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c0b8c7f38.mp3">
 </audio>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-content" data-aos="fade-up">
+<h1>Charly & Pasangan</h1>
+<p>20 April 2026</p>
+</div>
+</section>
 
 <!-- AYAT -->
 <section data-aos="fade-up">
@@ -133,7 +154,6 @@ untukmu agar kamu merasa tenteram kepadanya.”
 </i></p>
 </section>
 
-<!-- PARALLAX -->
 <div class="parallax"></div>
 
 <!-- MEMPELAI -->
@@ -149,9 +169,9 @@ Putri dari Bapak Nama Ayah & Ibu Nama Ibu
 </div>
 </section>
 
-<!-- SLIDER GALERI -->
+<!-- GALERI -->
 <section>
-<h2 data-aos="fade-up">Galeri</h2>
+<h2 data-aos="fade-up">Momen Bahagia</h2>
 <div class="swiper" data-aos="zoom-in">
 <div class="swiper-wrapper">
 <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"></div>
@@ -163,7 +183,7 @@ Putri dari Bapak Nama Ayah & Ibu Nama Ibu
 
 <!-- ACARA -->
 <section>
-<h2 data-aos="fade-up">Acara</h2>
+<h2 data-aos="fade-up">Detail Acara</h2>
 <div class="card" data-aos="fade-up">
 <b>Akad Nikah</b><br>
 Sabtu, 20 April 2026<br>
@@ -179,7 +199,7 @@ Pukul 11.00 WIB – Selesai
 <section>
 <h2 data-aos="fade-up">Lokasi</h2>
 <div class="card" data-aos="zoom-in">
-<iframe src="https://www.google.com/maps?q=-6.175392,106.827153&output=embed" height="320"></iframe>
+<iframe src="https://www.google.com/maps?q=-6.175392,106.827153&output=embed" height="340"></iframe>
 </div>
 </section>
 
@@ -211,15 +231,15 @@ AOS.init({once:true,duration:1200});
 
 new Swiper('.swiper',{
 loop:true,
-autoplay:{delay:2500}
+autoplay:{delay:2800}
 });
 
 const q=new URLSearchParams(location.search);
 document.getElementById("tamu").innerText=q.get("to")||"Tamu Undangan";
 
 function buka(){
+document.getElementById("lock").style.display="none";
 document.getElementById("musik").play();
-window.scrollTo(0,window.innerHeight);
 }
 
 function kirim(){
