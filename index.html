@@ -3,74 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Charly & Pasangan</title>
+<title>Undangan Pernikahan</title>
 
+<!-- GOOGLE FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
 
 <style>
 :root{
---gold:#c9a24d;
---gold-soft:#e6d8a8;
---cream:#fffaf2;
---dark:#2b2620;
+--emas:#c9a24d;
+--emas-muda:#ead8a0;
+--krim:#fffaf2;
+--gelap:#2b261f;
 }
 
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
-background:var(--cream);
-color:var(--dark);
+background:var(--krim);
+color:var(--gelap);
 scroll-behavior:smooth;
 }
 
-section{
-padding:120px 20px;
-text-align:center;
-}
+section{padding:120px 20px;text-align:center}
 
 h1,h2{
 font-family:'Playfair Display',serif;
-color:var(--gold);
+color:var(--emas);
 letter-spacing:1px;
 }
 
 .lock{
 position:fixed;
 inset:0;
-background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-url('https://images.unsplash.com/photo-1519741497674-611481863552') center/cover;
+background:
+linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url('FOTO_KAMU_COVER.jpg') center/cover;
 z-index:999;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 color:#fff;
 }
 
-.lock-content{
+.lock-box{
 background:rgba(255,255,255,.1);
-backdrop-filter:blur(8px);
+backdrop-filter:blur(10px);
 padding:50px;
-border-radius:20px;
+border-radius:24px;
 }
 
 .btn{
 padding:14px 40px;
 border-radius:50px;
 border:none;
-font-size:16px;
 background:linear-gradient(135deg,#d4af37,#b8962e);
 color:#fff;
+font-size:16px;
 }
 
 .hero{
 height:100vh;
-background:url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e') center/cover fixed;
+background:url('cover.jpg') center/cover fixed;
 display:flex;
 align-items:center;
 justify-content:center;
 color:#fff;
+position:relative;
 }
 
 .hero::after{
@@ -80,7 +80,7 @@ inset:0;
 background:rgba(0,0,0,.55);
 }
 
-.hero-content{
+.hero-inner{
 position:relative;
 z-index:2;
 }
@@ -90,19 +90,19 @@ background:#fff;
 max-width:780px;
 margin:40px auto;
 padding:60px 40px;
-border-radius:24px;
-box-shadow:0 30px 80px rgba(0,0,0,.15);
+border-radius:26px;
+box-shadow:0 30px 90px rgba(0,0,0,.15);
 }
 
 .parallax{
-height:400px;
-background:url('https://images.unsplash.com/photo-1520854221256-17451cc331bf') center/cover fixed;
+height:420px;
+background:url('galeri4.jpg') center/cover fixed;
 }
 
 .swiper{
 width:90%;
 max-width:960px;
-border-radius:24px;
+border-radius:26px;
 overflow:hidden;
 }
 
@@ -126,30 +126,33 @@ border:1px solid #ddd;
 
 <!-- LOCK SCREEN -->
 <div class="lock" id="lock">
-<div class="lock-content" data-aos="zoom-in">
-<h1>Charly & Pasangan</h1>
+<div class="lock-box" data-aos="zoom-in">
+<h1>Charly Handani<br>& Pasangan</h1>
 <p>Kepada Yth.<br><b id="tamu"></b></p>
 <button class="btn" onclick="buka()">Buka Undangan</button>
 </div>
 </div>
 
+<!-- MUSIK -->
 <audio id="musik" loop>
-<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c0b8c7f38.mp3">
+<source src="lagu.mp3">
 </audio>
 
 <!-- HERO -->
 <section class="hero">
-<div class="hero-content" data-aos="fade-up">
-<h1>Charly & Pasangan</h1>
-<p>20 April 2026</p>
+<div class="hero-inner" data-aos="fade-up">
+<h1>Walimatul ‘Urs</h1>
+<p>Charly Handani & Pasangan</p>
+<p>Sabtu, 20 April 2026</p>
 </div>
 </section>
 
 <!-- AYAT -->
 <section data-aos="fade-up">
 <p><i>
-“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan
-untukmu agar kamu merasa tenteram kepadanya.”
+“Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan
+untukmu agar kamu merasa tenteram kepadanya,
+dan dijadikan-Nya di antara kamu kasih dan sayang.”
 <br>(QS. Ar-Rum : 21)
 </i></p>
 </section>
@@ -158,37 +161,53 @@ untukmu agar kamu merasa tenteram kepadanya.”
 
 <!-- MEMPELAI -->
 <section>
-<h2 data-aos="fade-up">Mempelai</h2>
+<h2 data-aos="fade-up">Kedua Mempelai</h2>
+
 <div class="card" data-aos="fade-right">
-<b>Charly Handani</b><br>
-Putra dari Bapak Nama Ayah & Ibu Nama Ibu
+<b>Ananda Charly Handani</b><br>
+Putra dari Bapak <b>Nama Ayah</b><br>
+dan Ibu <b>Nama Ibu</b>
 </div>
+
 <div class="card" data-aos="fade-left">
-<b>Nama Pasangan</b><br>
-Putri dari Bapak Nama Ayah & Ibu Nama Ibu
+<b>Ananda Nama Lengkap Pasangan</b><br>
+Putri dari Bapak <b>Nama Ayah</b><br>
+dan Ibu <b>Nama Ibu</b>
+</div>
+</section>
+
+<!-- PETUAH MELAYU -->
+<section data-aos="fade-up">
+<div class="card">
+<p><i>
+“Adat bersendi syarak, syarak bersendi Kitabullah.<br>
+Ikatan suci ini diharap membawa berkat,
+menjadi rumah tangga yang sakinah, mawaddah, warahmah.”
+</i></p>
 </div>
 </section>
 
 <!-- GALERI -->
 <section>
-<h2 data-aos="fade-up">Momen Bahagia</h2>
+<h2 data-aos="fade-up">Galeri Bahagia</h2>
 <div class="swiper" data-aos="zoom-in">
 <div class="swiper-wrapper">
-<div class="swiper-slide"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"></div>
-<div class="swiper-slide"><img src="https://images.unsplash.com/photo-1519741497674-611481863552"></div>
-<div class="swiper-slide"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf"></div>
+<div class="swiper-slide"><img src="galeri1.jpg"></div>
+<div class="swiper-slide"><img src="galeri2.jpg"></div>
+<div class="swiper-slide"><img src="galeri3.jpg"></div>
 </div>
 </div>
 </section>
 
 <!-- ACARA -->
 <section>
-<h2 data-aos="fade-up">Detail Acara</h2>
+<h2 data-aos="fade-up">Rangkaian Acara</h2>
 <div class="card" data-aos="fade-up">
 <b>Akad Nikah</b><br>
 Sabtu, 20 April 2026<br>
 Pukul 09.00 WIB
 </div>
+
 <div class="card" data-aos="fade-up">
 <b>Resepsi</b><br>
 Pukul 11.00 WIB – Selesai
@@ -197,19 +216,19 @@ Pukul 11.00 WIB – Selesai
 
 <!-- MAPS -->
 <section>
-<h2 data-aos="fade-up">Lokasi</h2>
+<h2 data-aos="fade-up">Tempat Acara</h2>
 <div class="card" data-aos="zoom-in">
-<iframe src="https://www.google.com/maps?q=-6.175392,106.827153&output=embed" height="340"></iframe>
+<iframe src="https://www.google.com/maps?q=LATITUDE,LONGITUDE&output=embed" height="340"></iframe>
 </div>
 </section>
 
 <!-- UCAPAN -->
 <section>
-<h2 data-aos="fade-up">Ucapan & Doa</h2>
+<h2 data-aos="fade-up">Ucapan & Doa Restu</h2>
 <div class="card" data-aos="fade-up">
-<input id="nama" placeholder="Nama Anda">
+<input id="nama" placeholder="Nama Tamu">
 <textarea id="pesan" placeholder="Ucapan & Doa"></textarea>
-<button class="btn" onclick="kirim()">Kirim</button>
+<button class="btn" onclick="kirim()">Kirim Ucapan</button>
 <div id="list"></div>
 </div>
 </section>
@@ -218,20 +237,23 @@ Pukul 11.00 WIB – Selesai
 <section data-aos="fade-up">
 <p>
 Merupakan suatu kehormatan dan kebahagiaan bagi kami
-apabila Bapak/Ibu/Saudara/i berkenan hadir.
+apabila Bapak/Ibu/Saudara/i berkenan hadir
+dan memberikan doa restu.
 </p>
-<p><i>Wassalamu’alaikum Warahmatullahi Wabarakatuh</i></p>
+<p><i>
+Wassalamu’alaikum Warahmatullahi Wabarakatuh
+</i></p>
 </section>
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
-AOS.init({once:true,duration:1200});
+AOS.init({once:true,duration:1300});
 
 new Swiper('.swiper',{
 loop:true,
-autoplay:{delay:2800}
+autoplay:{delay:3000}
 });
 
 const q=new URLSearchParams(location.search);
