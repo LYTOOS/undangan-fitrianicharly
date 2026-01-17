@@ -48,14 +48,11 @@ mix-blend-mode:overlay;
 pointer-events:none;
 }
 .songket::after{
-content:"";
-position:absolute;
-inset:0;
-background:
-url("https://www.transparenttextures.com/patterns/arabesque.png");
-opacity:.18;
-mix-blend-mode:overlay;
-pointer-events:none;
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top,rgba(255,255,255,.15),transparent);
+  pointer-events:none;
 }
 
 .songket{
@@ -138,7 +135,13 @@ text-shadow:
 0 2px 8px rgba(0,0,0,.4),
 0 0 20px rgba(255,215,0,.35);
 }
-.qris-protect{filter:blur(12px);transition:.3s;}
+.qris-protect{
+  filter:blur(0);
+}
+
+@media print{
+  .qris-protect{display:none}
+}
 .qris-protect:hover{filter:none;}
 .card{background:#fff;max-width:900px;margin:40px auto;padding:50px;border-radius:26px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
@@ -209,6 +212,37 @@ small{color:#888}
   0%{background-position:0% 50%}
   100%{background-position:200% 50%}
 }
+  
+/* ===== LEVEL 4 : CINEMATIC ===== */
+#cinematic{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  opacity:0;
+  pointer-events:none;
+}
+@keyframes cinematicOut{
+  to{opacity:0; visibility:hidden}
+}
+.cinematic-title h1{
+  font-size:4rem;
+  color:gold;
+  letter-spacing:6px;
+  animation:goldPulse 2s infinite;
+}
+@keyframes goldPulse{
+  0%,100%{text-shadow:0 0 15px gold}
+  50%{text-shadow:0 0 40px gold}
+}
+.cinematic-title p{
+  color:#eee;
+  letter-spacing:2px;
+}
 </style>
 </head>
 
@@ -223,7 +257,18 @@ small{color:#888}
   </div>
 </div>
 
+<!-- LEVEL 4 : CINEMATIC OPENING -->
+<div id="cinematic">
+  <div class="cinematic-title">
+    <h1>Walimatul ‘Urs</h1>
+    <p>Dengan penuh hormat kami mengundang</p>
+  </div>
+</div>
+
 <audio id="musik" src="musik/lagu.mp3" loop></audio>
+<script>
+const musik = document.getElementById("musik");
+</script>
 
 <section class="hero royal-fade">
 <div data-aos="zoom-in">
@@ -319,7 +364,9 @@ small{color:#888}
 <section data-aos="fade-up">
 <h2>Tanda Kasih</h2>
 <div class="card">
-<img src="foto/qris.png" class="qris qris-protect" onclick="popup(true)">
+<div class="qris-protect">
+  <img src="foto/qris.png" class="qris">
+</div>
 <p><small>Sentuh & tahan untuk melihat QR</small></p>
 <p class="copy" onclick="copy('082261467360')">DANA: 082261467360</p>
 <p class="copy" onclick="copy('082261467360')">GoPay: 082261467360</p>
@@ -382,7 +429,7 @@ if(n.length<3||p.length<5) return alert("Lengkapi");
 
 db.ref("ucapan").push({nama:n,pesan:p,waktu:Date.now(),device});
 localStorage.ucapanTerkirim=true;
-fetch(`https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20Baru%20${n}%20:%20${p}&apikey=${WA_APIKEY}`);
+fetch(`https://api.callmebot.com/whatsapp.php?phone=${6282261467360}&text=Ucapan%20Baru%20dari%20${n}&apikey=${WA_APIKEY}`);
 pesan.value="";
 }
 
@@ -403,9 +450,19 @@ if(isAdmin){document.body.style.outline="5px dashed gold"; console.log("ADMIN MO
 
 // Gerbang buka
 function openGate(){
-document.getElementById("gate").classList.add("open");
-document.getElementById("musik").play();
-setTimeout(()=>{document.getElementById("gate").remove();},1300);
+  document.getElementById("gate").classList.add("open");
+  musik.play();
+
+  setTimeout(()=>{
+    const cine = document.getElementById("cinematic");
+    cine.style.opacity = 1;
+    cine.style.pointerEvents = "auto";
+    cine.style.animation = "cinematicOut 2s ease 3.5s forwards";
+  },1300);
+
+  setTimeout(()=>{
+    document.getElementById("gate").remove();
+  },1300);
 }
 
 // Countdown
@@ -452,6 +509,29 @@ setInterval(()=>{
   if(scrollPos>=slider.scrollWidth) scrollPos=0;
   slider.scrollTo({left:scrollPos,behavior:"smooth"});
 },3500);
+</script>
+
+<!-- MUSIC FADE IN (LEVEL 4 IMPERIAL) -->
+<script>
+musik.volume = 0;
+let v = 0;
+
+const fadeAudio = setInterval(()=>{
+  if(v < 0.6){
+    v += 0.02;
+    musik.volume = v;
+  }else{
+    clearInterval(fadeAudio);
+  }
+}, 200);
+</script>
+
+<script>
+document.addEventListener("keyup",e=>{
+ if(e.key==="PrintScreen"){
+  alert("QRIS dilindungi keamanan undangan")
+ }
+});
 </script>
 
 </body>
