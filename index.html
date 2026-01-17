@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 <style>
@@ -13,6 +14,16 @@ body{margin:0;font-family:Poppins;background:#fffaf2;color:#2b261f}
 section{padding:90px 20px;text-align:center}
 h1,h2{font-family:'Playfair Display',serif;color:#c9a24d}
 .hero{min-height:100vh;background:url('foto/cover.jpg') center/cover fixed;display:flex;align-items:center;justify-content:center;color:#fff}
+button{
+  transition:.35s cubic-bezier(.25,.8,.25,1);
+}
+button:hover{
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 18px 45px rgba(212,175,55,.55);
+}
+button:active{
+  transform:scale(.96);
+}
 
 #gate{
 position:fixed; inset:0;
@@ -37,7 +48,6 @@ rgba(212,175,55,.25) 75%);
 background-size:200% 200%;
 animation:songket 8s infinite linear;
 }
-@keyframes songket{0%{background-position:0% 50%}100%{background-position:200% 50%}}
 .songket::before{
 content:"";
 position:absolute;
@@ -168,6 +178,7 @@ small{color:#888}
 
 /* === RELIEF EMAS HIDUP === */
 .royal-title{
+  text-shadow: var(--goldGlow, 0 0 20px rgba(255,215,0,.25));
   position:relative;
 }
 .royal-title::after{
@@ -243,6 +254,61 @@ small{color:#888}
   color:#eee;
   letter-spacing:2px;
 }
+
+/* === VIGNETTE LUXURY === */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(circle at center,transparent 60%,rgba(0,0,0,.45));
+  z-index:99998;
+}
+
+/* === LEVEL 5 : FILM GRAIN CINEMATIC === */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:0.08;
+  mix-blend-mode:overlay;
+  z-index:99999;
+}
+
+/* === ROYAL BRIDE & GROOM NAME === */
+.mempelai{
+  margin:40px 0;
+}
+
+.mempelai .nama{
+  font-family:'Great Vibes', cursive;
+  font-size:64px;
+  line-height:1.2;
+  background:linear-gradient(135deg,#FFD700,#FFF3B0,#C9A24D);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:
+    0 3px 8px rgba(0,0,0,.35),
+    0 0 22px rgba(255,215,0,.35);
+}
+
+.mempelai .label{
+  font-family:'Cinzel', serif;
+  font-size:14px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:#8f6b1f;
+  margin-bottom:6px;
+}
+
+.mempelai .ortu{
+  font-style:italic;
+  font-size:16px;
+  color:#444;
+  margin-top:8px;
+}
 </style>
 </head>
 
@@ -302,16 +368,23 @@ const musik = document.getElementById("musik");
 
 <section data-aos="fade-up">
   <h2>Pengantin</h2>
-  <div class="section-divider" data-aos="zoom-in"></div>
-
-  <p><b>Nama Mempelai Pria:</b> Charly Handani</p>
-  <p><b>Nama Mempelai Wanita:</b> Fitriani</p>
-</section>
-
-<section data-aos="fade-up">
-  <h2>Orang Tua Pihak Pria</h2>
   <div class="section-divider"></div>
-  <p>Bapak Zaili & Ibu Erni Wati</p>
+
+  <div class="mempelai">
+    <div class="label">Mempelai Pria</div>
+    <div class="nama">Charly Handani S.I.Kom</div>
+    <div class="ortu">
+      Putra dari Bapak Zaili & Ibu Erni Wati
+    </div>
+  </div>
+
+  <div class="mempelai">
+    <div class="label">Mempelai Wanita</div>
+    <div class="nama">Fitriani S.Pd</div>
+    <div class="ortu">
+      Putri dari Bapak R. Supian & Ibu Suryati
+    </div>
+  </div>
 </section>
 
 <section data-aos="fade-up">
@@ -481,22 +554,17 @@ setInterval(()=>{
 // Parallax songket
 window.addEventListener("scroll",()=>{
   const sc = window.scrollY;
+  const blur = Math.min(6, sc / 200);
 
   const hero = document.querySelector(".hero");
   if(hero){
     hero.style.backgroundPosition = `center ${sc*0.35}px`;
+    hero.style.filter = `blur(${blur*0.15}px)`;
   }
 
-  const songket = document.querySelector(".songket");
-  if(songket){
-    songket.style.backgroundPosition = `center ${sc*0.6}px`;
-    songket.style.transform = `translateZ(0) scale(1.02)`;
-  }
-
-  const layer = document.querySelector(".songket-layer");
-  if(layer){
-    layer.style.transform = `translateY(${sc*0.25}px)`;
-  }
+  document.querySelectorAll(".songket").forEach(el=>{
+    el.style.backgroundPosition = `center ${sc*0.6}px`;
+  });
 });
 </script>
 
@@ -527,10 +595,31 @@ const fadeAudio = setInterval(()=>{
 </script>
 
 <script>
+setInterval(()=>{
+  if(!musik.paused){
+    const pulse = 0.9 + Math.random()*0.15;
+    document.querySelectorAll(".royal-title").forEach(t=>{
+      t.style.transform = `scale(${pulse})`;
+    });
+  }
+},1200);
+</script>
+
+<script>
 document.addEventListener("keyup",e=>{
  if(e.key==="PrintScreen"){
   alert("QRIS dilindungi keamanan undangan")
  }
+});
+</script>
+
+<script>
+window.addEventListener("scroll",()=>{
+  const glow = Math.min(0.35, window.scrollY / 800);
+  document.documentElement.style.setProperty(
+    "--goldGlow",
+    `0 0 ${30+glow*60}px rgba(255,215,0,${glow})`
+  );
 });
 </script>
 
