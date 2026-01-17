@@ -4,25 +4,42 @@
 <meta charset="UTF-8">
 <title>Undangan Pernikahan</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
 <style>
-body{margin:0;font-family:Poppins;background:#fffaf2;color:#2b261f;overflow-x:hidden;}
+body{margin:0;font-family:Poppins;background:#fffaf2;color:#2b261f}
 section{padding:90px 20px;text-align:center}
 h1,h2{font-family:'Playfair Display',serif;color:#c9a24d}
-.hero{min-height:100vh;background:url('foto/cover.jpg') center/cover fixed;display:flex;align-items:center;justify-content:center;color:#fff;perspective:1500px;}
-#gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fffaf2;}
-.gate{position:absolute;top:0;width:50%;height:100%;background:linear-gradient(135deg,#d4af37,#b8962e);transition:1.2s ease-in-out;transform-origin:center;}
-.gate.left{left:0}
-.gate.right{right:0}
-#gate.open .left{transform:rotateY(-90deg) translateX(-50%);}
-#gate.open .right{transform:rotateY(90deg) translateX(50%);}
-.gate-text{position:relative;z-index:2;text-align:center;color:#fff;}
-.songket{background:linear-gradient(120deg,rgba(212,175,55,.15) 25%,rgba(255,215,0,.25) 50%,rgba(212,175,55,.15) 75%);background-size:200% 200%;animation:songket 6s infinite linear;transform-style:preserve-3d;}
+.hero{min-height:100vh;background:url('foto/cover.jpg') center/cover fixed;display:flex;align-items:center;justify-content:center;color:#fff}
+
+#gate{
+position:fixed; inset:0;
+background: linear-gradient(135deg,#1c1b18,#2b261f), url('foto/cover.jpg') center/cover;
+z-index:9999; display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+
+.gate{position:absolute;top:0;width:50%;height:100%;background:linear-gradient(135deg,#d4af37,#b8962e);transition:1.2s ease-in-out}
+.gate.left{left:0} .gate.right{right:0}
+#gate.open .left{transform:translateX(-100%)} #gate.open .right{transform:translateX(100%)}
+
+.gate-text{position:relative; z-index:2; text-align:center; color:#FFD700; text-shadow:2px 2px 8px rgba(0,0,0,0.6);}
+.gate-text h1{font-size:48px;} .gate-text button{font-size:18px; padding:12px 28px; text-shadow:1px 1px 4px rgba(0,0,0,0.5);}
+
+.songket{
+background: linear-gradient(120deg, rgba(212,175,55,.15) 25%, rgba(255,215,0,.25) 50%, rgba(212,175,55,.15) 75%);
+background-size:200% 200%;
+animation:songket 6s infinite linear;
+position:relative;
+}
 @keyframes songket{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+
 .qris-protect{filter:blur(12px);transition:.3s;}
 .qris-protect:hover{filter:none;}
 .card{background:#fff;max-width:900px;margin:40px auto;padding:50px;border-radius:26px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+.grid img{width:100%;height:220px;object-fit:cover;border-radius:18px}
 .slider{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;}
 .slider img{width:280px;border-radius:20px;scroll-snap-align:center;}
 input,textarea{width:100%;padding:14px;border-radius:12px;border:1px solid #ddd;margin-bottom:14px}
@@ -30,14 +47,14 @@ button{padding:14px 36px;border-radius:40px;border:none;background:linear-gradie
 .ucapan{text-align:left;border-bottom:1px solid #eee;padding:12px 0}
 .copy{cursor:pointer;color:#c9a24d;font-weight:600}
 .qris{max-width:220px;cursor:pointer}
-#popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);align-items:center;justify-content:center;z-index:999;}
+#popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);align-items:center;justify-content:center}
 #popup img{max-width:300px;border-radius:20px}
 small{color:#888}
 </style>
 </head>
+
 <body>
 
-<!-- Gerbang 3D -->
 <div id="gate">
   <div class="gate left"></div>
   <div class="gate right"></div>
@@ -48,80 +65,61 @@ small{color:#888}
 </div>
 
 <audio id="musik" src="musik/lagu.mp3" loop></audio>
-<audio id="ketukan" src="musik/ketukan.mp3"></audio>
 
-<!-- Hero -->
 <section class="hero">
-  <div data-aos="zoom-in">
-    <h1>Charly Handani S.I.Kom & Fitriani S.Pd</h1>
-    <p id="tamu">Tamu Undangan</p>
-    <p>Minggu, 15 Februari 2026</p>
-  </div>
+<div data-aos="zoom-in">
+<h1>Walimatul ‘Urs</h1>
+<p id="tamu">Tamu Undangan</p>
+<p>Minggu, 15 Februari 2026</p>
+</div>
 </section>
 
-<!-- Adat -->
 <section class="songket" data-aos="fade-up">
 <h2>Adat Melayu Riau</h2>
 <p>
-Dengan memohon ridho Allah SWT,  
-kami melaksanakan pernikahan sesuai adat Melayu Riau,  
-didahului dengan tepuk tepung tawar  
-sebagai tanda restu keluarga dan adat.
+Dengan memohon ridho Allah SWT,<br>
+kami melaksanakan pernikahan sesuai adat Melayu Riau,<br>
+didahului dengan tepuk tepung tawar sebagai tanda restu keluarga dan adat.
 </p>
 <p><i>“Takkan Melayu hilang di bumi.”</i></p>
 </section>
 
-<!-- Pantun -->
 <section data-aos="fade-up">
 <h2>Pantun Adat Melayu</h2>
 <p id="pantun" style="font-style:italic;font-size:18px"></p>
 </section>
 
-<!-- Orang Tua -->
 <section data-aos="fade-up">
-<h2>Orang Tua Pengantin</h2>
-<p>
-Putra dari pasangan<br>
-<b>Bapak Zaili</b> & <b>Ibu Erni Wati</b>
-</p>
-<br>
-<p>
-Putri dari pasangan<br>
-<b>Bapak R. Supian</b> & <b>Ibu Suryanti</b>
-</p>
+<h2>Pengantin</h2>
+<p><b>Nama Mempelai Pria:</b> Muhammad Zaili</p>
+<p><b>Nama Mempelai Wanita:</b> Siti Erni Wati</p>
 </section>
 
-<!-- Keluarga Besar Laki-laki -->
 <section data-aos="fade-up">
-<h2>Keluarga Besar Pengantin Laki-laki</h2>
-<p>Bapak A, Ibu B, Saudara C, Saudara D...</p>
+<h2>Keluarga Besar Pihak Pria</h2>
+<p>Bapak Zaili, Ibu Ani, Kakak Ahmad, Adik Fajar, Sepupu Rina</p>
 </section>
 
-<!-- Keluarga Besar Perempuan -->
 <section data-aos="fade-up">
-<h2>Keluarga Besar Pengantin Perempuan</h2>
-<p>Bapak E, Ibu F, Saudara G, Saudara H...</p>
+<h2>Keluarga Besar Pihak Wanita</h2>
+<p>Bapak Raja Pian, Ibu Yati, Kakak Rina, Adik Sari, Sepupu Dani</p>
 </section>
 
-<!-- Countdown -->
 <section data-aos="fade-up">
 <h2>Menuju Hari Bahagia</h2>
 <div id="countdown" style="font-size:28px;font-weight:600"></div>
 </section>
 
-<!-- Akad Nikah -->
 <section data-aos="fade-up">
 <h2>Akad Nikah</h2>
 <p>07.00 WIB<br>Kantor KUA Kec. Concong</p>
 </section>
 
-<!-- Resepsi -->
 <section data-aos="fade-up">
 <h2>Resepsi</h2>
 <p>11.00 – 17.00 WIB<br>Kediaman Mempelai Wanita</p>
 </section>
 
-<!-- Galeri -->
 <section data-aos="fade-up">
 <h2>Galeri</h2>
 <div class="slider">
@@ -132,7 +130,6 @@ Putri dari pasangan<br>
 </div>
 </section>
 
-<!-- Tanda Kasih -->
 <section data-aos="fade-up">
 <h2>Tanda Kasih</h2>
 <div class="card">
@@ -144,7 +141,6 @@ Putri dari pasangan<br>
 </div>
 </section>
 
-<!-- Ucapan -->
 <section data-aos="fade-up">
 <div class="card">
 <h2>Ucapan & Doa</h2>
@@ -166,7 +162,6 @@ Putri dari pasangan<br>
 <script>
 AOS.init({duration:1200,once:true});
 
-// Firebase
 const firebaseConfig={
 apiKey:"AIzaSyCr2VF6hZ3pLWU5eORdrtdM1c5L_AcLVH4",
 authDomain:"undangan-pernikahan-f6d5e.firebaseapp.com",
@@ -184,24 +179,28 @@ const pantunList = [
 ];
 document.getElementById("pantun").innerText = pantunList[Math.floor(Math.random()*pantunList.length)];
 
-// Device dan WA
 const WA_NUMBER="6282261467360";
 const WA_APIKEY="APIKEY_KAMU";
+
 const device = localStorage.device || ("dev-"+Math.random().toString(36).substr(2,9));
 localStorage.device = device;
 
-function play(){document.getElementById("musik").play();}
-function popup(show){document.getElementById("popup").style.display = show?"flex":"none";}
+function play(){document.getElementById("musik").play()}
+function popup(show){document.getElementById("popup").style.display = show ? "flex" : "none";}
 function copy(t){navigator.clipboard.writeText(t);alert("Disalin")}
 
+// Kirim ucapan dengan limit 1 per device
 function kirim(){
 if(localStorage.ucapanTerkirim) return alert("Ucapan sudah terkirim 🙏");
 const n=nama.value.trim(), p=pesan.value.trim();
 if(n.length<3||p.length<5) return alert("Lengkapi");
-const data={nama:n,pesan:p,waktu:Date.now(),device};
-db.ref("ucapan").push(data);
+
+db.ref("ucapan").push({nama:n,pesan:p,waktu:Date.now(),device});
 localStorage.ucapanTerkirim=true;
+
+// Kirim ke WA
 fetch(`https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20Baru%20${n}%20:%20${p}&apikey=${WA_APIKEY}`);
+
 pesan.value="";
 }
 
@@ -216,38 +215,39 @@ innerHTML:`<b>${d.nama}</b><br>${d.pesan}<br><small>${new Date(d.waktu).toLocale
 const params=new URLSearchParams(location.search);
 if(params.get("to")) document.getElementById("tamu").innerText="Yth. "+params.get("to");
 
-// Admin
+// Admin Mode
 const isAdmin = location.hash === "#admin-rahasia-2026";
-if(isAdmin){document.body.style.outline="5px dashed gold";console.log("ADMIN MODE AKTIF");}
+if(isAdmin){document.body.style.outline="5px dashed gold"; console.log("ADMIN MODE AKTIF");}
 
-// Gate
+// Gerbang buka
 function openGate(){
 document.getElementById("gate").classList.add("open");
 document.getElementById("musik").play();
-document.getElementById("ketukan").play();
-setTimeout(()=>{document.getElementById("gate").remove();},1500);
+setTimeout(()=>{document.getElementById("gate").remove();},1300);
 }
 
 // Countdown
 const target = new Date("2026-02-15T07:00:00").getTime();
 setInterval(()=>{
-const now=Date.now(), d=target-now;
-if(d<0){countdown.innerHTML="Hari Ini"; return;}
-const days=Math.floor(d/86400000),
-h=Math.floor(d%86400000/3600000),
-m=Math.floor(d%3600000/60000),
-s=Math.floor(d%60000/1000);
-countdown.innerHTML=`${days} hari ${h} jam ${m} menit ${s} detik`;
+  const now = Date.now();
+  const d = target - now;
+  if(d < 0){countdown.innerHTML="Hari Ini"; return;}
+  const days = Math.floor(d / 86400000);
+  const h = Math.floor(d % 86400000 / 3600000);
+  const m = Math.floor(d % 3600000 / 60000);
+  const s = Math.floor(d % 60000 / 1000);
+  countdown.innerHTML=`${days} hari ${h} jam ${m} menit ${s} detik`;
 },1000);
 
-// Paralaks hero + songket
+// Parallax songket
 window.addEventListener("scroll",()=>{
-const sc=window.pageYOffset;
-const hero=document.querySelector(".hero");
-const songket=document.querySelector(".songket");
-if(hero) hero.style.backgroundPositionY = sc*0.4 + "px";
-if(songket) songket.style.transform = `translateZ(${sc*0.05}px)`;
+  const sc=window.pageYOffset;
+  const hero=document.querySelector(".hero");
+  if(hero){hero.style.backgroundPositionY = sc*0.4 + "px";}
+  const songket=document.querySelector(".songket");
+  if(songket){songket.style.backgroundPositionY = sc*0.6 + "px";}
 });
 </script>
+
 </body>
 </html>
