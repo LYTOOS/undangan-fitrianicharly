@@ -91,18 +91,28 @@ didahului dengan tepuk tepung tawar sebagai tanda restu keluarga dan adat.
 
 <section data-aos="fade-up">
 <h2>Pengantin</h2>
-<p><b>Nama Mempelai Pria:</b> Muhammad Zaili</p>
-<p><b>Nama Mempelai Wanita:</b> Siti Erni Wati</p>
+<p><b>Nama Mempelai Pria:</b> Charly Handani</p>
+<p><b>Nama Mempelai Wanita:</b> Fitriani</p>
+</section>
+
+<section data-aos="fade-up">
+<h2>Orang Tua Pihak Pria</h2>
+<p>Bapak Zaili & Ibu Erni Wati</p>
+</section>
+
+<section data-aos="fade-up">
+<h2>Orang Tua Pihak Wanita</h2>
+<p>Bapak R. Supian & Ibu Suryati</p>
 </section>
 
 <section data-aos="fade-up">
 <h2>Keluarga Besar Pihak Pria</h2>
-<p>Bapak Zaili, Ibu Ani, Kakak Ahmad, Adik Fajar, Sepupu Rina</p>
+<p>Kakak Ahmad, Adik Fajar, Sepupu Rina, Paman Budi, Bibi Sari</p>
 </section>
 
 <section data-aos="fade-up">
 <h2>Keluarga Besar Pihak Wanita</h2>
-<p>Bapak Raja Pian, Ibu Yati, Kakak Rina, Adik Sari, Sepupu Dani</p>
+<p>Kakak Rina, Adik Sari, Sepupu Dani, Paman Hadi, Bibi Lela</p>
 </section>
 
 <section data-aos="fade-up">
@@ -161,7 +171,6 @@ didahului dengan tepuk tepung tawar sebagai tanda restu keluarga dan adat.
 
 <script>
 AOS.init({duration:1200,once:true});
-
 const firebaseConfig={
 apiKey:"AIzaSyCr2VF6hZ3pLWU5eORdrtdM1c5L_AcLVH4",
 authDomain:"undangan-pernikahan-f6d5e.firebaseapp.com",
@@ -197,10 +206,7 @@ if(n.length<3||p.length<5) return alert("Lengkapi");
 
 db.ref("ucapan").push({nama:n,pesan:p,waktu:Date.now(),device});
 localStorage.ucapanTerkirim=true;
-
-// Kirim ke WA
 fetch(`https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20Baru%20${n}%20:%20${p}&apikey=${WA_APIKEY}`);
-
 pesan.value="";
 }
 
