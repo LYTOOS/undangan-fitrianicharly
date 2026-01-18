@@ -271,6 +271,7 @@ text-shadow:
 .qris-protect{
   position:relative;
   display:inline-block;
+  touch-action:manipulation;
   overflow:hidden;
   border-radius:22px;
   filter:blur(14px) brightness(.75);
@@ -294,9 +295,35 @@ text-shadow:
 
 .qris-protect.open{
   filter:blur(0);
-  transform:scale(1.15);
+  transform:none;
 }
 .qris-protect.open::after{ opacity:0; }
+
+/* === QRIS SIZE LOCK (FINAL) === */
+.qris-protect img{
+  width:220px;
+  max-width:70vw;
+  height:auto;
+  border-radius:18px;
+  user-select:none;
+  -webkit-user-drag:none;
+  pointer-events:none;
+}
+
+/* Saat dibuka */
+.qris-protect.open img{
+  width:260px;
+}
+
+/* Mobile extra safety */
+@media(max-width:480px){
+  .qris-protect img{
+    width:200px;
+  }
+  .qris-protect.open img{
+    width:230px;
+  }
+}
   
 .card{background:#fff;max-width:900px;margin:40px auto;padding:50px;border-radius:26px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
 .card h2{
