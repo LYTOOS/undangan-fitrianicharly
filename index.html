@@ -961,6 +961,7 @@ setInterval(()=>{
   const s = Math.floor(d % 60000 / 1000);
   countdown.innerHTML=`${days} hari ${h} jam ${m} menit ${s} detik`;
 },1000);
+</script>
   
 <script>
 let ticking=false;
@@ -992,7 +993,6 @@ setInterval(()=>{
 <!-- MUSIC FADE IN (LEVEL 4 IMPERIAL) -->
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
-  const musik = document.getElementById("musik");
   if(!musik) return;
 
   musik.volume = 0;
