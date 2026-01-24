@@ -103,27 +103,6 @@ img{
   box-shadow:0 18px 40px rgba(0,0,0,.25);
 }
 
-#gate{
-position:fixed; inset:0;
-background: linear-gradient(135deg,#1c1b18,#2b261f), url('foto/cover.jpg') center/cover;
-z-index:10000; display:flex; align-items:center; justify-content:center; overflow:hidden;
-}
-
-#gate::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.25);
-  z-index:2;
-}
-
-.gate{position:absolute;top:0;width:50%;height:100%;background:linear-gradient(135deg,#d4af37,#b8962e);transition:1.2s ease-in-out;z-index:1}
-.gate.left{left:0} .gate.right{right:0}
-#gate.open .left{transform:translateX(-100%)} #gate.open .right{transform:translateX(100%)}
-
-.gate-text{position:relative; z-index:5; text-align:center; color:#FFD700; text-shadow:2px 2px 8px rgba(0,0,0,0.6);}
-.gate-text h1{font-size:48px;} .gate-text button{font-size:18px; padding:12px 28px; text-shadow:1px 1px 4px rgba(0,0,0,0.5);}
-
 #musicControl{
   position:fixed;
   bottom:24px;
@@ -411,6 +390,30 @@ section.aos-animate{
   transform:none;
 }
 
+.count-box{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+}
+.count-box div{
+  background:#fff;
+  padding:18px 16px;
+  border-radius:16px;
+  min-width:70px;
+  box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+.count-box span{
+  font-size:28px;
+  font-weight:700;
+  color:#c9a24d;
+}
+.count-box small{
+  display:block;
+  font-size:11px;
+  letter-spacing:1px;
+  margin-top:4px;
+}
+
 .sosmed{
   width:42px;
   height:42px;
@@ -499,6 +502,12 @@ section.aos-animate{
   z-index:-1;
   pointer-events:none;
   transform:translateZ(0);
+}
+
+.motion{
+  transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1),
+             opacity .6s ease;
 }
   
 /* ===== LEVEL 4 : CINEMATIC ===== */
@@ -720,22 +729,6 @@ textarea{
 <div class="songket-bg"></div>
 <div class="songket-melayu"></div>
 
-<div id="gate">
-  <div class="gate left"></div>
-  <div class="gate right"></div>
-  <div class="gate-text">
-    <h1 class="royal-title" data-text="Walimatul ‘Urs">Walimatul ‘Urs</h1>
-<p id="gateTamu"
-   style="margin-top:14px;
-          font-size:18px;
-          letter-spacing:1px;
-          color:#fff;
-          opacity:.9;">
-</p>
-    <button onclick="openGate()">Buka Undangan</button>
-  </div>
-</div>
-
 <!-- LEVEL 4 : CINEMATIC OPENING -->
 <div id="cinematic">
   <div class="cinematic-title">
@@ -820,32 +813,14 @@ const musik = document.getElementById("musik");
   </div>
 </section>
 
-<section data-aos="fade-up">
-  <h2>Keluarga Besar Pihak Wanita</h2>
-  <div class="section-divider"></div>
-  <p>Kakak Ahmad, Adik Fajar, Sepupu Rina, Paman Budi, Bibi Sari</p>
-</section>
-
-<section data-aos="fade-up">
-  <h2>Keluarga Besar Pihak Pria</h2>
-  <div class="section-divider"></div>
-  <p>Kakak Rina, Adik Sari, Sepupu Dani, Paman Hadi, Bibi Lela</p>
-</section>
-
-<section data-aos="fade-up">
-<h2>Menuju Hari Bahagia</h2>
-<div id="countdown" style="font-size:28px;font-weight:600"></div>
-<p style="
-margin-top:18px;
-font-size:14px;
-color:#777;
-line-height:1.8;
-">
-<b>QS. Ar-Rum : 21</b><br>
-“Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan
-untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya,
-dan Dia menjadikan di antaramu rasa kasih dan sayang.”
-</p>
+<section class="countdown-pro data-aos=fade-up"">
+  <h2>Menuju Hari Bahagia</h2>
+  <div class="count-box">
+    <div><span id="d">00</span><small>Hari</small></div>
+    <div><span id="h">00</span><small>Jam</small></div>
+    <div><span id="m">00</span><small>Menit</small></div>
+    <div><span id="s">00</span><small>Detik</small></div>
+  </div>
 </section>
 
 <section data-aos="fade-up">
@@ -1014,36 +989,19 @@ if(namaTamu){
 const isAdmin = location.hash === "#admin-rahasia-2026";
 if(isAdmin){document.body.style.outline="5px dashed gold"; console.log("ADMIN MODE AKTIF");}
 
-// Gerbang buka
-function openGate(){
-  document.getElementById("gate").classList.add("open");
-
-  musik.currentTime = 0;
-  musik.play().catch(()=>{});
-
-  setTimeout(()=>{
-    const cine = document.getElementById("cinematic");
-    cine.style.opacity = 1;
-    cine.style.pointerEvents = "auto";
-    cine.style.animation = "cinematicOut 2s ease 3.5s forwards";
-  },1300);
-
-  setTimeout(()=>{
-    document.getElementById("gate").remove();
-  },1400);
-}
-
 // Countdown
+<script>
 const target = new Date("2026-02-15T07:00:00").getTime();
+
 setInterval(()=>{
   const now = Date.now();
-  const d = target - now;
-  if(d < 0){countdown.innerHTML="Hari Ini"; return;}
-  const days = Math.floor(d / 86400000);
-  const h = Math.floor(d % 86400000 / 3600000);
-  const m = Math.floor(d % 3600000 / 60000);
-  const s = Math.floor(d % 60000 / 1000);
-  countdown.innerHTML=`${days} hari ${h} jam ${m} menit ${s} detik`;
+  let diff = target - now;
+  if(diff<0) diff=0;
+
+  d.innerText = Math.floor(diff/86400000);
+  h.innerText = Math.floor(diff%86400000/3600000);
+  m.innerText = Math.floor(diff%3600000/60000);
+  s.innerText = Math.floor(diff%60000/1000);
 },1000);
 </script>
   
@@ -1182,6 +1140,30 @@ window.addEventListener("scroll",()=>{
       .style.backgroundPosition = `center ${sc*0.35}px`;
     lastScroll=sc;
   }
+});
+</script>
+
+<script>
+const motions = document.querySelectorAll("section");
+
+window.addEventListener("scroll",()=>{
+  const sc = window.scrollY;
+
+  motions.forEach((el,i)=>{
+    const rect = el.getBoundingClientRect();
+    const center = window.innerHeight / 2;
+    const offset = rect.top - center;
+
+    const rotate = offset * -0.015;
+    const depth  = Math.min(40, Math.abs(offset) * 0.08);
+
+    el.style.transform =
+      `translateZ(${depth}px)
+       rotateX(${rotate}deg)`;
+
+    el.style.opacity =
+      Math.max(0.25,1-Math.abs(offset)/800);
+  });
 });
 </script>
 
