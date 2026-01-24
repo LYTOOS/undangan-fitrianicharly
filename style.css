@@ -255,6 +255,27 @@ html{
 section{
   scroll-margin-top:60px;
 }
+
+.section-soft{
+  background:linear-gradient(180deg,#fffaf2,#f5efe6);
+}
+
+.section-royal{
+  background:radial-gradient(circle,#2b261f,#14120f);
+  color:#f7e3a1;
+}
+
+.section-cinematic{
+  background:linear-gradient(160deg,#111,#000);
+  color:#eee;
+}
+
+.section-fabric{
+  background:
+    linear-gradient(120deg,rgba(212,175,55,.12),transparent),
+    url(songket.png);
+  background-size:cover;
+}
   
 .royal-title{
 font-size:52px;
