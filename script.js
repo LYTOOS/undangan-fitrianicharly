@@ -5,8 +5,91 @@ authDomain:"undangan-pernikahan-f6d5e.firebaseapp.com",
 databaseURL:"https://undangan-pernikahan-f6d5e-default-rtdb.asia-southeast1.firebasedatabase.app",
 projectId:"undangan-pernikahan-f6d5e"
 };
-firebase.initializeApp(firebaseConfig);
-const db=firebase.database();
+
+// Pantun otomatis
+const pantunList = [
+  "Pergi ke hulu mencari sepat, singgah sebentar di tepi paya. Jika niat sudah terpatri di hati, akad nikah jadi penyempurna cinta.",
+  "Songket disulam benang emas, dipakai raja di hari mulia. Restu orang tua doa terikhlas, rumah tangga bahagia selamanya.",
+  "Kalau berlayar ke Indragiri, jangan lupa membawa bekal. Bila akad telah diikrari, cinta halal jadi modal kekal."
+];
+document.getElementById("pantun").innerText = pantunList[Math.floor(Math.random()*pantunList.length)];
+
+const WA_NUMBER="6282261467360";
+const WA_APIKEY="APIKEY_KAMU";
+
+const device = localStorage.device || ("dev-"+Math.random().toString(36).substr(2,9));
+localStorage.device = device;
+
+function play(){document.getElementById("musik").play()}
+function popup(show){document.getElementById("popup").style.display = show ? "flex" : "none";}
+function copy(t){navigator.clipboard.writeText(t);alert("Disalin")}
+
+// Kirim ucapan dengan limit 1 per device
+function kirim(){
+  if(localStorage.ucapanTerkirim){
+    alert("Ucapan sudah terkirim 🙏");
+    return;
+  }
+
+  const n = nama.value.trim();
+  const p = pesan.value.trim();
+
+  if(n.length < 3 || p.length < 5){
+    alert("Nama & ucapan belum lengkap");
+    return;
+  }
+
+  const now = Date.now();
+
+  const last = localStorage.lastSend || 0;
+  if(Date.now() - last < 60000){
+    alert("Tunggu 1 menit sebelum mengirim lagi 🙏");
+    return;
+  }
+  localStorage.lastSend = Date.now();
+
+  db.ref("ucapan").push({
+    nama: n,
+    pesan: p,
+    waktu: now,
+    device: device
+  });
+
+  localStorage.ucapanTerkirim = "1";
+
+  // WhatsApp notif
+  fetch(
+    `https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20baru%20dari%20${encodeURIComponent(n)}&apikey=${WA_APIKEY}`
+  );
+
+  pesan.value = "";
+}
+
+db.ref("ucapan").on("child_added", s => {
+  const d = s.val();
+  const div = document.createElement("div");
+  div.className = "ucapan";
+  div.innerText = `${d.nama}\n${d.pesan}`;
+  listUcapan.prepend(div);
+});
+
+const urlParams = new URLSearchParams(location.search);
+const namaTamu = urlParams.get("to");
+
+if(namaTamu){
+  document.getElementById("tamu").innerText = "Yth. " + namaTamu.replace(/\+/g," ");
+  document.getElementById("gateTamu").innerHTML =
+    `Yth. Bapak/Ibu<br><b>${namaTamu.replace(/\+/g," ")}</b>`;
+}
+
+// Admin Mode
+const isAdmin = location.hash === "#admin-rahasia-2026";
+if(isAdmin){document.body.style.outline="5px dashed gold"; console.log("ADMIN MODE AKTIF");}
+
+const gateTamu = document.getElementById("gateTamu");
+if(gateTamu){
+  gateTamu.innerHTML = ...
+}
 
 // Countdown
 const target = new Date("2026-02-15T07:00:00").getTime();
