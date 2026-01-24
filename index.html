@@ -130,23 +130,6 @@ img{
   background:#666;
 }
 
-.songket::before{
-content:"";
-position:absolute;
-inset:0;
-background:url("https://www.transparenttextures.com/patterns/fabric-of-squares.png");
-opacity:.25;
-mix-blend-mode:overlay;
-pointer-events:none;
-}
-.songket::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at top,rgba(255,255,255,.15),transparent);
-  pointer-events:none;
-}
-
 .songket{
   position:absolute;
   background:
@@ -154,12 +137,6 @@ pointer-events:none;
   opacity:.16;
   z-index:-1;
   transform:translateZ(0);
-}
-.songket-layer{
-position:absolute;
-inset:0;
-background:linear-gradient(45deg,rgba(255,215,0,.08),transparent);
-pointer-events:none;
 }
 
 /* === SONGKET ROYAL CURTAIN === */
@@ -414,6 +391,26 @@ section.aos-animate{
   margin-top:4px;
 }
 
+.countdown-pro{
+  opacity:0;
+  transform:translateY(60px);
+  transition:1.2s ease;
+}
+.countdown-pro.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.ar-rum{
+  margin-top:26px;
+  font-size:14px;
+  max-width:700px;
+  margin-inline:auto;
+  line-height:1.7;
+  color:#555;
+  font-style:italic;
+}
+
 .sosmed{
   width:42px;
   height:42px;
@@ -630,6 +627,47 @@ body::after{
   50%{opacity:.85}
 }
 
+#intro{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at center,rgba(0,0,0,.45),#000),
+    url("foto/cover.jpg") center/cover;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.intro-box{
+  color:#fff;
+  animation:introIn 1.4s ease forwards;
+}
+
+@keyframes introIn{
+  from{opacity:0; transform:scale(1.1)}
+  to{opacity:1; transform:scale(1)}
+}
+
+#btnOpen{
+  margin-top:28px;
+  padding:14px 42px;
+  border-radius:50px;
+  background:linear-gradient(135deg,#d4af37,#b8962e);
+  color:#fff;
+  font-size:16px;
+  border:none;
+}
+
+.hide-intro{
+  animation:introOut 1s ease forwards;
+}
+
+@keyframes introOut{
+  to{opacity:0; transform:scale(.9); visibility:hidden}
+}
+
 /* === LEVEL ULTIMATE : AURA ISTANA === */
 body{
   background:
@@ -729,6 +767,14 @@ textarea{
 <div class="songket-bg"></div>
 <div class="songket-melayu"></div>
 
+<div id="intro">
+  <div class="intro-box">
+    <h1 class="royal-title">Walimatul ‘Urs</h1>
+    <p id="introNama">Yth. Bapak/Ibu</p>
+    <button id="btnOpen">Buka Undangan</button>
+  </div>
+</div>
+
 <!-- LEVEL 4 : CINEMATIC OPENING -->
 <div id="cinematic">
   <div class="cinematic-title">
@@ -756,7 +802,6 @@ const musik = document.getElementById("musik");
 </section>
 
 <section class="songket-section" data-aos="fade-up">
-  <div class="songket-layer"></div>
 
   <h2>Adat Melayu Riau</h2>
   <div class="section-divider"></div>
@@ -813,14 +858,23 @@ const musik = document.getElementById("musik");
   </div>
 </section>
 
-<section class="countdown-pro data-aos=fade-up"">
+<section class="countdown-pro motion">
   <h2>Menuju Hari Bahagia</h2>
+
   <div class="count-box">
     <div><span id="d">00</span><small>Hari</small></div>
     <div><span id="h">00</span><small>Jam</small></div>
     <div><span id="m">00</span><small>Menit</small></div>
     <div><span id="s">00</span><small>Detik</small></div>
   </div>
+
+  <p class="ar-rum">
+    “Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan
+    pasangan-pasangan untukmu dari jenismu sendiri,
+    agar kamu cenderung dan merasa tenteram kepadanya,
+    dan Dia menjadikan di antaramu rasa kasih dan sayang.”
+    <br><b>(QS. Ar-Rum: 21)</b>
+  </p>
 </section>
 
 <section data-aos="fade-up">
@@ -992,17 +1046,26 @@ if(isAdmin){document.body.style.outline="5px dashed gold"; console.log("ADMIN MO
 // Countdown
 <script>
 const target = new Date("2026-02-15T07:00:00").getTime();
+const section = document.querySelector(".countdown-pro");
 
 setInterval(()=>{
   const now = Date.now();
   let diff = target - now;
-  if(diff<0) diff=0;
+  if(diff < 0) diff = 0;
 
   d.innerText = Math.floor(diff/86400000);
   h.innerText = Math.floor(diff%86400000/3600000);
   m.innerText = Math.floor(diff%3600000/60000);
   s.innerText = Math.floor(diff%60000/1000);
 },1000);
+
+// Animasi masuk
+window.addEventListener("scroll",()=>{
+  const rect = section.getBoundingClientRect();
+  if(rect.top < window.innerHeight * 0.8){
+    section.classList.add("show");
+  }
+});
 </script>
   
 <script>
@@ -1165,6 +1228,25 @@ window.addEventListener("scroll",()=>{
       Math.max(0.25,1-Math.abs(offset)/800);
   });
 });
+</script>
+
+<script>
+const intro = document.getElementById("intro");
+const btnOpen = document.getElementById("btnOpen");
+const musik = document.getElementById("musik");
+
+btnOpen.onclick = ()=>{
+  intro.classList.add("hide-intro");
+  musik.play();
+  setTimeout(()=>intro.remove(),1000);
+};
+
+// Nama tamu dari URL
+const q = new URLSearchParams(location.search);
+if(q.get("to")){
+  document.getElementById("introNama").innerText =
+    "Yth. " + q.get("to").replace(/-/g," ");
+}
 </script>
 
 </body>
