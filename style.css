@@ -310,8 +310,8 @@ text-shadow:
 
 /* === QRIS SIZE LOCK (FINAL) === */
 .qris-protect img{
-  width:220px;
-  max-width:70vw;
+  width:180px;
+  max-width:65vw;
   height:auto;
   border-radius:18px;
   user-select:none;
@@ -321,16 +321,16 @@ text-shadow:
 
 /* Saat dibuka */
 .qris-protect.open img{
-  width:260px;
+  width:220px;
 }
 
 /* Mobile extra safety */
 @media(max-width:480px){
   .qris-protect img{
-    width:200px;
+    width:160px;
   }
   .qris-protect.open img{
-    width:230px;
+    width:200px;
   }
 }
   
@@ -555,6 +555,11 @@ body::after{
   z-index:99999;
 }
 
+footer{
+  position:relative;
+  z-index:100000;
+}
+
 /* === ROYAL BRIDE & GROOM NAME === */
 .mempelai{
   margin:40px 0;
@@ -749,6 +754,8 @@ textarea{
 
 /* gambar tidak bisa di zoom aneh */
 img{
-  pointer-events:auto;
-  touch-action:pan-x pan-y;
+  max-width:100%;
+  height:auto;
+  pointer-events:none;
+  touch-action:none;
 }
