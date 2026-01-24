@@ -91,6 +91,14 @@ if(gateTamu){
   gateTamu.innerHTML = ...
 }
 
+function toggleMusic(){
+  if(musik.paused){
+    musik.play();
+  }else{
+    musik.pause();
+  }
+}
+
 // Countdown
 const target = new Date("2026-02-15T07:00:00").getTime();
 const section = document.querySelector(".countdown-pro");
