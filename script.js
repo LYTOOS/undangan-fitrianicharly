@@ -12,6 +12,11 @@ const db=firebase.database();
 const target = new Date("2026-02-15T07:00:00").getTime();
 const section = document.querySelector(".countdown-pro");
 
+const d = document.getElementById("d");
+const h = document.getElementById("h");
+const m = document.getElementById("m");
+const s = document.getElementById("s");
+
 setInterval(()=>{
   const now = Date.now();
   let diff = target - now;
