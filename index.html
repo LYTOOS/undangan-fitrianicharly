@@ -29,7 +29,7 @@
 <!-- LEVEL 4 : CINEMATIC OPENING -->
 <div id="cinematic">
   <div class="cinematic-title">
-    <h1>Walimatul ‘Urs</h1>
+    <h1>Undangan Pernikahan</h1>
     <p>Dengan penuh hormat kami mengundang</p>
   </div>
 </div>
@@ -42,7 +42,7 @@
 <section class="hero royal-fade">
 <div data-aos="zoom-in">
   <div class="ornament"><span></span><span></span></div>
-<h1>Walimatul ‘Urs</h1>
+<h1>Undangan Pernikahan</h1>
 <p id="tamu">Tamu Undangan</p>
 <p>Minggu, 15 Februari 2026</p>
 </div>
@@ -143,7 +143,7 @@
 </a>
 </div>
 
-  <p>11.00 – 17.00 WIB<br>Kediaman Mempelai Wanita<br>Jl. xxxx</p>
+  <p>11.00 – 17.00 WIB<br>Kediaman Mempelai Wanita<br>Jl. Pendidikan</p>
 </section>
 
 <section data-aos="fade-up">
@@ -195,86 +195,6 @@
 <img src="foto/qris.png">
 </div>
 
-// Pantun otomatis
-const pantunList = [
-"Pergi ke hulu mencari sepat, singgah sebentar di tepi paya. Jika niat sudah terpatri di hati, akad nikah jadi penyempurna cinta.",
-"Songket disulam benang emas, dipakai raja di hari mulia. Restu orang tua doa terikhlas, rumah tangga bahagia selamanya.",
-"Kalau berlayar ke Indragiri, jangan lupa membawa bekal. Bila akad telah diikrari, cinta halal jadi modal kekal."
-];
-document.getElementById("pantun").innerText = pantunList[Math.floor(Math.random()*pantunList.length)];
-
-const WA_NUMBER="6282261467360";
-const WA_APIKEY="APIKEY_KAMU";
-
-const device = localStorage.device || ("dev-"+Math.random().toString(36).substr(2,9));
-localStorage.device = device;
-
-function play(){document.getElementById("musik").play()}
-function popup(show){document.getElementById("popup").style.display = show ? "flex" : "none";}
-function copy(t){navigator.clipboard.writeText(t);alert("Disalin")}
-
-// Kirim ucapan dengan limit 1 per device
-function kirim(){
-  if(localStorage.ucapanTerkirim){
-    alert("Ucapan sudah terkirim 🙏");
-    return;
-  }
-
-  const n = nama.value.trim();
-  const p = pesan.value.trim();
-
-  if(n.length < 3 || p.length < 5){
-    alert("Nama & ucapan belum lengkap");
-    return;
-  }
-
-  const now = Date.now();
-
-  const last = localStorage.lastSend || 0;
-  if(Date.now() - last < 60000){
-    alert("Tunggu 1 menit sebelum mengirim lagi 🙏");
-    return;
-  }
-  localStorage.lastSend = Date.now();
-
-  db.ref("ucapan").push({
-    nama: n,
-    pesan: p,
-    waktu: now,
-    device: device
-  });
-
-  localStorage.ucapanTerkirim = "1";
-
-  // WhatsApp notif
-  fetch(
-    `https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20baru%20dari%20${encodeURIComponent(n)}&apikey=${WA_APIKEY}`
-  );
-
-  pesan.value = "";
-}
-
-db.ref("ucapan").on("child_added", s => {
-  const d = s.val();
-  const div = document.createElement("div");
-  div.className = "ucapan";
-  div.innerText = `${d.nama}\n${d.pesan}`;
-  listUcapan.prepend(div);
-});
-
-const urlParams = new URLSearchParams(location.search);
-const namaTamu = urlParams.get("to");
-
-if(namaTamu){
-  document.getElementById("tamu").innerText = "Yth. " + namaTamu.replace(/\+/g," ");
-  document.getElementById("gateTamu").innerHTML =
-    `Yth. Bapak/Ibu<br><b>${namaTamu.replace(/\+/g," ")}</b>`;
-}
-
-// Admin Mode
-const isAdmin = location.hash === "#admin-rahasia-2026";
-if(isAdmin){document.body.style.outline="5px dashed gold"; console.log("ADMIN MODE AKTIF");}
-
 <footer style="
 text-align:center;
 padding:40px 20px 60px;
@@ -310,6 +230,12 @@ color:#888;
 
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+</script>
+
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="script.js"></script>
 
