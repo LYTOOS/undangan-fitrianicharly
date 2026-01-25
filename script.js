@@ -203,26 +203,23 @@ setInterval(()=>{
 },1000);
 
 // Animasi masuk
-window.addEventListener("scroll",()=>{
-  const rect = section.getBoundingClientRect();
-  if(rect.top < window.innerHeight * 0.8){
-    section.classList.add("show");
-  }
-});
-  
-let ticking=false;
+let ticking = false;
+
 window.addEventListener("scroll",()=>{
   if(!ticking){
     requestAnimationFrame(()=>{
-      const sc=window.scrollY;
-      document.querySelectorAll(".songket-bg").forEach(el=>{
-        el.style.backgroundPosition=`center ${sc*0.4}px`;
-      });
-      ticking=false;
+      const sc = window.scrollY;
+
+      document.querySelectorAll(".songket-bg,.songket-melayu")
+        .forEach(el=>{
+          el.style.backgroundPosition = `center ${sc*0.35}px`;
+        });
+
+      ticking = false;
     });
-    ticking=true;
+    ticking = true;
   }
-});
+});  
 
 const slider=document.querySelector(".slider");
 let scrollPos=0;
@@ -297,27 +294,7 @@ setTimeout(()=>{
   if(cine) cine.remove();
 },6000);
 
-let lastScroll=0;
-window.addEventListener("scroll",()=>{
-  const sc=window.scrollY;
-  if(Math.abs(sc-lastScroll)>8){
-    document.querySelector(".songket-melayu")
-      .style.backgroundPosition = `center ${sc*0.35}px`;
-    lastScroll=sc;
-  }
-});
-
 const motionEls = document.querySelectorAll(".motion");
-
-window.addEventListener("scroll",()=>{
-  motionEls.forEach(el=>{
-    const r = el.getBoundingClientRect();
-    if(r.top < window.innerHeight*0.85){
-      el.style.opacity = 1;
-      el.style.transform = "translateY(0)";
-    }
-  });
-});
 
 // Nama tamu dari URL
 const q = new URLSearchParams(location.search);
