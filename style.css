@@ -814,3 +814,27 @@ section, .card{
 img{
   -webkit-user-drag:none;
 }
+
+/* === LOCK BEFORE OPEN === */
+body.lock {
+  overflow: hidden;
+}
+
+/* SEMUA KONTEN DISEMBUNYIKAN */
+body.lock section,
+body.lock footer,
+body.lock .music-btn,
+body.lock #cinematic {
+  display: none;
+}
+
+/* INTRO FULLSCREEN */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(160deg,#111,#000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
