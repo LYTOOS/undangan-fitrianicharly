@@ -31,38 +31,46 @@ function kirim(){
     return;
   }
 
-  const n = nama.value.trim();
-  const p = pesan.value.trim();
+const btn = document.getElementById("btnOpen");
+const intro = document.getElementById("intro");
 
-  if(n.length < 3 || p.length < 5){
-    alert("Nama & ucapan belum lengkap");
-    return;
-  }
+btn.addEventListener("click", () => {
+  intro.classList.add("hide");
+  musik.play();
+});
 
-  const now = Date.now();
+const n = nama.value.trim();
+const p = pesan.value.trim();
 
-  const last = localStorage.lastSend || 0;
-  if(Date.now() - last < 60000){
-    alert("Tunggu 1 menit sebelum mengirim lagi 🙏");
-    return;
-  }
-  localStorage.lastSend = Date.now();
+if(n.length < 3 || p.length < 5){
+  alert("Nama & ucapan belum lengkap");
+  return;
+}
 
-  db.ref("ucapan").push({
-    nama: n,
-    pesan: p,
-    waktu: now,
-    device: device
-  });
+const now = Date.now();
 
-  localStorage.ucapanTerkirim = "1";
+const last = localStorage.lastSend || 0;
+if(Date.now() - last < 60000){
+  alert("Tunggu 1 menit sebelum mengirim lagi 🙏");
+  return;
+}
+localStorage.lastSend = Date.now();
 
-  // WhatsApp notif
-  fetch(
-    `https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20baru%20dari%20${encodeURIComponent(n)}&apikey=${WA_APIKEY}`
-  );
+db.ref("ucapan").push({
+  nama: n,
+  pesan: p,
+  waktu: now,
+  device: device
+});
 
-  pesan.value = "";
+localStorage.ucapanTerkirim = "1";
+
+// WhatsApp notif
+fetch(
+  `https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20baru%20dari%20${encodeURIComponent(n)}&apikey=${WA_APIKEY}`
+);
+
+pesan.value = "";
 }
 
 db.ref("ucapan").on("child_added", s => {
