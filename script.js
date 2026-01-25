@@ -13,7 +13,26 @@ const pantunList = [
   "Songket disulam benang emas, dipakai raja di hari mulia. Restu orang tua doa terikhlas, rumah tangga bahagia selamanya.",
   "Kalau berlayar ke Indragiri, jangan lupa membawa bekal. Bila akad telah diikrari, cinta halal jadi modal kekal."
 ];
-document.getElementById("pantun").innerText = pantunList[Math.floor(Math.random()*pantunList.length)];
+
+const pantunEl = document.getElementById("pantun");
+if (pantunEl) {
+  pantunEl.innerText =
+    pantunList[Math.floor(Math.random() * pantunList.length)];
+}
+
+const tamuEl = document.getElementById("tamu");
+if (tamuEl) {
+  const q = new URLSearchParams(location.search);
+  if (q.get("to")) {
+    tamuEl.innerText = "Yth. " + q.get("to").replace(/-/g, " ");
+  }
+}
+
+const popupEl = document.getElementById("popup");
+function popup(show) {
+  if (!popupEl) return;
+  popupEl.style.display = show ? "flex" : "none";
+}
 
 const WA_NUMBER="6282261467360";
 const WA_APIKEY="APIKEY_KAMU";
@@ -26,19 +45,55 @@ function popup(show){document.getElementById("popup").style.display = show ? "fl
 function copy(t){navigator.clipboard.writeText(t);alert("Disalin")}
 
 // Kirim ucapan dengan limit 1 per device
-function kirim(){
-  if(localStorage.ucapanTerkirim){
+function kirim() {
+  if (localStorage.ucapanTerkirim) {
     alert("Ucapan sudah terkirim 🙏");
     return;
   }
 
+  const nama = document.getElementById("nama");
+  const pesan = document.getElementById("pesan");
+
+  if (!nama || !pesan) return;
+
+  const n = nama.value.trim();
+  const p = pesan.value.trim();
+
+  if (n.length < 3 || p.length < 5) {
+    alert("Nama & ucapan belum lengkap");
+    return;
+  }
+
+  const last = localStorage.lastSend || 0;
+  if (Date.now() - last < 60000) {
+    alert("Tunggu 1 menit sebelum mengirim lagi 🙏");
+    return;
+  }
+  localStorage.lastSend = Date.now();
+
+  try {
+    db.ref("ucapan").push({
+      nama: n,
+      pesan: p,
+      waktu: Date.now()
+    });
+
+    localStorage.ucapanTerkirim = "1";
+    pesan.value = "";
+
+    fetch(
+      `https://api.callmebot.com/whatsapp.php?phone=${WA_NUMBER}&text=Ucapan%20baru%20dari%20${encodeURIComponent(
+        n
+      )}&apikey=${WA_APIKEY}`
+    ).catch(() => {});
+  } catch (e) {
+    console.error("Firebase error:", e);
+    alert("Maaf, gagal mengirim ucapan 🙏");
+  }
+}
+
 const btn = document.getElementById("btnOpen");
 const intro = document.getElementById("intro");
-
-btn.onclick = ()=>{
-  intro.classList.add("hide");
-  musik.play();
-});
 
 function toggleMusic(){
   if(musik.paused){
@@ -95,9 +150,6 @@ const namaTamu = urlParams.get("to");
 
 if(namaTamu){
   document.getElementById("tamu").innerText = "Yth. " + namaTamu.replace(/\+/g," ");
-  document.getElementById("gateTamu").innerHTML =
-    `Yth. Bapak/Ibu<br><b>${namaTamu.replace(/\+/g," ")}</b>`;
-}
 
 // Admin Mode
 const isAdmin = location.hash === "#admin-rahasia-2026";
@@ -167,7 +219,7 @@ setInterval(()=>{
   slider.scrollTo({left:scrollPos,behavior:"smooth"});
 },3500);
 
-<!-- MUSIC FADE IN (LEVEL 4 IMPERIAL) -->
+// MUSIC FADE IN (LEVEL 4 IMPERIAL)
 document.addEventListener("DOMContentLoaded",()=>{
   if(!musik) return;
 
@@ -244,15 +296,29 @@ const intro = document.getElementById("intro");
 const btnOpen = document.getElementById("btnOpen");
 const musik = document.getElementById("musik");
 
-btnOpen.onclick = ()=>{
-  intro.classList.add("hide-intro");
-  musik.play();
-  setTimeout(()=>intro.remove(),1000);
-};
-
 // Nama tamu dari URL
 const q = new URLSearchParams(location.search);
 if(q.get("to")){
   document.getElementById("introNama").innerText =
     "Yth. " + q.get("to").replace(/-/g," ");
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const intro = document.getElementById("intro");
+  const btnOpen = document.getElementById("btnOpen");
+  const musik = document.getElementById("musik");
+
+  if (btnOpen && intro) {
+    btnOpen.addEventListener("click", () => {
+      intro.classList.add("hide-intro");
+
+      if (musik) {
+        musik.play().catch(() => {});
+      }
+
+      setTimeout(() => {
+        intro.remove();
+      }, 1200);
+    });
+  }
+});
