@@ -1,3 +1,9 @@
+"use strict";
+
+function $(id){
+  return document.getElementById(id);
+}
+
 AOS.init({duration:1200,once:true});
 
 const firebaseConfig={
@@ -92,14 +98,18 @@ function kirim() {
   }
 }
 
-const btn = document.getElementById("btnOpen");
-const intro = document.getElementById("intro");
+const musik = $("musik");
+const musicBtn = document.querySelector(".music-btn");
 
 function toggleMusic(){
+  if(!musik) return;
+
   if(musik.paused){
-    musik.play();
+    musik.play().catch(()=>{});
+    musicBtn?.classList.remove("muted");
   }else{
     musik.pause();
+    musicBtn?.classList.add("muted");
   }
 }
 
@@ -110,6 +120,10 @@ if(n.length < 3 || p.length < 5){
   alert("Nama & ucapan belum lengkap");
   return;
 }
+
+const deviceID =
+  localStorage.deviceID ||
+  (localStorage.deviceID = "dev-" + crypto.randomUUID());
 
 const now = Date.now();
 
@@ -239,6 +253,19 @@ document.querySelector(".qris-protect").onclick=()=>{
   document.querySelector(".qris-protect").classList.toggle("open");
 }
 
+const qrisBox = document.querySelector(".qris-protect");
+if(qrisBox){
+  qrisBox.addEventListener("click",()=>{
+    qrisBox.classList.toggle("open");
+  });
+}
+
+document.addEventListener("keyup",e=>{
+  if(e.key === "PrintScreen"){
+    alert("QRIS dilindungi sistem undangan 🔒");
+  }
+});
+
 setInterval(()=>{
   if(!musik.paused){
     const pulse = 0.9 + Math.random()*0.15;
@@ -291,10 +318,6 @@ window.addEventListener("scroll",()=>{
     }
   });
 });
-
-const intro = document.getElementById("intro");
-const btnOpen = document.getElementById("btnOpen");
-const musik = document.getElementById("musik");
 
 // Nama tamu dari URL
 const q = new URLSearchParams(location.search);
