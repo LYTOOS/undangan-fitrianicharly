@@ -316,6 +316,7 @@ text-shadow:
 .qris-protect.open::after{ opacity:0; }
 
 /* === QRIS SIZE LOCK (FINAL) === */
+.qris-protect,
 .qris-protect img{
   width:180px;
   max-width:65vw;
@@ -325,6 +326,10 @@ text-shadow:
   user-select:none;
   -webkit-user-drag:none;
   pointer-events:none;
+}
+
+.qris-protect{
+  pointer-events:auto;
 }
 
 /* Saat dibuka */
