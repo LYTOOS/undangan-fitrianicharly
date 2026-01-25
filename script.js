@@ -57,7 +57,6 @@ const WA_APIKEY="APIKEY_KAMU";
 const device = localStorage.device || ("dev-"+Math.random().toString(36).substr(2,9));
 localStorage.device = device;
 
-function play(){document.getElementById("musik").play()}
 function popup(show){document.getElementById("popup").style.display = show ? "flex" : "none";}
 function copy(t){navigator.clipboard.writeText(t);alert("Disalin")}
 
@@ -133,21 +132,6 @@ function kirim(){
   }
 }
 
-const musik = $("musik");
-const musicBtn = document.querySelector(".music-btn");
-
-function toggleMusic(){
-  if(!musik) return;
-
-  if(musik.paused){
-    musik.play().catch(()=>{});
-    musicBtn?.classList.remove("muted");
-  }else{
-    musik.pause();
-    musicBtn?.classList.add("muted");
-  }
-}
-
 const n = nama.value.trim();
 const p = pesan.value.trim();
 
@@ -207,14 +191,6 @@ if(isAdmin){document.body.style.outline="5px dashed gold"; console.log("ADMIN MO
 const gateTamu = document.getElementById("gateTamu");
 if(gateTamu){
   gateTamu.innerHTML = ...
-}
-
-function toggleMusic(){
-  if(musik.paused){
-    musik.play();
-  }else{
-    musik.pause();
-  }
 }
 
 // Countdown
@@ -338,27 +314,46 @@ if(q.get("to")){
     "Yth. " + q.get("to").replace(/-/g," ");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const intro = document.getElementById("intro");
-  const btnOpen = document.getElementById("btnOpen");
-  const musik = document.getElementById("musik");
-
-  if (btnOpen && intro) {
-    btnOpen.addEventListener("click", () => {
-      intro.classList.add("hide-intro");
-
-      if (musik) {
-        musik.play().catch(() => {});
-      }
-
-      setTimeout(() => {
-        intro.remove();
-      }, 1200);
-    });
-  }
-});
-
 window.onerror = function(msg, src, line){
   console.warn("JS SAFE MODE:", msg);
   return true;
 };
+
+/* === LOCK PAGE === */
+document.body.classList.add("lock");
+
+/* === OPEN INVITATION === */
+const btnOpen = document.getElementById("btnOpen");
+const intro = document.getElementById("intro");
+const musik = document.getElementById("musik");
+const musicBtn = document.querySelector(".music-btn");
+
+btnOpen.addEventListener("click", () => {
+  intro.style.opacity = "0";
+  intro.style.pointerEvents = "none";
+
+  setTimeout(() => {
+    intro.style.display = "none";
+    document.body.classList.remove("lock");
+
+    musik.play().catch(()=>{});
+    musicBtn.style.display = "flex";
+
+    window.scrollTo(0,0);
+  }, 600);
+});
+
+/* === MUSIC TOGGLE === */
+function toggleMusic(){
+  if(musik.paused){
+    musik.play();
+    musicBtn.classList.add("on");
+  } else {
+    musik.pause();
+    musicBtn.classList.remove("on");
+  }
+}
+
+document.querySelectorAll("section").forEach(s=>{
+  s.classList.add("fade-in");
+});
