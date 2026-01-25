@@ -4,6 +4,17 @@ function $(id){
   return document.getElementById(id);
 }
 
+/* === GET USER IP (ONCE) === */
+fetch("https://api.ipify.org?format=json")
+  .then(r => r.json())
+  .then(d => localStorage.ip = d.ip)
+  .catch(()=>{});
+
+/* === DEVICE ID === */
+const deviceID =
+  localStorage.deviceID ||
+  (localStorage.deviceID = "dev-" + crypto.randomUUID());
+
 AOS.init({duration:1200,once:true});
 
 const firebaseConfig={
@@ -51,19 +62,43 @@ function popup(show){document.getElementById("popup").style.display = show ? "fl
 function copy(t){navigator.clipboard.writeText(t);alert("Disalin")}
 
 // Kirim ucapan dengan limit 1 per device
-function kirim() {
-  if (localStorage.ucapanTerkirim) {
-    alert("Ucapan sudah terkirim 🙏");
+function kirim(){
+  const nama = document.getElementById("nama")?.value.trim();
+  const pesan = document.getElementById("pesan")?.value.trim();
+
+  if(!nama || !pesan){
+    alert("Nama dan ucapan wajib diisi 🙏");
     return;
   }
 
-  const nama = document.getElementById("nama");
-  const pesan = document.getElementById("pesan");
+  /* === LIMIT 1 UCAPAN / 24 JAM === */
+  const lastSend = localStorage.lastSend || 0;
+  if (Date.now() - lastSend < 24 * 60 * 60 * 1000) {
+    alert("Ucapan hanya dapat dikirim 1 kali 🙏");
+    return;
+  }
 
-  if (!nama || !pesan) return;
+  /* === DATA EXTRA === */
+  const ip = localStorage.ip || "unknown";
+  const waktu = new Date().toISOString();
 
-  const n = nama.value.trim();
-  const p = pesan.value.trim();
+  /* === PUSH FIREBASE === */
+  firebase.database().ref("ucapan").push({
+    nama: nama,
+    pesan: pesan,
+    device: deviceID,
+    ip: ip,
+    waktu: waktu
+  });
+
+  /* === SAVE TIME === */
+  localStorage.lastSend = Date.now();
+
+  document.getElementById("nama").value = "";
+  document.getElementById("pesan").value = "";
+
+  alert("Terima kasih atas doa & ucapannya 🤍");
+}
 
   if (n.length < 3 || p.length < 5) {
     alert("Nama & ucapan belum lengkap");
