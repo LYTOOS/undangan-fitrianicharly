@@ -39,6 +39,14 @@ btn.addEventListener("click", () => {
   musik.play();
 });
 
+function toggleMusic(){
+  if(musik.paused){
+    musik.play();
+  }else{
+    musik.pause();
+  }
+}
+
 const n = nama.value.trim();
 const p = pesan.value.trim();
 
