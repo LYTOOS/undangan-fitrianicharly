@@ -322,3 +322,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+window.onerror = function(msg, src, line){
+  console.warn("JS SAFE MODE:", msg);
+  return true;
+};
