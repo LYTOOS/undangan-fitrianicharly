@@ -1,4 +1,5 @@
 AOS.init({duration:1200,once:true});
+
 const firebaseConfig={
 apiKey:"AIzaSyCr2VF6hZ3pLWU5eORdrtdM1c5L_AcLVH4",
 authDomain:"undangan-pernikahan-f6d5e.firebaseapp.com",
@@ -34,7 +35,7 @@ function kirim(){
 const btn = document.getElementById("btnOpen");
 const intro = document.getElementById("intro");
 
-btn.addEventListener("click", () => {
+btn.onclick = ()=>{
   intro.classList.add("hide");
   musik.play();
 });
