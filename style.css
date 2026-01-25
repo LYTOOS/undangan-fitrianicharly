@@ -585,9 +585,6 @@ footer{
   background:linear-gradient(135deg,#FFD700,#8F6B1F,#C9A24D);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  text-shadow:
-    0 3px 8px rgba(0,0,0,.35),
-    0 0 22px rgba(255,215,0,.35);
 }
 
 .mempelai .label{
