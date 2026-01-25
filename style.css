@@ -326,7 +326,6 @@ text-shadow:
 .qris-protect,
 .qris-protect img{
   width:180px;
-  max-width:65vw;
   height:auto;
   border-radius:22px;
   touch-action:none;
