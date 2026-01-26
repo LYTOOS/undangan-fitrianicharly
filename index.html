@@ -1,116 +1,324 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Undangan Pernikahan</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
-  
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <title>The Wedding of Charly & Fitriani</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&family=Great+Vibes&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="lock">
 
-<div class="royal-scroll"></div>
-<div class="songket-bg"></div>
-<div class="songket-melayu"></div>
+    <div class="texture-overlay"></div>
 
-<div id="intro">
-  <div class="intro-box">
-    <h1 class="royal-title">Undangan Pernikahan</h1>
-    <p id="introNama">Yth. Bapak/Ibu</p>
-    <button id="btnOpen">Buka Undangan</button>
-  </div>
-</div>
-
-<!-- LEVEL 4 : CINEMATIC OPENING -->
-<div id="cinematic">
-  <div class="cinematic-title">
-    <h1>Undangan Pernikahan</h1>
-    <p>Dengan penuh hormat kami mengundang</p>
-  </div>
-</div>
-
-<audio id="musik" src="musik/lagu.mp3" loop></audio>
-<div class="music-btn" onclick="toggleMusic()">
-  <img src="icon-music.svg">
-</div>
-
-<section class="hero section-cinematic royal-fade">
-  <div data-aos="zoom-in">
-    <h1>Undangan Pernikahan</h1>
-    <p id="tamu">Tamu Undangan</p>
-    <p>Minggu, 15 Februari 2026</p>
-  </div>
-</section>
-
-<section class="songket-section section-fabric" data-aos="fade-up">
-  <h2>Adat Melayu Riau</h2>
-  <div class="section-divider"></div>
-
-  <p>
-    Dengan memohon ridho Allah SWT,<br>
-    kami melaksanakan pernikahan sesuai adat Melayu Riau,<br>
-    didahului dengan tepuk tepung tawar sebagai tanda restu keluarga dan adat.
-  </p>
-  <p><i>“Takkan Melayu hilang di bumi.”</i></p>
-</section>
-
-<section class="section-soft" data-aos="fade-up">
-  <h2>Doa Adat Melayu</h2>
-  <div class="section-divider"></div>
-
-  <p style="font-style:italic;font-size:20px;line-height:1.8">
-    “Kami memohon restu Tuhan Yang Maha Esa,<br>
-    restu orang tua, ninik mamak, dan kaum kerabat.<br>
-    Semoga ikatan suci ini kekal selamanya,<br>
-    berpayung adat, bersendi syarak.”
-  </p>
-
-  <p style="margin-top:14px;font-weight:600;color:#8f6b1f">
-    Adat bersendi syarak, syarak bersendi Kitabullah
-  </p>
-</section>
-
-<section class="section-royal" data-aos="fade-up">
-  <h2>Pantun Adat Melayu</h2>
-  <div class="section-divider" data-aos="zoom-in"></div>
-  <p id="pantun" style="font-style:italic;font-size:18px"></p>
-</section>
-
-<section class="section-soft" data-aos="fade-up">
-  <h2>Pengantin</h2>
-  <div class="section-divider"></div>
-
-  <div class="mempelai">
-    <div class="label">Mempelai Wanita</div>
-    <div class="nama">Fitriani S.Pd</div>
-    <div class="ortu">
-      Putra dari Bapak R. Supian & Ibu Suryati
+    <audio id="musik" src="musik/lagu.mp3" loop></audio>
+    <div id="musicControl" class="music-btn" style="display:none;" onclick="toggleMusic()">
+        <img src="icon/icon-music.svg" alt="Music" id="musicIcon">
     </div>
-  </div>
 
-  <div class="mempelai">
-    <div class="label">Mempelai Pria</div>
-    <div class="nama">Charly Handani S.I.Kom</div>
-    <div class="ortu">
-      Putri dari Bapak Zaili & Ibu Erni Wati
+    <div id="qrisPopup" class="qris-popup" onclick="closeQris()">
+        <div class="qris-content">
+            <span class="close-btn">&times;</span>
+            <h3>Scan QRIS</h3>
+            <img src="foto/qris.png" alt="QRIS Code">
+            <p>Atas Nama: Charly & Fitriani</p>
+        </div>
     </div>
-  </div>
-</section>
 
-<section class="countdown-pro section-cinematic motion">
-  <h2>Menuju Hari Bahagia</h2>
-  <div class="count-box">
-    <div><span id="d">00</span><small>Hari</small></div>
-    <div><span id="h">00</span><small>Jam</small></div>
-    <div><span id="m">00</span><small>Menit</small></div>
-    <div><span id="s">00</span><small>Detik</small></div>
-  </div>
+    <div id="intro" class="intro-container">
+        <div class="royal-border-frame">
+            <div class="corner-ornament top-left"></div>
+            <div class="corner-ornament top-right"></div>
+            <div class="corner-ornament bottom-left"></div>
+            <div class="corner-ornament bottom-right"></div>
+        </div>
 
+        <div class="intro-content" data-aos="zoom-in">
+            <h3 class="intro-subtitle">The Wedding of</h3>
+            <h1 class="intro-title">Charly & Fitriani</h1>
+            
+            <div class="intro-divider"></div>
+            
+            <div class="intro-guest">
+                <p>Kepada Yth. Bapak/Ibu/Saudara/i</p>
+                <h2 id="introNama" class="guest-name">Tamu Undangan</h2>
+            </div>
+
+            <button id="btnOpen" class="btn-royal">
+                <span>Buka Undangan</span>
+            </button>
+        </div>
+    </div>
+
+    <main id="mainContent">
+
+        <section class="section-hero bg-section-1">
+            <div class="content-wrapper" data-aos="fade-down">
+                <h3 class="subtitle">Walimatul Ursy</h3>
+                <h1 class="title-main">Undangan Pernikahan</h1>
+                <p class="date">Minggu, 15 Februari 2026</p>
+                <div class="ornament-divider"></div>
+            </div>
+        </section>
+
+        <section class="section-adat bg-section-2">
+            <div class="container" data-aos="fade-up">
+                <h2 class="section-title">Adat Melayu Riau</h2>
+                <div class="gold-divider"></div>
+                
+                <p class="quote-text">
+                    "Takkan Melayu hilang di bumi. <br>
+                    Adat bersendi syarak, syarak bersendi Kitabullah."
+                </p>
+                
+                <div class="pantun-box" data-aos="zoom-in" data-aos-delay="200">
+                    <p id="pantun" class="pantun-text"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-couple bg-section-3">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Mempelai</h2>
+                <img src="foto/bismillah.png" class="bismillah" alt="Bismillah" data-aos="fade-up">
+                
+                <p class="intro-text" data-aos="fade-up">
+                    Dengan memohon ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami:
+                </p>
+
+                <div class="couple-card" data-aos="fade-right">
+                    <div class="couple-img">
+                        <img src="foto/wanita.jpg" alt="Fitriani">
+                    </div>
+                    <h3 class="couple-name">Fitriani S.Pd</h3>
+                    <p class="couple-parent">Putri dari Bapak R. Supian & Ibu Suryati</p>
+                </div>
+
+                <div class="and-symbol" data-aos="zoom-in">&</div>
+
+                <div class="couple-card" data-aos="fade-left">
+                    <div class="couple-img">
+                        <img src="foto/pria.jpg" alt="Charly">
+                    </div>
+                    <h3 class="couple-name">Charly Handani S.I.Kom</h3>
+                    <p class="couple-parent">Putra dari Bapak Zaili & Ibu Erni Wati</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-countdown bg-section-4">
+            <div class="container" data-aos="zoom-in">
+                <h2>Menuju Hari Bahagia</h2>
+                <div class="countdown-box">
+                    <div class="time-item"><span id="d">00</span><small>Hari</small></div>
+                    <div class="time-item"><span id="h">00</span><small>Jam</small></div>
+                    <div class="time-item"><span id="m">00</span><small>Menit</small></div>
+                    <div class="time-item"><span id="s">00</span><small>Detik</small></div>
+                </div>
+                
+                <div class="quran-verse">
+                    <p>“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri...”</p>
+                    <strong>(QS. Ar-Rum: 21)</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-event bg-section-5">
+            <div class="container">
+                <div class="event-box" data-aos="fade-up">
+                    <h3>Akad Nikah</h3>
+                    <p class="event-time">07.00 WIB</p>
+                    <p class="event-loc">Kantor KUA Kec. Concong<br>Jl. Pendidikan</p>
+                </div>
+
+                <div class="event-box main-event" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Resepsi Pernikahan</h3>
+                    <p class="event-time">11.00 – 17.00 WIB</p>
+                    <p class="event-loc">Kediaman Mempelai Wanita<br>Jl. Pendidikan</p>
+                    
+                    <a href="https://goo.gl/maps/placeholder" target="_blank" class="btn-maps">
+                        📍 Lihat Lokasi Google Maps
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-gallery bg-section-6">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-down">Momen Bahagia</h2>
+                <div class="gallery-grid">
+                    <img src="foto/galeri1.jpg" data-aos="zoom-in" alt="Galeri 1">
+                    <img src="foto/galeri2.jpg" data-aos="zoom-in" data-aos-delay="100" alt="Galeri 2">
+                    <img src="foto/galeri3.jpg" data-aos="zoom-in" data-aos-delay="200" alt="Galeri 3">
+                    <img src="foto/galeri4.jpg" data-aos="zoom-in" data-aos-delay="300" alt="Galeri 4">
+                </div>
+            </div>
+        </section>
+
+        <section class="section-gift bg-section-7">
+            <div class="container" data-aos="fade-up">
+                <h2 class="section-title">Tanda Kasih</h2>
+                <p class="gift-text">Kehadiran dan doa restu Anda adalah kado terindah bagi kami. Namun jika Anda ingin memberi tanda kasih, kami menyediakan amplop digital:</p>
+                
+                <div class="wallet-category">
+                    <h3 class="cat-title">Bank Transfer</h3>
+                    
+                    <div class="wallet-card">
+                        <div class="wallet-header">
+                            <img src="icon/bri.png" alt="BRI" class="bank-logo"> 
+                            <span>Bank BRI</span>
+                        </div>
+                        <div class="account-details">
+                            <div class="acc-row">
+                                <div>
+                                    <small>No. Rekening</small>
+                                    <b class="rek-text">xxxx-xxxx-xxxx</b>
+                                </div>
+                                <button class="btn-copy" onclick="copyText('xxxx-xxxx-xxxx')">Salin</button>
+                            </div>
+                            <p class="acc-name">a.n Charly Handani</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wallet-category">
+                    <h3 class="cat-title">E-Wallet & QRIS</h3>
+
+                    <div class="wallet-card">
+                        <div class="wallet-header">
+                            <img src="icon/dana.png" alt="DANA" class="bank-logo">
+                            <span>DANA</span>
+                        </div>
+                        
+                        <div class="account-details dashed">
+                            <div class="acc-row">
+                                <div>
+                                    <small>Mempelai Pria</small>
+                                    <b>0822-6146-7360</b>
+                                </div>
+                                <button class="btn-copy" onclick="copyText('082261467360')">Salin</button>
+                            </div>
+                        </div>
+
+                        <div class="account-details dashed">
+                            <div class="acc-row">
+                                <div>
+                                    <small>Mempelai Wanita</small>
+                                    <b>08xx-xxxx-xxxx</b>
+                                </div>
+                                <button class="btn-copy" onclick="copyText('08xxxxxxxxxx')">Salin</button>
+                            </div>
+                        </div>
+
+                        <button class="btn-view-qris" onclick="openQris()">
+                            <img src="icon/qr-icon.png" style="width:16px; margin-right:8px;"> Lihat QRIS
+                        </button>
+                    </div>
+
+                    <div class="wallet-card">
+                        <div class="wallet-header">
+                            <img src="icon/seabank.png" alt="SeaBank" class="bank-logo">
+                            <span>SeaBank</span>
+                        </div>
+                        <div class="account-details dashed">
+                            <div class="acc-row">
+                                <div>
+                                    <small>Mempelai Pria</small>
+                                    <b>9011-6306-2173</b>
+                                </div>
+                                <button class="btn-copy" onclick="copyText('901163062173')">Salin</button>
+                            </div>
+                        </div>
+                        <div class="account-details">
+                            <div class="acc-row">
+                                <div>
+                                    <small>Mempelai Wanita</small>
+                                    <b>xxxx-xxxx-xxxx</b>
+                                </div>
+                                <button class="btn-copy" onclick="copyText('xxxxxxxxxxxx')">Salin</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wallet-card">
+                        <div class="wallet-header">
+                            <img src="icon/gopay.png" alt="GoPay" class="bank-logo">
+                            <span>GoPay</span>
+                        </div>
+                        <div class="account-details dashed">
+                            <div class="acc-row">
+                                <div>
+                                    <small>Mempelai Pria</small>
+                                    <b>0822-6146-7360</b>
+                                </div>
+                                <button class="btn-copy" onclick="copyText('082261467360')">Salin</button>
+                            </div>
+                        </div>
+                        <div class="account-details">
+                            <div class="acc-row">
+                                <div>
+                                    <small>Mempelai Wanita</small>
+                                    <b>08xx-xxxx-xxxx</b>
+                                </div>
+                                <button class="btn-copy" onclick="copyText('08xxxxxxxxxx')">Salin</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wishes bg-section-8">
+            <div class="container" data-aos="fade-up">
+                <h2 class="section-title">Ucapan & Doa</h2>
+                <div class="form-box">
+                    <input type="text" id="namaPengirim" placeholder="Nama Anda">
+                    <textarea id="pesanUcapan" placeholder="Tuliskan ucapan & doa restu..."></textarea>
+                    <button onclick="kirimUcapan()" class="btn-royal">Kirim Ucapan</button>
+                </div>
+                <div id="displayUcapan" class="wishes-list"></div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>Kami yang berbahagia,</p>
+                <h2 class="footer-couple">Charly & Fitriani</h2>
+                <p>Keluarga Besar Bpk. Zaili & Bpk. R. Supian</p>
+                
+                <div class="social-links">
+                    <a href="https://instagram.com/icharlyh" target="_blank">
+                        <img src="icon/ig.png" alt="Instagram">
+                    </a>
+                    <a href="https://tiktok.com/@icharlyh" target="_blank">
+                        <img src="icon/tiktok.png" alt="TikTok">
+                    </a>
+                    <a href="https://youtube.com/@lytoos7" target="_blank">
+                        <img src="icon/youtube.png" alt="YouTube">
+                    </a>
+                    <a href="https://wa.me/6282261467360" target="_blank">
+                        <img src="icon/wa.png" alt="WhatsApp">
+                    </a>
+                </div>
+                
+                <div class="credit">
+                    Invitation Created by Lytoos © 2026
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
   <p class="ar-rum">
     “Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan
     pasangan-pasangan untukmu dari jenismu sendiri,
