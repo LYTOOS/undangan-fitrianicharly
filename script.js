@@ -1,5 +1,18 @@
 "use strict";
 
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCr2VF6hZ3pLWU5eORdrtdM1c5L_AcLVH4",
+  authDomain: "undangan-pernikahan-f6d5e.firebaseapp.com",
+  databaseURL: "https://undangan-pernikahan-f6d5e-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "undangan-pernikahan-f6d5e"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
 // --- KONFIGURASI DOM ---
 const musicBtn = document.getElementById("musicControl");
 const musik = document.getElementById("musik");
@@ -116,16 +129,45 @@ document.querySelector('.qris-content').addEventListener('click', function(e) {
 });
 
 // --- 9. KIRIM UCAPAN (FRONTEND ONLY) ---
-function kirimUcapan() {
-    const nama = document.getElementById("namaPengirim").value;
-    const pesan = document.getElementById("pesanUcapan").value;
-    if (nama === "" || pesan === "") { alert("Harap isi nama dan ucapan."); return; }
-    const list = document.getElementById("displayUcapan");
-    const item = document.createElement("div");
-    item.style.borderBottom = "1px solid #ddd"; item.style.padding = "10px 0"; item.style.textAlign = "left";
-    item.innerHTML = `<strong>${nama}</strong><br><small>${pesan}</small>`;
-    list.prepend(item);
-    document.getElementById("namaPengirim").value = "";
-    document.getElementById("pesanUcapan").value = "";
-    alert("Terima kasih, ucapan Anda telah terkirim!");
+function kirimUcapan(){
+  const nama = document.getElementById("namaPengirim").value.trim();
+  const pesan = document.getElementById("pesanUcapan").value.trim();
+
+  if(nama.length < 3 || pesan.length < 5){
+    alert("Nama & ucapan belum lengkap");
+    return;
+  }
+
+  const lastSend = localStorage.lastSend || 0;
+  if(Date.now() - lastSend < 24*60*60*1000){
+    alert("Ucapan hanya dapat dikirim 1 kali 🙏");
+    return;
+  }
+
+  fetch("https://api.ipify.org?format=json")
+    .then(r=>r.json())
+    .then(d=>localStorage.ip=d.ip)
+    .catch(()=>{});
+
+  const ip = localStorage.ip || "unknown";
+
+  try{
+    db.ref("ucapan").push({
+      nama,
+      pesan,
+      waktu: Date.now(),
+      ip
+    });
+
+    localStorage.lastSend = Date.now();
+
+    alert("Terima kasih, ucapan Anda terkirim 🤍");
+
+    document.getElementById("namaPengirim").value="";
+    document.getElementById("pesanUcapan").value="";
+
+  }catch(e){
+    console.error(e);
+    alert("Gagal mengirim ucapan");
+  }
 }
