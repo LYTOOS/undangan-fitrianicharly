@@ -10,9 +10,12 @@
 }
 
 /* === RESET & BASE === */
-* { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+* {
+    box-sizing: border-box;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
 html {
-    overflow-x: hidden; /* Mencegah geser samping */
     scroll-behavior: smooth;
 }
 
@@ -27,7 +30,6 @@ body {
     line-height: 1.6;
     overflow-x: hidden; /* Pastikan tidak ada scroll samping */
     overflow-y: auto;   /* IZINKAN SCROLL VERTIKAL */
-    -webkit-overflow-scrolling: touch; /* Agar scroll mulus di iPhone/Android */
 }
 
 /* === LOCK SCROLL (Saat Cover Aktif) === */
