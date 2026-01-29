@@ -276,6 +276,32 @@ input, textarea {
 }
 textarea { height: 100px; resize: none; }
 
+.ucapan-item{
+  padding:14px 0;
+  border-bottom:1px solid rgba(0,0,0,.08);
+  text-align:left;
+}
+
+.ucapan-item strong{
+  display:block;
+  color:#b8962e;
+  font-weight:600;
+}
+
+.ucapan-item small{
+  display:block;
+  font-size:11px;
+  color:#999;
+  margin-bottom:6px;
+}
+
+.ucapan-item p{
+  margin:0;
+  font-size:14px;
+  color:#444;
+  line-height:1.6;
+}
+
 /* === FOOTER === */
 footer {
     background: #111; color: #888; padding: 50px 20px; font-size: 0.9rem;
