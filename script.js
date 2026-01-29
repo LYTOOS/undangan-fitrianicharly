@@ -6,16 +6,6 @@ const musik = document.getElementById("musik");
 const intro = document.getElementById("intro");
 const btnOpen = document.getElementById("btnOpen");
 
-// --- 1. INISIALISASI AOS (ANIMASI) ---
-document.addEventListener("DOMContentLoaded", () => {
-    AOS.init({
-        duration: 1000,
-        easing: 'ease-out-cubic',
-        once: true,
-        mirror: false
-    });
-});
-
 // --- 2. LOGIKA BUKA UNDANGAN ---
 btnOpen.addEventListener("click", () => {
     window.scrollTo(0, 0);
@@ -130,3 +120,12 @@ function kirimUcapan() {
     document.getElementById("pesanUcapan").value = "";
     alert("Terima kasih, ucapan Anda telah terkirim!");
 }
+
+window.addEventListener("load", () => {
+  AOS.init({
+    duration: 1100,
+    easing: "ease-out-cubic",
+    once: true,
+    mirror: false
+  });
+});
