@@ -20,8 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
 btnOpen.addEventListener("click", () => {
     window.scrollTo(0, 0);
     intro.classList.add("slide-up");
+    
     document.body.classList.remove("lock");
-    document.body.style.overflowY = "auto";
+    document.body.style.overflow = "auto";       // Paksa CSS inline
+    document.body.style.overflowX = "hidden";    // Jaga biar gak geser samping
+    document.body.style.position = "static";     // Hapus posisi fixed
+    document.body.style.height = "auto";         // Reset tinggi
     
     // Mainkan musik
     playMusic();
