@@ -22,17 +22,13 @@ btnOpen.addEventListener("click", () => {
     intro.classList.add("slide-up");
     
     document.body.classList.remove("lock");
-    document.body.style.overflow = "auto";       // Paksa CSS inline
-    document.body.style.overflowX = "hidden";    // Jaga biar gak geser samping
-    document.body.style.position = "static";     // Hapus posisi fixed
-    document.body.style.height = "auto";         // Reset tinggi
+    document.getElementById("intro").classList.add("hide");
+    document.getElementById("musicControl").style.display = "flex";
     
     // Mainkan musik
-    playMusic();
+    musik.play();
     
     setTimeout(() => {
-        musicBtn.style.display = "flex";
-        intro.style.display = "none";
         AOS.refresh();
     }, 1000);
 });
