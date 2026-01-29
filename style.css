@@ -946,10 +946,11 @@ textarea{
 
 /* ===== AGENCY FIX MOBILE ===== */
 html, body{
-  width:100%;
-  overflow-x:hidden;
-  overscroll-behavior:none;
-  touch-action:manipulation;
+  width:100%;
+  overflow-x:hidden;
+  overflow-y:auto;
+  touch-action:pan-y;
+  overscroll-behavior-y:auto;
 }
 
 /* cegah elemen bisa digeser */
@@ -970,20 +971,17 @@ img{
   height:auto;
 }
 
-html, body{
-  overscroll-behavior:none;
-  touch-action:manipulation;
-}
-
 section{
-  overflow:hidden;
+  overflow:visible;
 }
 .card{
   overflow:visible;
 }
 
 img{
-  -webkit-user-drag:none;
+  -webkit-user-drag:none;
+  user-select:none;
+  pointer-events:none;
 }
 
 /* === LOCK BEFORE OPEN === */
@@ -992,11 +990,12 @@ body.lock {
 }
 
 /* SEMUA KONTEN DISEMBUNYIKAN */
-body.lock section,
-body.lock footer{
-  opacity:0;
-  pointer-events:none;
-  transform:translateY(40px);
+body.lock{
+  overflow:hidden;
+}
+
+body.lock main{
+  pointer-events:none;
 }
 
 /* INTRO FULLSCREEN */
