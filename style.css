@@ -37,6 +37,21 @@ h1, h2, h3 { font-family: var(--font-title); color: var(--gold); margin: 0; }
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 
+/* === SECTION DIVIDER (RESTORE FINAL) === */
+.section-divider{
+    width: 90px;
+    height: 3px;
+    margin: 18px auto 28px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--gold),
+        transparent
+    );
+    border-radius: 3px;
+    opacity: .9;
+}
+
 /* === COMPONENTS === */
 .btn-royal {
     padding: 12px 35px; border-radius: 50px; border: none;
