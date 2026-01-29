@@ -10,17 +10,17 @@ const btnOpen = document.getElementById("btnOpen");
 btnOpen.addEventListener("click", () => {
     window.scrollTo(0, 0);
 
-    document.body.classList.remove("lock");
-    
     intro.classList.add("hide");
-    
-    // Mainkan musik
-    musicBtn.style.display = "flex";
-    if(musik) musik.play();
-    
-    if (typeof AOS !== 'undefined') {
-        setTimeout(() => { AOS.refresh(); }, 600);
-    }
+
+    setTimeout(() => {
+        document.body.classList.remove("lock");
+        intro.style.display = "none";
+
+        musicBtn.style.display = "flex";
+        musik.play().catch(()=>{});
+
+        AOS.refreshHard();
+    }, 700);
 });
 
 // --- 3. KONTROL MUSIK ---
