@@ -9,14 +9,6 @@
     --font-script: 'Great Vibes', cursive;
 }
 
-// Pantun otomatis
-const pantunList = [
-"Pergi ke hulu mencari sepat, singgah sebentar di tepi paya. Jika niat sudah terpatri di hati, akad nikah jadi penyempurna cinta.",
-"Songket disulam benang emas, dipakai raja di hari mulia. Restu orang tua doa terikhlas, rumah tangga bahagia selamanya.",
-"Kalau berlayar ke Indragiri, jangan lupa membawa bekal. Bila akad telah diikrari, cinta halal jadi modal kekal."
-];
-document.getElementById("pantun").innerText = pantunList[Math.floor(Math.random()*pantunList.length)];
-
 /* === RESET & BASE === */
 * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
 html, body { margin: 0; padding: 0; overflow-x: hidden; width: 100%; }
