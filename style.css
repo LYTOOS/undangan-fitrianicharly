@@ -39,17 +39,25 @@ h1, h2, h3 { font-family: var(--font-title); color: var(--gold); margin: 0; }
 
 /* === SECTION DIVIDER (RESTORE FINAL) === */
 .section-divider{
-    width: 90px;
-    height: 3px;
-    margin: 18px auto 28px;
+    width: 140px;
+    height: 6px;
+    margin: 28px auto;
     background: linear-gradient(
         90deg,
-        transparent,
-        var(--gold),
-        transparent
+        #8f6b1f,
+        #ffd700,
+        #fff3b0,
+        ffd700,
+        #8f6b1f
     );
-    border-radius: 3px;
-    opacity: .9;
+    border-radius: 8px;
+    box-shadow: 0 0 18px rgba(255, 215, 0, .6), 0 0 40px rgba(255, 215, 0, .35);
+    position: relative;
+    overflow: hidden;
+}
+
+section{
+  overflow: visible; /* jangan hidden */
 }
 
 /* === COMPONENTS === */
@@ -121,7 +129,7 @@ h1, h2, h3 { font-family: var(--font-title); color: var(--gold); margin: 0; }
 .slide-up { transform: translateY(-100%); }
 
 /* === SECTIONS GENERAL === */
-section { padding: 80px 20px; text-align: center; position: relative; overflow: hidden; }
+section { padding: 90px 20px; text-align: center; position: relative; overflow: hidden; }
 
 /* === BACKGROUNDS PER SECTION === */
 .bg-section-1 { background: url('foto/bg-intro.png') center/cover; }
@@ -131,7 +139,7 @@ section { padding: 80px 20px; text-align: center; position: relative; overflow: 
 .bg-section-5 { background: url('foto/bg-event.png') center/cover; background-color: #fffaf0; }
 .bg-section-6 { background: url('foto/bg-gallery.png') center/cover; background-color: #fdfbf7; }
 .bg-section-7 { background: url('foto/bg-gift.png') center/cover; background-color: #fff; }
-.bg-section-8 { background: url('foto/bg-wishes.png') center/cover; }
+.bg-section-8 { background: url('foto/bg-wishes.png') center/cover no-repeat; background-color: #fffaf2; }
 
 /* === HERO SECTION === */
 .section-hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
