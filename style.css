@@ -1,11 +1,4 @@
-/* === 1. RESET & CORE SCROLL FIX === */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
-}
-
+/* === ROOT VARIABLES === */
 :root {
     --gold: #d4af37;
     --gold-light: #f3e5ab;
@@ -16,7 +9,16 @@
     --font-script: 'Great Vibes', cursive;
 }
 
+/* === RESET & BASE (FIXED SCROLL) === */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
 html {
+    font-size: 16px;
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
@@ -29,50 +31,25 @@ body {
     color: var(--dark);
     line-height: 1.6;
     overflow-x: hidden;
-    overflow-y: auto; /* Memastikan scroll 1 jari aktif */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     position: relative;
-    -webkit-overflow-scrolling: touch; /* Mulus di iPhone */
 }
 
-/* === 2. KUNCI LAYAR (HANYA SAAT COVER) === */
+/* KUNCI LAYAR HANYA SAAT COVER AKTIF */
 body.lock {
     overflow: hidden !important;
     height: 100vh !important;
-    position: fixed !important; /* Mengunci total saat cover ada */
+    position: fixed !important;
+    width: 100%;
 }
 
-/* Sembunyikan konten utama saat terkunci agar tidak berat */
-body.lock main, 
-body.lock section, 
-body.lock footer {
-    display: none;
-}
-
-/* === 3. INTRO / COVER (FULLSCREEN) === */
-#intro {
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.45), #000), 
-                url('foto/cover.jpg') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s;
-}
-
-#intro.hide {
-    transform: translateY(-100%);
-    pointer-events: none;
-}
-
-.intro-box { color: #fff; padding: 20px; }
-
-/* === 4. DEKORASI SONGKET & OVERLAY === */
+/* === BACKGROUND & ORNAMEN (FIXED SIZE) === */
 .texture-overlay {
     position: fixed;
     inset: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: 9998;
     background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
@@ -83,90 +60,115 @@ body.lock footer {
     position: fixed;
     inset: 0;
     background: url("https://www.transparenttextures.com/patterns/arabesque.png");
-    opacity: 0.1;
+    background-size: 200px;
+    opacity: 0.12;
     z-index: -1;
     pointer-events: none;
 }
 
-/* === 5. TYPOGRAPHY & SECTIONS === */
-h1, h2, h3 { font-family: var(--font-title); color: var(--gold); }
+/* === INTRO / COVER (FIXED RESPONSIVE) === */
+#intro {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.5), #000), 
+                url('foto/cover.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+#intro.hide {
+    transform: translateY(-100%);
+}
+
+.intro-box { padding: 20px; width: 100%; max-width: 400px; }
+.intro-title { font-size: 2.8rem; font-family: var(--font-script); color: var(--gold-light); }
+.intro-subtitle { font-family: var(--font-title); letter-spacing: 2px; font-size: 0.8rem; text-transform: uppercase; }
+
+/* === TYPOGRAPHY (FIXED SIZE) === */
+h1, h2, h3 { font-family: var(--font-title); color: var(--gold); margin-bottom: 10px; }
+.title-main { font-size: 2.5rem; font-family: var(--font-script); }
+
 section { 
     padding: 60px 20px; 
     text-align: center; 
-    position: relative; 
-    width: 100%;
-    overflow: hidden; /* Mencegah elemen animasi keluar jalur */
+    width: 100%; 
+    max-width: 100vw; 
+    overflow: hidden;
 }
 
-.title-main { font-size: 3rem; font-family: var(--font-script); }
-
-/* === 6. CARD & COMPONENTS === */
+/* === CARD & GRID === */
 .card {
     background: #fff;
-    max-width: 500px;
+    width: 95%;
+    max-width: 550px;
     margin: 20px auto;
-    padding: 30px 20px;
+    padding: 30px 15px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
 }
 
-.btn-royal {
-    padding: 14px 40px;
-    border-radius: 50px;
-    border: none;
-    background: linear-gradient(135deg, var(--gold), #b8962e);
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 10px 20px rgba(212,175,55,0.3);
-}
-
-/* === 7. COUNTDOWN === */
-.count-box {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-.count-box div {
-    background: #fff;
-    padding: 15px;
-    border-radius: 12px;
-    min-width: 65px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-.count-box span { font-size: 24px; font-weight: 700; color: var(--gold); display: block; }
-
-/* === 8. MUSIC CONTROL === */
-.music-btn {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 50px;
-    height: 50px;
+.couple-img {
+    width: 150px; height: 150px;
+    margin: 0 auto 15px;
     border-radius: 50%;
-    background: var(--gold);
-    display: none; /* Muncul setelah klik buka */
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border: 3px solid var(--gold);
+    overflow: hidden;
 }
+.couple-img img { width: 100%; height: 100%; object-fit: cover; }
 
-/* === 9. QRIS PROTECTION === */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+.gallery-grid img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; }
+
+/* === QRIS PROTECTION === */
 .qris-protect {
-    width: 180px;
+    max-width: 200px;
     margin: 0 auto;
+    position: relative;
     border-radius: 15px;
     overflow: hidden;
-    position: relative;
     cursor: pointer;
 }
-.qris-protect img { width: 100%; filter: blur(10px); transition: 0.3s; }
-.qris-protect.open img { filter: blur(0); }
+.qris-protect img { 
+    width: 100%; 
+    filter: blur(12px) brightness(0.7); 
+    transition: 0.5s; 
+}
+.qris-protect.open img { filter: blur(0) brightness(1); }
+.qris-protect::after {
+    content: "KLIK UNTUK LIHAT QRIS";
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 0.7rem; font-weight: bold;
+    background: rgba(0,0,0,0.3); transition: 0.3s;
+}
+.qris-protect.open::after { opacity: 0; }
 
-/* === 10. MOBILE RESPONSIVE === */
+/* === MUSIC BUTTON === */
+.music-btn {
+    position: fixed;
+    bottom: 20px; right: 20px;
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: none; /* Muncul lewat JS */
+    align-items: center; justify-content: center;
+    z-index: 10000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.music-btn img { width: 20px; }
+
+/* === RESPONSIVE FIX === */
 @media (max-width: 480px) {
-    .title-main { font-size: 2.2rem; }
-    .nama { font-size: 48px !important; }
+    .intro-title { font-size: 2.2rem; }
+    .title-main { font-size: 2rem; }
+    .card { padding: 20px 10px; }
 }
