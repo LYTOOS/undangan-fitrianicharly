@@ -1,26 +1,35 @@
 "use strict";
 
 // --- KONFIGURASI DOM ---
-const musicBtn = document.querySelector('.music-btn');
+const musicBtn = document.getElementById("musicControl");
 const musik = document.getElementById("musik");
 const intro = document.getElementById("intro");
 const btnOpen = document.getElementById("btnOpen");
 
+// --- 1. INISIALISASI AOS (ANIMASI) ---
+document.addEventListener("DOMContentLoaded", () => {
+    AOS.init({
+        duration: 1000,
+        easing: 'ease-out-cubic',
+        once: true,
+        mirror: false
+    });
+});
+
 // --- 2. LOGIKA BUKA UNDANGAN ---
 btnOpen.addEventListener("click", () => {
     window.scrollTo(0, 0);
-
-    intro.classList.add("hide");
-
+    intro.classList.add("slide-up");
+    document.body.classList.remove("lock");
+    
+    // Mainkan musik
+    playMusic();
+    
     setTimeout(() => {
-        document.body.classList.remove("lock");
-        intro.style.display = "none";
-
         musicBtn.style.display = "flex";
-        musik.play().catch(()=>{});
-
-        AOS.refreshHard();
-    }, 700);
+        intro.style.display = "none";
+        AOS.refresh();
+    }, 1000);
 });
 
 // --- 3. KONTROL MUSIK ---
@@ -120,12 +129,3 @@ function kirimUcapan() {
     document.getElementById("pesanUcapan").value = "";
     alert("Terima kasih, ucapan Anda telah terkirim!");
 }
-
-window.addEventListener("load", () => {
-  AOS.init({
-    duration: 1100,
-    easing: "ease-out-cubic",
-    once: true,
-    mirror: false
-  });
-});
