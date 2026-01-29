@@ -42,24 +42,20 @@ h1, h2, h3 { font-family: var(--font-title); color: var(--gold); margin: 0; }
     width: 140px;
     height: 6px;
     margin: 28px auto;
+    border-radius: 8px;
     background: linear-gradient(
-        90deg,
-        #8f6b1f,
-        #ffd700,
-        #fff3b0,
-        ffd700,
+        90deg, 
+        #8f6b1f, 
+        #ffd700, 
+        #fff3b0, 
+        #ffd700, 
         #8f6b1f
     );
-    border-radius: 8px;
     box-shadow: 
         0 0 18px rgba(255, 215, 0, .6), 
         0 0 40px rgba(255, 215, 0, .35);
     position: relative;
     overflow: hidden;
-}
-
-section{
-  overflow: visible; /* jangan hidden */
 }
 
 /* Kilau cahaya */
