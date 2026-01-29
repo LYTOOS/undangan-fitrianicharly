@@ -21,6 +21,7 @@ btnOpen.addEventListener("click", () => {
     window.scrollTo(0, 0);
     intro.classList.add("slide-up");
     document.body.classList.remove("lock");
+    document.body.style.overflowY = "auto";
     
     // Mainkan musik
     playMusic();
