@@ -1,8 +1,5 @@
 "use strict";
 
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
 const firebaseConfig = {
   apiKey: "AIzaSyCr2VF6hZ3pLWU5eORdrtdM1c5L_AcLVH4",
   authDomain: "undangan-pernikahan-f6d5e.firebaseapp.com",
@@ -12,6 +9,16 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
+
+// --- DEVICE & IP HARDEN ---
+const deviceId = localStorage.device || 
+  ("dev-" + Math.random().toString(36).substr(2,9));
+localStorage.device = deviceId;
+
+fetch("https://api.ipify.org?format=json")
+  .then(r => r.json())
+  .then(d => localStorage.ip = d.ip)
+  .catch(()=>{});
 
 // --- KONFIGURASI DOM ---
 const musicBtn = document.getElementById("musicControl");
@@ -128,7 +135,7 @@ document.querySelector('.qris-content').addEventListener('click', function(e) {
     e.stopPropagation();
 });
 
-// --- 9. KIRIM UCAPAN (FRONTEND ONLY) ---
+// --- KIRIM UCAPAN (LIMIT 1X) ---
 function kirimUcapan(){
   const nama = document.getElementById("namaPengirim").value.trim();
   const pesan = document.getElementById("pesanUcapan").value.trim();
@@ -171,3 +178,23 @@ function kirimUcapan(){
     alert("Gagal mengirim ucapan");
   }
 }
+
+// --- AUTO LOAD UCAPAN (REALTIME) ---
+const list = document.getElementById("displayUcapan");
+
+db.ref("ucapan")
+  .limitToLast(50)
+  .on("child_added", snap => {
+    const d = snap.val();
+    if(!d || !list) return;
+
+    const div = document.createElement("div");
+    div.className = "ucapan-item";
+    div.innerHTML = `
+      <strong>${d.nama}</strong>
+      <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
+      <p>${d.pesan}</p>
+    `;
+
+    list.prepend(div);
+  });
