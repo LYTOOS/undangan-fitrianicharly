@@ -1,7 +1,7 @@
 "use strict";
 
 // --- KONFIGURASI DOM ---
-const musicBtn = document.getElementById("musicControl");
+const musicBtn = document.querySelector('.music-btn');
 const musik = document.getElementById("musik");
 const intro = document.getElementById("intro");
 const btnOpen = document.getElementById("btnOpen");
@@ -19,18 +19,18 @@ document.addEventListener("DOMContentLoaded", () => {
 // --- 2. LOGIKA BUKA UNDANGAN ---
 btnOpen.addEventListener("click", () => {
     window.scrollTo(0, 0);
-    intro.classList.add("slide-up");
-    
+
     document.body.classList.remove("lock");
-    document.getElementById("intro").classList.add("hide");
-    document.getElementById("musicControl").style.display = "flex";
+    
+    intro.classList.add("hide");
     
     // Mainkan musik
-    musik.play();
+    musicBtn.style.display = "flex";
+    if(musik) musik.play();
     
-    setTimeout(() => {
-        AOS.refresh();
-    }, 1000);
+    if (typeof AOS !== 'undefined') {
+        setTimeout(() => { AOS.refresh(); }, 600);
+    }
 });
 
 // --- 3. KONTROL MUSIK ---
