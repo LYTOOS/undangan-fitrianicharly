@@ -16,14 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Pantun otomatis
-const pantunList = [
-"Pergi ke hulu mencari sepat, singgah sebentar di tepi paya. Jika niat sudah terpatri di hati, akad nikah jadi penyempurna cinta.",
-"Songket disulam benang emas, dipakai raja di hari mulia. Restu orang tua doa terikhlas, rumah tangga bahagia selamanya.",
-"Kalau berlayar ke Indragiri, jangan lupa membawa bekal. Bila akad telah diikrari, cinta halal jadi modal kekal."
-];
-document.getElementById("pantun").innerText = pantunList[Math.floor(Math.random()*pantunList.length)];
-
 // --- 2. LOGIKA BUKA UNDANGAN ---
 btnOpen.addEventListener("click", () => {
     window.scrollTo(0, 0);
