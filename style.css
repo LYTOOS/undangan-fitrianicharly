@@ -30,7 +30,7 @@ body.lock { overflow: hidden; height: 100vh; }
 }
 
 /* === TYPOGRAPHY === */
-h1, h2, h3 { font-family: var(--font-title); color: var(--gold); margin: 0; }
+h1, h2, h3 { font-family: var(--font-title); color: var(--cream); margin: 0; }
 .section-title {
     font-size: 2.2rem; margin-bottom: 20px;
     background: linear-gradient(45deg, #b8860b, #ffd700, #b8860b);
@@ -209,8 +209,8 @@ background:linear-gradient(
 
 .cover-content h1{
   font-family:"Great Vibes",cursive;
-  font-size:36px;
-  margin:12px 0 24px;
+  font-size:22px;
+  margin:100px 0 140px;
 }
 
 .btn-open{
