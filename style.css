@@ -308,6 +308,12 @@ footer {
     background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
 }
 .footer-couple { font-family: var(--font-script); font-size: 2.5rem; color: var(--gold); margin: 10px 0; }
+.footer-logo{
+  width:80px;
+  margin:20px auto 10px;
+  display:block;
+  opacity:.9;
+}
 .social-links { margin: 20px 0; display: flex; justify-content: center; gap: 15px; }
 .social-links img { width: 30px; height: 30px; transition: 0.3s; filter: grayscale(0.5); }
 .social-links img:hover { filter: grayscale(0); transform: translateY(-5px) scale(1.1); }
