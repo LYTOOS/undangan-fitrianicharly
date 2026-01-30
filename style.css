@@ -309,7 +309,7 @@ footer {
 }
 .footer-couple { font-family: var(--font-script); font-size: 2.5rem; color: var(--gold); margin: 10px 0; }
 .footer-logo{
-  width:80px;
+  width:40px;
   margin:20px auto 10px;
   display:block;
   opacity:.9;
