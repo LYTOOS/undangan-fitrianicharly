@@ -21,10 +21,10 @@ fetch("https://api.ipify.org?format=json")
   .catch(()=>{});
 
 // --- KONFIGURASI DOM ---
+const book = document.querySelector(".book");
+const intro = document.getElementById("intro");
 const musicBtn = document.getElementById("musicControl");
 const musik = document.getElementById("musik");
-const intro = document.getElementById("intro");
-const btnOpen = document.getElementById("btnOpen");
 
 // --- 1. INISIALISASI AOS (ANIMASI) ---
 document.addEventListener("DOMContentLoaded", () => {
@@ -37,20 +37,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // --- 2. LOGIKA BUKA UNDANGAN ---
-btnOpen.addEventListener("click", () => {
-    window.scrollTo(0, 0);
-    intro.classList.add("slide-up");
+btnOpen.onclick = ()=>{
+  book.classList.add("open");
+
+  setTimeout(()=>{
+    intro.style.opacity = "0";
+    intro.style.pointerEvents = "none";
     document.body.classList.remove("lock");
-    
-    // Mainkan musik
-    playMusic();
-    
-    setTimeout(() => {
-        musicBtn.style.display = "flex";
-        intro.style.display = "none";
-        AOS.refresh();
-    }, 1000);
-});
+    musik.play().catch(()=>{});
+    musicBtn.style.display="flex";
+  },1200);
+};
 
 // --- 3. KONTROL MUSIK ---
 function playMusic() {
