@@ -38,19 +38,18 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // --- 2. LOGIKA BUKA UNDANGAN ---
-btnOpen.addEventListener("click", () => {
-  cover.classList.add("open");
+btnOpen.onclick = () => {
+  document.querySelector(".book").classList.add("open");
 
-  setTimeout(() => {
-    introBook.style.display = "none";
+  setTimeout(()=>{
+    document.querySelector(".intro-book").style.display="none";
     document.body.classList.remove("lock");
-
-    audio.play().catch(()=>{});
-    musicBtn.style.display = "flex";
-
+    musik.volume = .5;
+    musik.play().catch(()=>{});
+    musicControl.style.display="flex";
     AOS.init({ once:true });
-  }, 1500);
-});
+  },1800);
+};
 
 // --- 3. KONTROL MUSIK ---
 function playMusic() {
