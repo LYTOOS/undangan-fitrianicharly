@@ -124,12 +124,11 @@ background:linear-gradient(
 .intro-book{
   position:fixed;
   inset:0;
-  z-index:20000;
+  background:#f6f2ea;
   display:flex;
-  align-items:center;
   justify-content:center;
-  background:#000;
-  perspective:1600px;
+  align-items:center;
+  z-index:9999;
 }
 
 /* vector bg */
@@ -142,8 +141,9 @@ background:linear-gradient(
 
 /* BOOK */
 .book{
-  width:300px;
-  height:420px;
+  width:320px;
+  height:480px;
+  perspective:2000px;
   position:relative;
   transform-style:preserve-3d;
   transition:1.2s ease;
@@ -156,31 +156,78 @@ background:linear-gradient(
 /* COVER */
 .book-cover{
   position:absolute;
+  width:100%
+  height:100%
   inset:0;
   background:#fff;
   transform-origin:left;
   transform-style:preserve-3d;
+  transition:transform 1.6s ease;
   border-radius:18px;
   box-shadow:0 30px 80px rgba(0,0,0,.45);
   overflow:hidden;
+  z-index:2;
 }
 
 .book-cover img{
   width:100%;
   height:100%;
   object-fit:cover;
+  border-radius:12px;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.cover-content{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:#fff;
+  padding:24px;
+  background:rgba(0,0,0,.35);
+  border-radius:12px;
+  z-index:3;
+}
+
+.cover-content h3{
+  font-family:"Cinzel",serif;
+  letter-spacing:2px;
+  font-size:14px;
+}
+
+.cover-content h1{
+  font-family:"Great Vibes",cursive;
+  font-size:36px;
+  margin:12px 0 24px;
+}
+
+.btn-open{
+  padding:12px 28px;
+  border:none;
+  background:#c8a34d;
+  color:#fff;
+  font-size:14px;
+  letter-spacing:2px;
+  border-radius:40px;
+  cursor:pointer;
 }
 
 /* PAGE */
 .book-page{
   position:absolute;
+  width:100%;
+  height:100%;
   inset:0;
-  background:#fffaf2;
+  background:#fff;
   padding:30px 22px;
   text-align:center;
   transform:translateZ(-1px);
-  border-radius:18px;
-  box-shadow:inset -10px 0 20px rgba(0,0,0,.08);
+  border-radius:12px;
+  box-shadow:inset 10px 30px rgba(0,0,0,.15);
+  z-index:1;
 }
 
 .book-page h1{
