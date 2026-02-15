@@ -157,10 +157,8 @@ background:linear-gradient(
 .book{
   width:100%;
   height:100%;
-  perspective:2200px;
   position:relative;
   transform-style:preserve-3d;
-  transition:1.2s ease;
 }
 
 .book-spine{
@@ -188,14 +186,14 @@ background:linear-gradient(
 .book-cover{
   position:absolute;
   inset:0;
-  width:100%;
-  height:100%;
   background:#fff;
   transform-origin:left center;
   transform-style:preserve-3d;
-  transition:transform 1.6s cubic-bezier(.4,0,.2,1);
-  z-index:2;
+  transition:transform 1.8s cubic-bezier(.4,0,.2,1);
+  z-index:4;
   overflow:hidden;
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.55);
 }
 
 .book-cover img{
@@ -249,8 +247,12 @@ background:linear-gradient(
   position:absolute;
   inset:0;
   background:#fffaf2;
-  padding:60px 24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
   text-align:center;
+  padding:50px 24px;
   transform:translateZ(-1px);
   z-index:1;
 }
