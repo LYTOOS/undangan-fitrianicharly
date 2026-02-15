@@ -39,15 +39,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --- 2. LOGIKA BUKA UNDANGAN ---
 btnOpen.onclick = () => {
-  document.querySelector(".book-cover").classList.add("open");
+  document.querySelector(".book").classList.add("open");
 
   setTimeout(()=>{
     document.querySelector(".intro-book").style.display="none";
     document.body.classList.remove("lock");
+    musik.volume = .5;
     musik.play().catch(()=>{});
     musicControl.style.display="flex";
     AOS.init({ once:true });
-  },1600);
+  },1800);
 };
 
 // --- 3. KONTROL MUSIK ---
