@@ -149,7 +149,6 @@ background:linear-gradient(
 .intro-bg{
   position:absolute;
   inset:0;
-  background:url("foto/bg-intro.png") center/cover;
   opacity:.25;
 }
 
@@ -246,7 +245,9 @@ background:linear-gradient(
 .book-page{
   position:absolute;
   inset:0;
-  background:#fffaf2;
+  background:
+    url("foto/bg-intro.png") center/cover,
+    #fffaf2;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -484,4 +485,9 @@ footer {
     .couple-img { width: 150px; height: 150px; }
     .title-main { font-size: 2.5rem; }
     .royal-border-frame { top: 15px; bottom: 15px; left: 15px; right: 15px; }
+}
+
+#intro{
+  display:none !important;
+  pointer-events:none !important;
 }
