@@ -123,6 +123,53 @@ function copyText(text) {
     });
 }
 
+function openWallet(type){
+  const popup = document.getElementById("walletPopup");
+  const title = document.getElementById("walletTitle");
+  const content = document.getElementById("walletContent");
+
+  let html = "";
+
+  if(type === "bri"){
+    title.innerText = "Bank BRI";
+    html = `
+      <p>017501078299507</p>
+      <button onclick="copyText('017501078299507')">Salin</button>
+    `;
+  }
+
+  if(type === "dana"){
+    title.innerText = "DANA";
+    html = `
+      <p>082261467360</p>
+      <button onclick="copyText('082261467360')">Salin</button>
+    `;
+  }
+
+  if(type === "gopay"){
+    title.innerText = "GoPay";
+    html = `
+      <p>082287179255</p>
+      <button onclick="copyText('082287179255')">Salin</button>
+    `;
+  }
+
+  if(type === "seabank"){
+    title.innerText = "SeaBank";
+    html = `
+      <p>901519817032</p>
+      <button onclick="copyText('901519817032')">Salin</button>
+    `;
+  }
+
+  content.innerHTML = html;
+  popup.classList.add("active");
+}
+
+function closeWallet(){
+  document.getElementById("walletPopup").classList.remove("active");
+}
+
 // --- 8. POPUP QRIS LOGIC ---
 function openQris() {
     document.getElementById("qrisPopup").classList.add("active");
