@@ -352,5 +352,19 @@
 
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="script.js"></script>
+
+    <script>
+    const dividers = document.querySelectorAll(".section-divider");
+    
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add("active");
+        }
+      });
+    },{threshold:.4});
+    
+    dividers.forEach(d=>observer.observe(d));
+    </script>
 </body>
 </html>
