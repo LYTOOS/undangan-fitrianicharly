@@ -197,30 +197,31 @@
                 <div class="wallet-category">
                     <h3 class="cat-title">Digital Gift</h3>
                     
-                    <div class="wallet-logo-grid">
+                    <div class="wallet-logos">
 
-                        <div class="wallet-logo" onclick="openWallet('bri')">
+                        <div class="wallet-item" onclick="openWallet('bri')">
                             <img src="icon/bri.png">
                         </div>
 
-                        <div class="wallet-logo" onclick="openWallet('dana')">
+                        <div class="wallet-item" onclick="openWallet('dana')">
                             <img src="icon/dana.png">
                         </div>
                 
-                        <div class="wallet-logo" onclick="openWallet('seabank')">
-                            <img src="icon/seabank.png">
+                        <div class="wallet-item" onclick="openWallet('gopay')">
+                            <img src="icon/gopay.png">
                         </div>
                 
-                        <div class="wallet-logo" onclick="openWallet('gopay')">
-                            <img src="icon/gopay.png">
+                        <div class="wallet-item" onclick="openWallet('seabank')">
+                            <img src="icon/seabank.png">
                         </div>
 
                         <!-- WALLET POPUP -->
-                        <div id="walletModal" class="wallet-modal">
-                            <div class="wallet-modal-content">
-                                <span class="close-wallet" onclick="closeWallet()">&times;</span>
-                                <div id="walletDetail"></div>
-                            </div>
+                        <div id="walletPopup" class="wallet-popup">
+                          <div class="wallet-box">
+                            <h3 id="walletTitle"></h3>
+                            <div id="walletContent"></div>
+                            <button onclick="closeWallet()" class="btn-close">Tutup</button>
+                          </div>
                         </div>
                         
             <div class="wallet-category gift-sultan">
