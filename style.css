@@ -532,6 +532,30 @@ textarea { height: 100px; resize: none; }
     border:none;
 }
 
+.status {
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;
+  margin-right:8px;
+  font-weight:600;
+}
+
+.status.Hadir {
+  background:#d4edda;
+  color:#155724;
+}
+
+.status.TidakHadir {
+  background:#f8d7da;
+  color:#721c24;
+}
+
+.status.BelumPasti {
+  background:#fff3cd;
+  color:#856404;
+}
+
 /* === FOOTER === */
 footer {
     background: #111; color: #888; padding: 50px 20px; font-size: 0.9rem;
