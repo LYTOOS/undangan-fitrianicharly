@@ -288,6 +288,14 @@
                     <button onclick="kirimUcapan()" class="btn-royal">Kirim Ucapan</button>
                 </div>
                 <div id="displayUcapan" class="wishes-list"></div>
+
+                <div class="rsvp-group">
+                    <button type="button" class="rsvp-btn" onclick="setStatus('Hadir')">Hadir</button>
+                    <button type="button" class="rsvp-btn" onclick="setStatus('Tidak Hadir')">Tidak Hadir</button>
+                    <button type="button" class="rsvp-btn" onclick="setStatus('Belum Pasti')">Belum Pasti</button>
+                </div>
+                
+                <input type="hidden" id="rsvpStatus">
             </div>
         </section>
 
