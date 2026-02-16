@@ -138,9 +138,10 @@ document.querySelector('.qris-content').addEventListener('click', function(e) {
 function kirimUcapan(){
   const nama = document.getElementById("namaPengirim").value.trim();
   const pesan = document.getElementById("pesanUcapan").value.trim();
+  const status = document.getElementById("rsvpStatus").value;
 
-  if(nama.length < 3 || pesan.length < 5){
-    alert("Nama & ucapan belum lengkap");
+  if(nama.length < 3 || pesan.length < 5 || !status){
+    alert("Nama, status kehadiran & ucapan wajib diisi 🙏");
     return;
   }
 
@@ -150,17 +151,13 @@ function kirimUcapan(){
     return;
   }
 
-  fetch("https://api.ipify.org?format=json")
-    .then(r=>r.json())
-    .then(d=>localStorage.ip=d.ip)
-    .catch(()=>{});
-
   const ip = localStorage.ip || "unknown";
 
   try{
     db.ref("ucapan").push({
       nama,
       pesan,
+      status,
       waktu: Date.now(),
       ip
     });
@@ -171,6 +168,7 @@ function kirimUcapan(){
 
     document.getElementById("namaPengirim").value="";
     document.getElementById("pesanUcapan").value="";
+    document.getElementById("rsvpStatus").value="";
 
   }catch(e){
     console.error(e);
