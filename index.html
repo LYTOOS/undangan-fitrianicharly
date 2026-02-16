@@ -286,13 +286,29 @@
                 <div class="form-box">
                     <input type="text" id="namaPengirim" placeholder="Nama Anda">
                     <textarea id="pesanUcapan" placeholder="Tuliskan ucapan & doa restu..."></textarea>
+                    <div class="rsvp-container">
+
+                      <label class="rsvp-option">
+                        <input type="radio" name="rsvp" value="Hadir" onchange="toggleGuestInput(true)">
+                        <span></span> Hadir
+                      </label>
+                    
+                      <div id="guestCountBox" class="guest-box">
+                        <input type="number" id="jumlahTamu" min="1" placeholder="Jumlah orang">
+                      </div>
+                    
+                      <label class="rsvp-option">
+                        <input type="radio" name="rsvp" value="Tidak Hadir">
+                        <span></span> Tidak Hadir
+                      </label>
+                    
+                      <label class="rsvp-option">
+                        <input type="radio" name="rsvp" value="Belum Pasti">
+                        <span></span> Belum Pasti
+                      </label>
+                    
+                    </div>
                     <button onclick="kirimUcapan()" class="btn-royal">Kirim Ucapan</button>
-                    <select id="rsvpStatus" required>
-                      <option value="">Konfirmasi Kehadiran</option>
-                      <option value="Hadir">Hadir</option>
-                      <option value="Tidak Hadir">Tidak Hadir</option>
-                      <option value="Belum Pasti">Belum Pasti</option>
-                    </select>
                 </div>
                 <div id="displayUcapan" class="wishes-list"></div>
             </div>
