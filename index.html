@@ -389,6 +389,19 @@
     </script>
 
     <script>
+    function setStatus(status){
+        document.getElementById("rsvpStatus").value = status;
+    
+        document.querySelectorAll(".rsvp-btn").forEach(btn=>{
+            btn.classList.remove("active");
+            if(btn.innerText === status){
+                btn.classList.add("active");
+            }
+        });
+    }
+    </script>
+
+    <script>
     const dividers = document.querySelectorAll(".section-divider");
     
     const observer = new IntersectionObserver(entries=>{
