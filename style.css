@@ -39,23 +39,20 @@ h1, h2, h3 { font-family: var(--font-title); color: var(--gold-light); margin: 0
 
 /* === SECTION DIVIDER (RESTORE FINAL) === */
 .section-divider{
-    width: 140px;
-    height: 6px;
-    margin: 28px auto;
-    border-radius: 8px;
-    background: linear-gradient(
-        90deg, 
-        #8f6b1f, 
-        #ffd700, 
-        #fff3b0, 
-        #ffd700, 
-        #8f6b1f
-    );
-    box-shadow: 
-        0 0 18px rgba(255, 215, 0, .6), 
-        0 0 40px rgba(255, 215, 0, .35);
-    position: relative;
-    overflow: hidden;
+  width:80px;
+  height:3px;
+  margin:25px auto;
+  background:linear-gradient(90deg,#c6a85c,#e8d18c,#c6a85c);
+  border-radius:4px;
+  transform:scaleX(0);
+  transform-origin:center;
+  opacity:0;
+  transition:all 1s ease;
+}
+
+.section-divider.active{
+  transform:scaleX(1);
+  opacity:1;
 }
 
 /* Kilau cahaya */
