@@ -223,6 +223,10 @@ function kirimUcapan(){
   }
 }
 
+function toggleGuestInput(show){
+  document.getElementById("guestCountBox").style.display = show ? "block" : "none";
+}
+
 // --- AUTO LOAD UCAPAN (REALTIME) ---
 const list = document.getElementById("displayUcapan");
 
