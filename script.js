@@ -189,6 +189,9 @@ db.ref("ucapan")
     div.className = "ucapan-item";
     div.innerHTML = `
       <strong>${d.nama}</strong>
+      <small class="status ${d.status.replace(/\s/g,'')}">
+        ${d.status}
+      </small>
       <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
       <p>${d.pesan}</p>
     `;
