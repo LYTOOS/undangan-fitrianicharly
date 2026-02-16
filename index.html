@@ -195,110 +195,34 @@
                                      kami menyediakan amplop digital:</p>
                 
                 <div class="wallet-category">
-                    <h3 class="cat-title">Bank Transfer</h3>
+                    <h3 class="cat-title">Digital Gift</h3>
                     
-                    <div class="wallet-card">
-                        <div class="wallet-header">
-                            <img src="icon/bri.png" alt="BRI" class="bank-logo"> 
-                            <span>Bank BRI</span>
+                    <div class="wallet-logo-grid">
+
+                        <div class="wallet-logo" onclick="openWallet('bri')">
+                            <img src="icon/bri.png">
                         </div>
-                        <div class="account-details">
-                            <div class="acc-row">
-                                <div>
-                                    <small>No. Rekening</small>
-                                    <b class="rek-text">0175-0107-8299-507</b>
-                                </div>
-                                <button class="btn-copy" onclick="copyText('xxxx-xxxx-xxxx')">Salin</button>
+
+                        <div class="wallet-logo" onclick="openWallet('dana')">
+                            <img src="icon/dana.png">
+                        </div>
+                
+                        <div class="wallet-logo" onclick="openWallet('seabank')">
+                            <img src="icon/seabank.png">
+                        </div>
+                
+                        <div class="wallet-logo" onclick="openWallet('gopay')">
+                            <img src="icon/gopay.png">
+                        </div>
+
+                        <!-- WALLET POPUP -->
+                        <div id="walletModal" class="wallet-modal">
+                            <div class="wallet-modal-content">
+                                <span class="close-wallet" onclick="closeWallet()">&times;</span>
+                                <div id="walletDetail"></div>
                             </div>
-                            <p class="acc-name">a.n FITRIANI</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="wallet-category">
-                    <h3 class="cat-title">E-Wallet & QRIS</h3>
-
-                    <div class="wallet-card">
-                        <div class="wallet-header">
-                            <img src="icon/dana.png" alt="DANA" class="bank-logo">
-                            <span>DANA</span>
                         </div>
                         
-                        <div class="account-details dashed">
-                            <div class="acc-row">
-                                <div>
-                                    <small>Mempelai Pria</small>
-                                    <b>0822-6146-7360</b>
-                                </div>
-                                <button class="btn-copy" onclick="copyText('082261467360')">Salin</button>
-                            </div>
-                        </div>
-
-                        <div class="account-details dashed">
-                            <div class="acc-row">
-                                <div>
-                                    <small>Mempelai Wanita</small>
-                                    <b>0822-8721-0136</b>
-                                </div>
-                                <button class="btn-copy" onclick="copyText('082287210136')">Salin</button>
-                            </div>
-                        </div>
-
-                        <button class="btn-view-qris" onclick="openQris()">
-                            <img src="icon/qr-icon.png" style="width:16px; margin-right:8px;"> Lihat QRIS
-                        </button>
-                    </div>
-
-                    <div class="wallet-card">
-                        <div class="wallet-header">
-                            <img src="icon/seabank.png" alt="SeaBank" class="bank-logo">
-                            <span>SeaBank</span>
-                        </div>
-                        <div class="account-details dashed">
-                            <div class="acc-row">
-                                <div>
-                                    <small>Mempelai Pria</small>
-                                    <b>9011-6306-2173</b>
-                                </div>
-                                <button class="btn-copy" onclick="copyText('901163062173')">Salin</button>
-                            </div>
-                        </div>
-                        <div class="account-details">
-                            <div class="acc-row">
-                                <div>
-                                    <small>Mempelai Wanita</small>
-                                    <b>9015-1981-7032</b>
-                                </div>
-                                <button class="btn-copy" onclick="copyText('901519817032')">Salin</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="wallet-card">
-                        <div class="wallet-header">
-                            <img src="icon/gopay.png" alt="GoPay" class="bank-logo">
-                            <span>GoPay</span>
-                        </div>
-                        <div class="account-details dashed">
-                            <div class="acc-row">
-                                <div>
-                                    <small>Mempelai Pria</small>
-                                    <b>0822-6146-7360</b>
-                                </div>
-                                <button class="btn-copy" onclick="copyText('082261467360')">Salin</button>
-                            </div>
-                        </div>
-                        <div class="account-details">
-                            <div class="acc-row">
-                                <div>
-                                    <small>Mempelai Wanita</small>
-                                    <b>0822-8717-9255</b>
-                                </div>
-                                <button class="btn-copy" onclick="copyText('082287179255')">Salin</button>
-                            </div>
-                        </div>
-                    </div>
-
             <div class="wallet-category gift-sultan">
                 <h3 class="cat-title">Wedding Registry – Shopee</h3>
                 
@@ -404,6 +328,57 @@
 
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="script.js"></script>
+
+    <script>
+    function openWallet(type){
+        const modal = document.getElementById("walletModal");
+        const detail = document.getElementById("walletDetail");
+    
+        let content = "";
+    
+        if(type === "bri"){
+            content = `
+                <h3>Bank BRI</h3>
+                <p>No Rekening:</p>
+                <b>0175-0107-8299-507</b>
+                <p>a.n FITRIANI</p>
+            `;
+        }
+    
+        if(type === "dana"){
+            content = `
+                <h3>DANA</h3>
+                <p>Mempelai Pria</p>
+                <b>082261467360</b>
+                <p>Mempelai Wanita</p>
+                <b>082287210136</b>
+            `;
+        }
+    
+        if(type === "seabank"){
+            content = `
+                <h3>SeaBank</h3>
+                <b>901163062173</b>
+                <b>901519817032</b>
+            `;
+        }
+    
+        if(type === "gopay"){
+            content = `
+                <h3>GoPay</h3>
+                <b>082261467360</b>
+                <b>082287179255</b>
+            `;
+        }
+    
+        detail.innerHTML = content;
+        modal.style.display = "flex";
+    }
+    
+    function closeWallet(){
+        document.getElementById("walletModal").style.display = "none";
+    }
+    </script>
 
     <script>
     const dividers = document.querySelectorAll(".section-divider");
