@@ -185,10 +185,16 @@ document.querySelector('.qris-content').addEventListener('click', function(e) {
 function kirimUcapan(){
   const nama = document.getElementById("namaPengirim").value.trim();
   const pesan = document.getElementById("pesanUcapan").value.trim();
-  const status = document.getElementById("rsvpStatus").value;
+  const status = document.querySelector('input[name="rsvp"]:checked');
+  const jumlah = document.getElementById("jumlahTamu").value || 0;
 
   if(nama.length < 3 || pesan.length < 5 || !status){
     alert("Nama, status kehadiran & ucapan wajib diisi 🙏");
+    return;
+  }
+
+  if(!status){
+    alert("Silakan pilih konfirmasi kehadiran");
     return;
   }
 
@@ -197,6 +203,10 @@ function kirimUcapan(){
     alert("Ucapan hanya dapat dikirim 1 kali 🙏");
     return;
   }
+
+  const finalStatus = status.value === "Hadir"
+  ? `Hadir (${jumlah} orang)`
+  : status.value;
 
   const ip = localStorage.ip || "unknown";
 
