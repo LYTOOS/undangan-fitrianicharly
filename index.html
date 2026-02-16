@@ -337,57 +337,6 @@
     <script src="script.js"></script>
 
     <script>
-    function openWallet(type){
-        const modal = document.getElementById("walletModal");
-        const detail = document.getElementById("walletDetail");
-    
-        let content = "";
-    
-        if(type === "bri"){
-            content = `
-                <h3>Bank BRI</h3>
-                <p>No Rekening:</p>
-                <b>0175-0107-8299-507</b>
-                <p>a.n FITRIANI</p>
-            `;
-        }
-    
-        if(type === "dana"){
-            content = `
-                <h3>DANA</h3>
-                <p>Mempelai Pria</p>
-                <b>082261467360</b>
-                <p>Mempelai Wanita</p>
-                <b>082287210136</b>
-            `;
-        }
-    
-        if(type === "seabank"){
-            content = `
-                <h3>SeaBank</h3>
-                <b>901163062173</b>
-                <b>901519817032</b>
-            `;
-        }
-    
-        if(type === "gopay"){
-            content = `
-                <h3>GoPay</h3>
-                <b>082261467360</b>
-                <b>082287179255</b>
-            `;
-        }
-    
-        detail.innerHTML = content;
-        modal.style.display = "flex";
-    }
-    
-    function closeWallet(){
-        document.getElementById("walletModal").style.display = "none";
-    }
-    </script>
-
-    <script>
     function setStatus(status){
         document.getElementById("rsvpStatus").value = status;
     
