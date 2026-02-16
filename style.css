@@ -485,3 +485,62 @@ footer {
   display:none !important;
   pointer-events:none !important;
 }
+
+.gift-sultan{
+    margin-top:60px;
+}
+
+.gift-sultan-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:22px;
+}
+
+.gift-sultan-item{
+    position:relative;
+    background:#fff;
+    padding:14px;
+    border-radius:18px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    transition:.4s ease;
+    text-align:center;
+}
+
+.gift-sultan-item:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 45px rgba(0,0,0,.15);
+}
+
+.gift-sultan-item img{
+    width:100%;
+    border-radius:12px;
+    margin-bottom:12px;
+}
+
+.btn-gift-sultan{
+    width:100%;
+    padding:9px;
+    border:none;
+    border-radius:40px;
+    background:linear-gradient(135deg,#f6b93b,#e58e26);
+    color:#fff;
+    font-size:13px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-gift-sultan:hover{
+    opacity:.9;
+}
+
+.gift-badge{
+    position:absolute;
+    top:8px;
+    left:8px;
+    background:#c0392b;
+    color:#fff;
+    font-size:10px;
+    padding:4px 8px;
+    border-radius:20px;
+    letter-spacing:1px;
+}
