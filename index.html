@@ -214,15 +214,6 @@
                         <div class="wallet-item" onclick="openWallet('seabank')">
                             <img src="icon/seabank.png">
                         </div>
-
-                        <!-- WALLET POPUP -->
-                        <div id="walletPopup" class="wallet-popup">
-                          <div class="wallet-box">
-                            <h3 id="walletTitle"></h3>
-                            <div id="walletContent"></div>
-                            <button onclick="closeWallet()" class="btn-close">Tutup</button>
-                          </div>
-                        </div>
                         
             <div class="wallet-category gift-sultan">
                 <h3 class="cat-title">Wedding Registry – Shopee</h3>
@@ -344,6 +335,15 @@
         </footer>
 
     </main>
+
+    <!-- WALLET POPUP -->
+    <div id="walletPopup" class="wallet-popup">
+      <div class="wallet-box">
+        <h3 id="walletTitle"></h3>
+        <div id="walletContent"></div>
+        <button onclick="closeWallet()" class="btn-close">Tutup</button>
+      </div>
+    </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
