@@ -460,6 +460,45 @@ section { padding: 90px 20px; text-align: center; position: relative; overflow: 
     animation:fadeUp .4s ease;
 }
 
+.wallet-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.wallet-popup.active {
+  display: flex;
+}
+
+.wallet-box {
+  background: #fff;
+  width: 90%;
+  max-width: 350px;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  animation: scaleUp .3s ease;
+}
+
+@keyframes scaleUp {
+  from { transform: scale(.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.btn-close {
+  margin-top: 15px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
 .close-wallet{
     position:absolute;
     right:25px;
