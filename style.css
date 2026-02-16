@@ -510,6 +510,28 @@ textarea { height: 100px; resize: none; }
   line-height:1.6;
 }
 
+.rsvp-group{
+    display:flex;
+    gap:10px;
+    margin:15px 0;
+}
+
+.rsvp-btn{
+    flex:1;
+    padding:8px;
+    border-radius:30px;
+    border:1px solid #ddd;
+    background:#fff;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.rsvp-btn.active{
+    background:#c59d5f;
+    color:#fff;
+    border:none;
+}
+
 /* === FOOTER === */
 footer {
     background: #111; color: #888; padding: 50px 20px; font-size: 0.9rem;
