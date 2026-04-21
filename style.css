@@ -465,19 +465,47 @@ section { padding: 90px 20px; text-align: center; position: relative; overflow: 
 }
 
 .wallet-box{
-  background:#fff;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+
   width:85%;
   max-width:300px;
-  border-radius:18px;
-  padding:22px;
+  border-radius:20px;
+  padding:25px;
   text-align:center;
-  box-shadow:0 15px 35px rgba(0,0,0,.15);
-  animation:fadeUp .25s ease;
+
+  border:1px solid rgba(255,255,255,0.4);
+  box-shadow:0 20px 40px rgba(0,0,0,.2);
+
+  animation:popupFade .35s ease;
+}
+
+@keyframes popupFade{
+  from{
+    opacity:0;
+    transform:translateY(30px) scale(.9);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
 }
 
 .wallet-box h3{
   margin-bottom:12px;
   color:#b8962e;
+  font-size:18px;
+  font-weight:600;
+  background:linear-gradient(90deg,#c6a85c,#ffd700,#c6a85c);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shineText 3s infinite linear;
+}
+
+@keyframes shineText{
+  0%{background-position:-200px}
+  100%{background-position:200px}
 }
 
 .wallet-box p{
