@@ -362,6 +362,25 @@ section { padding: 90px 20px; text-align: center; position: relative; overflow: 
 }
 .gallery-grid img:hover { transform: scale(1.02); }
 
+.gallery-slider{
+  display:flex;
+  overflow-x:auto;
+  gap:12px;
+  scroll-snap-type:x mandatory;
+  padding:10px;
+}
+
+.gallery-slider img{
+  flex:0 0 80%;
+  border-radius:15px;
+  scroll-snap-align:center;
+  object-fit:cover;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 /* === GIFT / EWALLET (ROYAL STYLE) === */
 .wallet-category { margin-bottom: 40px; }
 .cat-title {
