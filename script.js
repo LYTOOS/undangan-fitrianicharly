@@ -192,7 +192,10 @@ function openEnvelope(){
   setTimeout(()=>{
     const target = document.querySelector(".wallet-category");
     if(target){
-      target.scrollIntoView({ behavior:"smooth" });
+      target.scrollIntoView({ 
+        behavior:"smooth",
+        block:"center"
+      });
     }
   },800);
 }
