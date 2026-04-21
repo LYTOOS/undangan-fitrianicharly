@@ -182,6 +182,7 @@ function openWallet(type){
 
 function closeWallet(){
   document.getElementById("walletPopup").classList.remove("active");
+  clearTimeout(walletTimer);
 }
 
 function openEnvelope(){
