@@ -540,8 +540,10 @@ section { padding: 90px 20px; text-align: center; position: relative; overflow: 
 }
 
 .wallet-box p{
-  font-size:14px;
-  letter-spacing:1px;
+  font-size:15px;
+  letter-spacing:2px;
+  font-weight:500;
+  color:#333;
   margin-bottom:12px;
 }
 
