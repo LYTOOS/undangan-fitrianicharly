@@ -44,8 +44,19 @@ btnOpen.onclick = () => {
   setTimeout(()=>{
     document.querySelector(".intro-book").style.display="none";
     document.body.classList.remove("lock");
-    musik.volume = .5;
+    musik.volume = 0;
     musik.play().catch(()=>{});
+
+    let vol = 0;
+    const fade = setInterval(()=>{
+      if(vol < 0.5){
+        vol += 0.02;
+        musik.volume = vol;
+      }else{
+        clearInterval(fade);
+      }
+    },100);
+    
     musicControl.style.display="flex";
     AOS.init({ once:true });
   },1800);
@@ -181,7 +192,8 @@ function openWallet(type){
 }
 
 function closeWallet(){
-  document.getElementById("walletPopup").classList.remove("active");
+  const popup = document.getElementById("walletPopup");
+  popup.classList.remove("active");
   clearTimeout(walletTimer);
 }
 
