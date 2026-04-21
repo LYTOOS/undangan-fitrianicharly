@@ -123,6 +123,8 @@ function copyText(text) {
     });
 }
 
+let walletTimer;
+
 function openWallet(type){
   const popup = document.getElementById("walletPopup");
   const title = document.getElementById("walletTitle");
@@ -131,39 +133,51 @@ function openWallet(type){
   let html = "";
 
   if(type === "bri"){
-    title.innerText = "Bank BRI";
-    html = `
-      <p>017501078299507</p>
-      <button onclick="copyText('017501078299507')">Salin</button>
-    `;
-  }
+  title.innerText = "Bank BRI";
+  html = `
+    <p>017501078299507</p>
+    <button class="btn-copy" onclick="copyText('017501078299507')">
+      Salin Nomor
+    </button>
+  `;
+}
 
   if(type === "dana"){
-    title.innerText = "DANA";
-    html = `
-      <p>082261467360</p>
-      <button onclick="copyText('082261467360')">Salin</button>
-    `;
-  }
+  title.innerText = "DANA";
+  html = `
+    <p>082261467360</p>
+    <button class="btn-copy" onclick="copyText('082261467360')">
+      Salin Nomor
+    </button>
+  `;
+}
 
   if(type === "gopay"){
-    title.innerText = "GoPay";
-    html = `
-      <p>082287179255</p>
-      <button onclick="copyText('082287179255')">Salin</button>
-    `;
-  }
+  title.innerText = "GoPay";
+  html = `
+    <p>082287179255</p>
+    <button class="btn-copy" onclick="copyText('082287179255')">
+      Salin Nomor
+    </button>
+  `;
+}
 
   if(type === "seabank"){
-    title.innerText = "SeaBank";
-    html = `
-      <p>901519817032</p>
-      <button onclick="copyText('901519817032')">Salin</button>
-    `;
-  }
+  title.innerText = "SeaBank";
+  html = `
+    <p>901519817032</p>
+    <button class="btn-copy" onclick="copyText('901519817032')">
+      Salin Nomor
+    </button>
+  `;
+}
 
   content.innerHTML = html;
   popup.classList.add("active");
+
+  walletTimer = setTimeout(()=>{
+    closeWallet();
+  },10000);
 }
 
 function closeWallet(){
