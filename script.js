@@ -189,9 +189,10 @@ function openEnvelope(){
   el.classList.add("open");
 
   setTimeout(()=>{
-    document.querySelector(".wallet-category").scrollIntoView({
-      behavior:"smooth"
-    });
+    const target = document.querySelector(".wallet-category");
+    if(target){
+      target.scrollIntoView({ behavior:"smooth" });
+    }
   },800);
 }
 
