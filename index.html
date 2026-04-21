@@ -337,13 +337,6 @@
     </main>
 
     <!-- WALLET POPUP -->
-    <div id="walletPopup" class="wallet-popup">
-      <div class="wallet-box">
-        <h3 id="walletTitle"></h3>
-        <div id="walletContent"></div>
-        <button onclick="closeWallet()" class="btn-close">Tutup</button>
-      </div>
-    </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
@@ -383,6 +376,14 @@
     function openShopee(link){
         window.open(link,'_blank');
     }
-    </script>                    
+    </script>                 
+
+<div id="walletPopup" class="wallet-popup">
+  <div class="wallet-box">
+    <h3 id="walletTitle"></h3>
+    <div id="walletContent"></div>
+    <button onclick="closeWallet()" class="btn-close">Tutup</button>
+  </div>
+</div>
 </body>
 </html>
