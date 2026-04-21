@@ -285,6 +285,22 @@ db.ref("ucapan")
     list.prepend(div);
   });
 
+db.ref("ucapan").on("value", snap=>{
+  let hadir=0, tidak=0, ragu=0;
+
+  snap.forEach(child=>{
+    const s = child.val().status || "";
+
+    if(s.includes("Hadir")) hadir++;
+    else if(s.includes("Tidak")) tidak++;
+    else ragu++;
+  });
+
+  document.getElementById("hadirCount").innerText = hadir;
+  document.getElementById("tidakCount").innerText = tidak;
+  document.getElementById("raguCount").innerText = ragu;
+});
+
 // --- FIX POPUP CLICK ---
 document.addEventListener("DOMContentLoaded", function () {
   const box = document.querySelector(".wallet-box");
