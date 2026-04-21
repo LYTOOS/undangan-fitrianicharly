@@ -178,7 +178,7 @@
         <section class="section-gallery bg-section-6">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-down">Momen Bahagia</h2>
-                <div class="gallery-slider"><div class="gallery-slider" data-aos="zoom-in">
+                <div class="gallery-slider" data-aos="zoom-in">
                     <img src="foto/galeri1.jpg" data-aos="zoom-in" alt="Galeri 1">
                     <img src="foto/galeri2.jpg" data-aos="zoom-in" data-aos-delay="100" alt="Galeri 2">
                     <img src="foto/galeri3.jpg" data-aos="zoom-in" data-aos-delay="200" alt="Galeri 3">
@@ -200,13 +200,12 @@
                 
                 <div class="wallet-category">
                     <h3 class="cat-title">Digital Gift</h3>
-                    
+                
                     <div class="wallet-logos">
-
                         <div class="wallet-item" onclick="openWallet('bri')">
                             <img src="icon/bri.png">
                         </div>
-
+                
                         <div class="wallet-item" onclick="openWallet('dana')">
                             <img src="icon/dana.png">
                         </div>
@@ -218,6 +217,7 @@
                         <div class="wallet-item" onclick="openWallet('seabank')">
                             <img src="icon/seabank.png">
                         </div>
+                    </div>
                 </div>
                         
             <div class="wallet-category gift-sultan">
@@ -349,6 +349,13 @@
     </main>
 
     <!-- WALLET POPUP -->
+    <div id="walletPopup" class="wallet-popup" onclick="closeWallet()">
+      <div class="wallet-box">
+        <h3 id="walletTitle"></h3>
+        <div id="walletContent"></div>
+        <button onclick="closeWallet()" class="btn-close">Tutup</button>
+      </div>
+    </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
@@ -389,13 +396,5 @@
         window.open(link,'_blank');
     }
     </script>                 
-
-<div id="walletPopup" class="wallet-popup" onclick="closeWallet()">
-  <div class="wallet-box">
-    <h3 id="walletTitle"></h3>
-    <div id="walletContent"></div>
-    <button onclick="closeWallet()" class="btn-close">Tutup</button>
-  </div>
-</div>
 </body>
 </html>
