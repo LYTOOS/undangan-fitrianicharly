@@ -720,6 +720,26 @@ textarea { height: 100px; resize: none; }
   border:1px solid #ddd;
 }
 
+.rsvp-counter{
+  display:flex;
+  justify-content:space-around;
+  margin-bottom:20px;
+}
+
+.rsvp-counter div{
+  background:#fff;
+  padding:10px 15px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,.05);
+  text-align:center;
+}
+
+.rsvp-counter b{
+  display:block;
+  font-size:18px;
+  color:#c59d5f;
+}
+
 /* === FOOTER === */
 footer {
     background: #111; color: #888; padding: 50px 20px; font-size: 0.9rem;
