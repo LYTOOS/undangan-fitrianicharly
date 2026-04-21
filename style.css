@@ -816,6 +816,37 @@ footer {
     letter-spacing:1px;
 }
 
+.envelope{
+  margin:30px auto;
+  width:200px;
+  height:120px;
+  background:linear-gradient(135deg,#d4af37,#b8962e);
+  border-radius:12px;
+  position:relative;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  color:#fff;
+  box-shadow:0 15px 30px rgba(0,0,0,.2);
+  transition:.4s;
+}
+
+.envelope:hover{
+  transform:translateY(-5px);
+}
+
+.envelope.open{
+  animation:openEnvelope .8s forwards;
+}
+
+@keyframes openEnvelope{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.1) rotate(-2deg)}
+  100%{transform:scale(0);opacity:0}
+}
+
 .registry-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
