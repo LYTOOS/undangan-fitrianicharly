@@ -200,17 +200,6 @@ function openEnvelope(){
   },800);
 }
 
-// --- 8. POPUP QRIS LOGIC ---
-function openQris() {
-    document.getElementById("qrisPopup").classList.add("active");
-}
-function closeQris() {
-    document.getElementById("qrisPopup").classList.remove("active");
-}
-document.querySelector('.qris-content').addEventListener('click', function(e) {
-    e.stopPropagation();
-});
-
 // --- KIRIM UCAPAN (LIMIT 1X) ---
 function kirimUcapan(){
   const nama = document.getElementById("namaPengirim").value.trim();
