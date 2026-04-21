@@ -214,7 +214,7 @@ function kirimUcapan(){
     db.ref("ucapan").push({
       nama,
       pesan,
-      status,
+      status: finalStatus,
       waktu: Date.now(),
       ip
     });
@@ -225,7 +225,6 @@ function kirimUcapan(){
 
     document.getElementById("namaPengirim").value="";
     document.getElementById("pesanUcapan").value="";
-    document.getElementById("rsvpStatus").value="";
 
   }catch(e){
     console.error(e);
@@ -259,3 +258,13 @@ db.ref("ucapan")
 
     list.prepend(div);
   });
+
+// --- FIX POPUP CLICK ---
+document.addEventListener("DOMContentLoaded", function () {
+  const box = document.querySelector(".wallet-box");
+  if (box) {
+    box.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+  }
+});
