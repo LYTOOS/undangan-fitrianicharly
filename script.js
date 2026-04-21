@@ -184,6 +184,17 @@ function closeWallet(){
   document.getElementById("walletPopup").classList.remove("active");
 }
 
+function openEnvelope(){
+  const el = document.querySelector(".envelope");
+  el.classList.add("open");
+
+  setTimeout(()=>{
+    document.querySelector(".wallet-category").scrollIntoView({
+      behavior:"smooth"
+    });
+  },800);
+}
+
 // --- 8. POPUP QRIS LOGIC ---
 function openQris() {
     document.getElementById("qrisPopup").classList.add("active");
