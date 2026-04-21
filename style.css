@@ -878,6 +878,8 @@ footer {
 
 .envelope.open{
   animation:openEnvelope .8s forwards;
+  transform: scale(1.1) rotate(3deg);
+  transition: .4s;
 }
 
 @keyframes openEnvelope{
