@@ -325,43 +325,48 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const slider = document.getElementById("gallerySlider");
+const dotsContainer = document.getElementById("galleryDots");
 
 if(slider){
-  let scrollAmount = 0;
 
-  setInterval(()=>{
-    scrollAmount += slider.clientWidth * 0.8;
+  const images = slider.querySelectorAll("img");
 
-    if(scrollAmount >= slider.scrollWidth){
-      scrollAmount = 0;
-    }
-
-    slider.scrollTo({
-      left: scrollAmount,
-      behavior: "smooth"
-    });
-  },3000);
-}
-
-if(slider){
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-
-  slider.addEventListener('mousedown', (e) => {
-    isDown = true;
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
+  // buat dots
+  images.forEach((_, i)=>{
+    const dot = document.createElement("span");
+    if(i===0) dot.classList.add("active");
+    dotsContainer.appendChild(dot);
   });
 
-  slider.addEventListener('mouseleave', () => isDown = false);
-  slider.addEventListener('mouseup', () => isDown = false);
+  const dots = dotsContainer.querySelectorAll("span");
 
-  slider.addEventListener('mousemove', (e) => {
-    if(!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 2;
-    slider.scrollLeft = scrollLeft - walk;
+  let index = 0;
+
+  function updateSlider(){
+    const width = slider.clientWidth;
+
+    slider.scrollTo({
+      left: width * index,
+      behavior:"smooth"
+    });
+
+    dots.forEach(d=>d.classList.remove("active"));
+    dots[index].classList.add("active");
+  }
+
+  // AUTO SLIDE
+  setInterval(()=>{
+    index++;
+    if(index >= images.length) index = 0;
+    updateSlider();
+  },4000);
+
+  // SCROLL DETECT (biar sinkron)
+  slider.addEventListener("scroll", ()=>{
+    const width = slider.clientWidth;
+    index = Math.round(slider.scrollLeft / width);
+
+    dots.forEach(d=>d.classList.remove("active"));
+    if(dots[index]) dots[index].classList.add("active");
   });
 }
