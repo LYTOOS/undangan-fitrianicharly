@@ -24,7 +24,7 @@ fetch("https://api.ipify.org?format=json")
 const btnOpen = document.getElementById("btnOpen");
 const cover = document.querySelector(".book-cover");
 const introBook = document.querySelector(".intro-book");
-const audio = document.getElementById("musik");
+const musik = document.getElementById("musik");
 const musicBtn = document.getElementById("musicControl");
 
 // --- 1. INISIALISASI AOS (ANIMASI) ---
@@ -85,8 +85,9 @@ function toggleMusic() {
 // --- 4. NAMA TAMU DARI URL ---
 const urlParams = new URLSearchParams(window.location.search);
 const namaTamu = urlParams.get('to');
-if (namaTamu) {
-    document.getElementById("introNama").innerText = namaTamu.replace(/-/g, " ");
+const introNama = document.getElementById("introNama");
+if (namaTamu && introNama) {
+    introNama.innerText = namaTamu.replace(/-/g, " ");
 }
 
 // --- 5. PANTUN ACAK ---
@@ -278,14 +279,29 @@ db.ref("ucapan")
 
     const div = document.createElement("div");
     div.className = "ucapan-item";
+    db.ref("ucapan")
+  .limitToLast(50)
+  .on("child_added", snap => {
+    const d = snap.val();
+    if(!d || !list) return;
+
+    const statusText = d.status || "Belum Pasti";
+
+    const div = document.createElement("div");
+    div.className = "ucapan-item";
+
     div.innerHTML = `
       <strong>${d.nama}</strong>
-      <const statusText = d.status || "Belum Pasti";
+      <small class="status ${statusText.replace(/\s/g,'')}">
+        ${statusText}
+      </small>
+      <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
+      <p>${d.pesan}</p>
+    `;
 
-       div.innerHTML = `
-         <strong>${d.nama}</strong>
-         <small class="status ${statusText.replace(/\s/g,'')}">
-           ${statusText}
+    list.prepend(div);
+  });
+    ${statusText}
          </small>
          <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
          <p>${d.pesan}</p>
