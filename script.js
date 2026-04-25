@@ -280,7 +280,16 @@ db.ref("ucapan")
     div.className = "ucapan-item";
     div.innerHTML = `
       <strong>${d.nama}</strong>
-      <small class="status ${d.status.replace(/\s/g,'')}">
+      <const statusText = d.status || "Belum Pasti";
+
+       div.innerHTML = `
+         <strong>${d.nama}</strong>
+         <small class="status ${statusText.replace(/\s/g,'')}">
+           ${statusText}
+         </small>
+         <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
+         <p>${d.pesan}</p>
+       `;>
         ${d.status}
       </small>
       <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
@@ -294,8 +303,7 @@ db.ref("ucapan").on("value", snap=>{
   let hadir=0, tidak=0, ragu=0;
 
   snap.forEach(child=>{
-    const s = child.val().status || "";
-
+    const s = (child.val() && child.val().status) || "";
     if(s.includes("Hadir")) hadir++;
     else if(s.includes("Tidak")) tidak++;
     else ragu++;
