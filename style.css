@@ -362,6 +362,10 @@ section { padding: 90px 20px; text-align: center; position: relative; overflow: 
 }
 .gallery-grid img:hover { transform: scale(1.02); }
 
+.gallery-wrapper{
+  position:relative;
+}
+
 .gallery-slider{
   display:flex;
   overflow-x:auto;
@@ -376,7 +380,7 @@ section { padding: 90px 20px; text-align: center; position: relative; overflow: 
   flex:0 0 80%;
   min-width:80%;
   border-radius:20px;
-  scroll-snap-align: center;
+  scroll-snap-align:center;
   object-fit:cover;
   box-shadow:0 10px 30px rgba(0,0,0,.2);
   transition:.5s;
@@ -386,8 +390,31 @@ html{
   scroll-behavior:smooth;
 }
 
+.gallery-slider img.active{
+  transform:scale(1.05);
+}
+
 .gallery-slider img:hover{
   transform:scale(1.05);
+}
+
+/* DOT INDICATOR */
+.gallery-dots{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:10px;
+}
+
+.gallery-dots span{
+  width:8px;
+  height:8px;
+  background:#ccc;
+  border-radius:50%;
+}
+
+.gallery-dots span.active{
+  background:#d4af37;
 }
 
 /* === GIFT / EWALLET (ROYAL STYLE) === */
