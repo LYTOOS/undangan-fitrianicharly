@@ -347,7 +347,8 @@ function kirimUcapan(){
       status: finalStatus,
       waktu: Date.now(),
       ip,
-      deviceId
+      deviceId,
+      likes: 0
     })
     .then(()=>{
       localStorage.lastSend = Date.now();
@@ -398,40 +399,24 @@ if(list){
     .limitToLast(50)
     .on("child_added", snap => {
       const d = snap.val();
-      if(!d) return;
-
-      const statusText = d.status || "Belum Pasti";
-
+      const key = snap.key;
+    
       const div = document.createElement("div");
       div.className = "ucapan-item";
-
+    
       div.innerHTML = `
-        <div class="ucapan-card">
-          
-          <div class="ucapan-avatar">
-            ${d.nama.charAt(0).toUpperCase()}
-          </div>
-      
-          <div class="ucapan-content">
-            
-            <div class="ucapan-header">
-              <span class="nama">${d.nama}</span>
-              <span class="status ${statusText.replace(/\s/g,'')}">${statusText}</span>
-            </div>
-      
-            <div class="ucapan-text">
-              ${d.pesan}
-            </div>
-      
-            <div class="ucapan-footer">
-              ${new Date(d.waktu).toLocaleString("id-ID")}
-            </div>
-      
-          </div>
-      
+        <strong>${d.nama}</strong>
+        <small>${d.status}</small>
+        <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
+        <p>${d.pesan}</p>
+    
+        <div class="like-box">
+          <button onclick="likeUcapan('${key}')" id="like-${key}">
+            ❤️ <span id="like-count-${key}">${d.likes || 0}</span>
+          </button>
         </div>
       `;
-
+    
       list.prepend(div);
 
       setTimeout(() => {
@@ -511,3 +496,27 @@ if(slider){
     if(dots[index]) dots[index].classList.add("active");
   });
 }
+
+function likeUcapan(id){
+
+    const likeKey = "liked_" + id;
+  
+    // Cegah like 2x di device yang sama
+    if(localStorage.getItem(likeKey)){
+      alert("Kamu sudah menyukai ini ❤️");
+      return;
+    }
+  
+    const ref = db.ref("ucapan/" + id + "/likes");
+  
+    ref.transaction(current => {
+      return (current || 0) + 1;
+    })
+    .then(() => {
+      localStorage.setItem(likeKey, true);
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Gagal like");
+    });
+  }
