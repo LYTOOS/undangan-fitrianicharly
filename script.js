@@ -411,7 +411,7 @@ if(list){
         <p>${d.pesan}</p>
     
         <div class="like-box">
-          <button onclick="likeUcapan('${key}')" id="like-${key}">
+          <button onclick="likeUcapan('${key}', event)" id="like-${key}">
             ❤️ <span id="like-count-${key}">${d.likes || 0}</span>
           </button>
         </div>
@@ -508,26 +508,55 @@ if(slider){
   });
 }
 
-function likeUcapan(id){
+function likeUcapan(id, event){
 
-    const likeKey = "liked_" + id;
-  
-    // Cegah like 2x di device yang sama
-    if(localStorage.getItem(likeKey)){
-      alert("Kamu sudah menyukai ini ❤️");
-      return;
-    }
-  
-    const ref = db.ref("ucapan/" + id + "/likes");
-  
-    ref.transaction(current => {
-      return (current || 0) + 1;
-    })
-    .then(() => {
-      localStorage.setItem(likeKey, true);
-    })
-    .catch(err => {
-      console.error(err);
-      alert("Gagal like");
-    });
+  const likeKey = "liked_" + id;
+
+  if(localStorage.getItem(likeKey)){
+    alert("Kamu sudah menyukai ini ❤️");
+    return;
   }
+
+  // ❤️ Ambil posisi klik
+  const x = event.clientX;
+  const y = event.clientY;
+
+  explodeHeart(x, y);
+
+  const ref = db.ref("ucapan/" + id + "/likes");
+
+  ref.transaction(current => {
+    return (current || 0) + 1;
+  })
+  .then(() => {
+    localStorage.setItem(likeKey, true);
+  })
+  .catch(err => {
+    console.error(err);
+  });
+}
+
+function explodeHeart(x, y){
+
+  const container = document.getElementById("heartContainer");
+
+  for(let i=0; i<6; i++){
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "❤️";
+
+    const offsetX = (Math.random() - 0.5) * 80;
+    const offsetY = Math.random() * -80;
+
+    heart.style.left = (x + offsetX) + "px";
+    heart.style.top = (y + offsetY) + "px";
+
+    heart.style.fontSize = (16 + Math.random() * 20) + "px";
+
+    container.appendChild(heart);
+
+    setTimeout(()=>{
+      heart.remove();
+    },1200);
+  }
+}
