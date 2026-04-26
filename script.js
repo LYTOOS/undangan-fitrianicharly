@@ -121,10 +121,13 @@ function toggleMusic() {
 
 // --- 4. NAMA TAMU DARI URL ---
 const urlParams = new URLSearchParams(window.location.search);
-const namaTamu = urlParams.get('to');
+const nama = urlParams.get("nama");
+const pasangan = urlParams.get("pasangan");
+
 const introNama = document.getElementById("introNama");
-if (namaTamu && introNama) {
-    introNama.innerText = namaTamu.replace(/-/g, " ");
+
+if(nama && pasangan && introNama){
+  introNama.innerText = `${nama} & ${pasangan}`;
 }
 
 // --- 5. PANTUN ACAK ---
