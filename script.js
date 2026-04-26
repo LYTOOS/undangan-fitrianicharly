@@ -412,7 +412,7 @@ if(list){
     
         <div class="like-box">
           <button onclick="likeUcapan('${key}', event)" id="like-${key}">
-            ❤️ <span id="like-count-${key}">${d.likes || 0}</span>
+            ❤️ <span id="like-count-${key}">${d.likes ? Object.keys(d.likes).length : 0}</span>
           </button>
         </div>
       `;
@@ -424,16 +424,27 @@ if(list){
       }, Math.random() * 200);
     });
   
-  db.ref("ucapan")
-    .on("child_changed", snap => {
-      const d = snap.val();
-      const key = snap.key;
-
-      const el = document.getElementById("like-count-" + key);
-      if(el){
-        el.innerText = d.likes || 0;
+  db.ref("ucapan").on("child_changed", snap => {
+    const d = snap.val();
+    const key = snap.key;
+  
+    // update count
+    const countEl = document.getElementById("like-count-" + key);
+    if(countEl){
+      countEl.innerText = d.likes ? Object.keys(d.likes).length : 0;
+    }
+  
+    // update list nama
+    const userEl = document.getElementById("like-users-" + key);
+    if(userEl){
+      if(d.likes){
+        const names = Object.values(d.likes);
+        userEl.innerText = "Disukai oleh: " + names.join(", ");
+      }else{
+        userEl.innerText = "";
       }
-    });
+    }
+  });
 }
 
 db.ref("ucapan").on("value", snap=>{
@@ -510,6 +521,12 @@ if(slider){
 
 function likeUcapan(id, event){
 
+  const nama = prompt("Masukkan nama kamu untuk like ❤️");
+  if(!nama || nama.length < 2){
+    alert("Nama tidak valid");
+    return;
+  }
+
   const likeKey = "liked_" + id;
 
   if(localStorage.getItem(likeKey)){
@@ -517,22 +534,19 @@ function likeUcapan(id, event){
     return;
   }
 
-  // ❤️ Ambil posisi klik
   const x = event.clientX;
   const y = event.clientY;
-
   explodeHeart(x, y);
 
-  const ref = db.ref("ucapan/" + id + "/likes");
+  const ref = db.ref("ucapan/" + id + "/likes/" + deviceId);
 
-  ref.transaction(current => {
-    return (current || 0) + 1;
-  })
+  ref.set(nama)
   .then(() => {
     localStorage.setItem(likeKey, true);
   })
   .catch(err => {
     console.error(err);
+    alert("Gagal like");
   });
 }
 
