@@ -139,7 +139,7 @@ if (pantunEl) {
 }
 
 // --- 6. HITUNG MUNDUR (COUNTDOWN) ---
-const weddingDate = new Date("2026-02-15T07:00:00").getTime();
+const weddingDate = new Date("2027-03-20T07:00:00").getTime();
 setInterval(() => {
     const dEl = document.getElementById("d");
     const hEl = document.getElementById("h");
