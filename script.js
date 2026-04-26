@@ -44,7 +44,10 @@ const musik = document.getElementById("musik");
 const musicBtn = document.getElementById("musicControl");
 
 // --- 1. INISIALISASI AOS (ANIMASI) ---
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", ()=>{
+  if(musicBtn){
+    musicBtn.style.display = "flex";
+  }
     AOS.init({
         duration: 1000,
         easing: 'ease-out-cubic',
