@@ -423,6 +423,17 @@ if(list){
         div.classList.add("show");
       }, Math.random() * 200);
     });
+  
+  db.ref("ucapan")
+    .on("child_changed", snap => {
+      const d = snap.val();
+      const key = snap.key;
+
+      const el = document.getElementById("like-count-" + key);
+      if(el){
+        el.innerText = d.likes || 0;
+      }
+    });
 }
 
 db.ref("ucapan").on("value", snap=>{
