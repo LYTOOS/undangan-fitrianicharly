@@ -406,12 +406,30 @@ if(list){
       div.className = "ucapan-item";
 
       div.innerHTML = `
-        <strong>${d.nama}</strong>
-        <small class="status ${statusText.replace(/\s/g,'')}">
-          ${statusText}
-        </small>
-        <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
-        <p>${d.pesan}</p>
+        <div class="ucapan-card">
+          
+          <div class="ucapan-avatar">
+            ${d.nama.charAt(0).toUpperCase()}
+          </div>
+      
+          <div class="ucapan-content">
+            
+            <div class="ucapan-header">
+              <span class="nama">${d.nama}</span>
+              <span class="status ${statusText.replace(/\s/g,'')}">${statusText}</span>
+            </div>
+      
+            <div class="ucapan-text">
+              ${d.pesan}
+            </div>
+      
+            <div class="ucapan-footer">
+              ${new Date(d.waktu).toLocaleString("id-ID")}
+            </div>
+      
+          </div>
+      
+        </div>
       `;
 
       list.prepend(div);
