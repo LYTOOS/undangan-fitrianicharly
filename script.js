@@ -180,6 +180,21 @@ function copyText(text) {
     });
 }
 
+function likeUcapan(id){
+  const user = localStorage.device;
+  const nama = localStorage.nama || "Tamu";
+
+  const ref = db.ref("ucapan/" + id + "/likes/" + user);
+
+  ref.once("value", snap => {
+    if(snap.exists()){
+      ref.remove(); // unlike
+    } else {
+      ref.set(nama); // ❤️ pakai nama user
+    }
+  });
+}
+
 let walletTimer;
 
 function openWallet(type){
@@ -348,7 +363,7 @@ function kirimUcapan(){
       waktu: Date.now(),
       ip,
       deviceId,
-      likes: 0
+      likes: null
     })
     .then(()=>{
       localStorage.lastSend = Date.now();
@@ -403,19 +418,28 @@ if(list){
     
       const div = document.createElement("div");
       div.className = "ucapan-item";
+      const statusText = d.status || "Belum Pasti";
     
       div.innerHTML = `
         <strong>${d.nama}</strong>
-        <small>${d.status}</small>
+        <small class="status ${statusText.replace(/\s/g,'')}">
+          ${statusText}
+        </small>
         <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
         <p>${d.pesan}</p>
-    
-        <div class="like-box">
-          <button onclick="likeUcapan('${key}', event)" id="like-${key}">
-            ❤️ <span id="like-count-${key}">${d.likes ? Object.keys(d.likes).length : 0}</span>
-          </button>
+      
+        <div class="like-section">
+          <button onclick="likeUcapan('${snap.key}')">❤️</button>
+          <span id="like-count-${snap.key}">${d.likes ? Object.keys(d.likes).length : 0}</span>
         </div>
+      
+        <div class="like-users" id="like-users-${snap.key}"></div>
       `;
+
+      const userEl = div.querySelector("#like-users-" + key);
+      if(userEl && d.likes){
+        userEl.innerText = "Disukai oleh: " + Object.values(d.likes).join(", ");
+      }
     
       list.prepend(div);
 
@@ -436,13 +460,8 @@ if(list){
   
     // update list nama
     const userEl = document.getElementById("like-users-" + key);
-    if(userEl){
-      if(d.likes){
-        const names = Object.values(d.likes);
-        userEl.innerText = "Disukai oleh: " + names.join(", ");
-      }else{
-        userEl.innerText = "";
-      }
+    if(userEl && d.likes){
+      userEl.innerText = "Disukai oleh: " + Object.values(d.likes).join(", ");
     }
   });
 }
@@ -521,7 +540,7 @@ if(slider){
 
 function likeUcapan(id, event){
 
-  const nama = prompt("Masukkan nama kamu untuk like ❤️");
+  const nama = localStorage.nama || "Tamu";
   if(!nama || nama.length < 2){
     alert("Nama tidak valid");
     return;
@@ -552,7 +571,9 @@ function likeUcapan(id, event){
 
 function explodeHeart(x, y){
 
-  const container = document.getElementById("heartContainer");
+  const heartContainer = document.getElementById("heartContainer");
+
+  if(!container) return;
 
   for(let i=0; i<6; i++){
     const heart = document.createElement("div");
