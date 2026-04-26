@@ -415,6 +415,10 @@ if(list){
       `;
 
       list.prepend(div);
+
+      setTimeout(() => {
+        div.classList.add("show");
+      }, Math.random() * 200);
     });
 }
 
