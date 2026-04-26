@@ -363,7 +363,7 @@ function kirimUcapan(){
       waktu: Date.now(),
       ip,
       deviceId,
-      likes: null
+      likes: {}
     })
     .then(()=>{
       localStorage.lastSend = Date.now();
@@ -429,7 +429,7 @@ if(list){
         <p>${d.pesan}</p>
       
         <div class="like-section">
-          <button onclick="likeUcapan('${snap.key}')">❤️</button>
+          <button onclick="likeUcapan('${snap.key}', event)">❤️</button>
           <span id="like-count-${snap.key}">${d.likes ? Object.keys(d.likes).length : 0}</span>
         </div>
       
@@ -571,8 +571,7 @@ function likeUcapan(id, event){
 
 function explodeHeart(x, y){
 
-  const heartContainer = document.getElementById("heartContainer");
-
+  const container = document.getElementById("heartContainer");
   if(!container) return;
 
   for(let i=0; i<6; i++){
