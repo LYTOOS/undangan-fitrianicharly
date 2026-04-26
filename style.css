@@ -1059,3 +1059,21 @@ footer {
   font-size: 11px;
   color: #888;
 }
+
+.like-box {
+  margin-top: 10px;
+}
+
+.like-box button {
+  border: none;
+  background: #fff0f3;
+  color: #e63946;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.like-box button:hover {
+  transform: scale(1.1);
+}
