@@ -1078,6 +1078,12 @@ footer {
   transform: scale(1.1);
 }
 
+.like-users {
+  font-size: 12px;
+  color: #777;
+  margin-top: 5px;
+}
+
 #heartContainer {
   position: fixed;
   bottom: 0;
