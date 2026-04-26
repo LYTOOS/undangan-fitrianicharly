@@ -988,3 +988,74 @@ footer {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
+.ucapan-card {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 16px;
+  background: #fff;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.ucapan-card:hover {
+  transform: translateY(-2px);
+  transition: 0.3s;
+}
+
+/* AVATAR */
+.ucapan-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d4af37, #f6e27a);
+  color: #000;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CONTENT */
+.ucapan-content {
+  flex: 1;
+}
+
+/* HEADER */
+.ucapan-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.ucapan-header .nama {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ucapan-header .status {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: #eee;
+}
+
+/* STATUS WARNA */
+.status.Hadir { background: #d4edda; color: #155724; }
+.status.TidakHadir { background: #f8d7da; color: #721c24; }
+.status.Ragu { background: #fff3cd; color: #856404; }
+
+/* TEXT */
+.ucapan-text {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 4px 0;
+}
+
+/* FOOTER */
+.ucapan-footer {
+  font-size: 11px;
+  color: #888;
+}
