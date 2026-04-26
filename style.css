@@ -87,15 +87,52 @@ background:linear-gradient(
 }
 
 /* === MUSIC CONTROL === */
-.music-btn {
-    position: fixed; bottom: 20px; right: 20px; z-index: 10000;
-    width: 50px; height: 50px; border-radius: 50%;
-    background: #fff; border: 2px solid var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer;
-    animation: spin 4s linear infinite;
+.music-btn{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  z-index:10000;
+
+  width:60px;
+  height:60px;
+  border-radius:50%;
+
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+
+  border:1px solid rgba(212,175,55,0.6);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:0 15px 35px rgba(0,0,0,0.15);
+
+  cursor:pointer;
+  transition:.4s ease;
 }
-.music-btn.paused { animation-play-state: paused; opacity: 0.6; }
+
+.music-btn::before{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(212,175,55,0.5), transparent 70%);
+  opacity:0;
+  transition:.4s;
+}
+
+.music-btn:hover::before{
+  opacity:1;
+}
+
+.music-btn:hover{
+  transform:scale(1.08);
+}
+.music-btn.paused{
+  opacity:0.5;
+  filter: grayscale(1);
+}
 .music-btn img { width: 24px; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
@@ -656,12 +693,20 @@ input, textarea {
 textarea { height: 100px; resize: none; }
 
 .ucapan-item{
-  padding:14px 0;
-  border-bottom:1px solid rgba(0,0,0,.08);
+  padding:18px 16px;
+  margin-bottom:12px;
+  border-radius:16px;
+
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(212,175,55,0.25);
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
   text-align:left;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease;
+
+  transition: all .4s ease;
 }
 
 .ucapan-item.show {
@@ -669,29 +714,38 @@ textarea { height: 100px; resize: none; }
   transform: translateY(0);
 }
 
-.ucapan-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+.ucapan-item:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(212,175,55,0.15);
 }
 
 .ucapan-item strong{
-  display:block;
+  font-size:14px;
   color:#b8962e;
-  font-weight:600;
+  letter-spacing:.5px;
 }
 
 .ucapan-item small{
-  display:block;
   font-size:11px;
-  color:#999;
-  margin-bottom:6px;
+  color:#888;
 }
 
 .ucapan-item p{
-  margin:0;
   font-size:14px;
-  color:#444;
+  color:#333;
+  margin-top:6px;
   line-height:1.6;
+}
+
+.ucapan-item::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  height:100%;
+  width:3px;
+  background: linear-gradient(#d4af37,#f3e5ab);
+  border-radius:20px;
 }
 
 .rsvp-group{
@@ -716,28 +770,29 @@ textarea { height: 100px; resize: none; }
     border:none;
 }
 
-.status {
-  display:inline-block;
+.status{
   padding:4px 10px;
-  border-radius:20px;
-  font-size:12px;
-  margin-right:8px;
+  border-radius:30px;
+  font-size:11px;
   font-weight:600;
+  letter-spacing:.5px;
+  border:1px solid transparent;
 }
 
-.status.Hadir {
-  background:#d4edda;
-  color:#155724;
+.status.Hadir{
+  background: linear-gradient(135deg,#d4edda,#b7f5c6);
+  color:#145c2c;
+  border-color:#8de0a5;
 }
 
-.status.TidakHadir {
-  background:#f8d7da;
-  color:#721c24;
+.status.TidakHadir{
+  background: linear-gradient(135deg,#ffe0e0,#ffb3b3);
+  color:#7a1c1c;
 }
 
-.status.BelumPasti {
-  background:#fff3cd;
-  color:#856404;
+.status.BelumPasti{
+  background: linear-gradient(135deg,#fff3cd,#ffe8a1);
+  color:#7a5a00;
 }
 
 .rsvp-container {
@@ -1082,6 +1137,34 @@ footer {
   font-size: 12px;
   color: #777;
   margin-top: 5px;
+}
+
+.like-section{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+}
+
+.like-section button{
+  border:none;
+  background: linear-gradient(135deg,#fff0f3,#ffe3e8);
+  color:#e63946;
+  padding:6px 12px;
+  border-radius:30px;
+  cursor:pointer;
+
+  box-shadow: 0 5px 15px rgba(230,57,70,0.15);
+  transition:.3s;
+}
+
+.like-section button:hover{
+  transform:scale(1.08);
+}
+
+.like-section span{
+  font-size:12px;
+  color:#666;
 }
 
 #heartContainer {
