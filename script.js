@@ -297,7 +297,7 @@ function kirimUcapan(){
   }
 
   if(!/^[\p{L}0-9\s.,'-]+$/u.test(nama)){
-    alert("Nama tidak valid");
+    showToast("Nama tidak valid");
     sending = false;
     resetButton(btn);
     return;
@@ -352,7 +352,7 @@ function kirimUcapan(){
     .then(()=>{
       localStorage.lastSend = Date.now();
     
-      alert("Terima kasih, ucapan Anda terkirim 🤍");
+      showToast("Terima kasih, ucapan Anda terkirim 🤍");
     
       document.getElementById("namaPengirim").value="";
       document.getElementById("pesanUcapan").value="";
@@ -366,7 +366,7 @@ function kirimUcapan(){
     })
     .catch(e=>{
       console.error(e);
-      alert("Gagal mengirim, coba lagi nanti 🙏");
+      showToast("Gagal mengirim, coba lagi nanti 🙏");
 
       sending = false;
       resetButton(btn);
@@ -376,6 +376,18 @@ function kirimUcapan(){
 
 function toggleGuestInput(show){
   document.getElementById("guestCountBox").style.display = show ? "block" : "none";
+}
+
+function showToast(msg){
+  const toast = document.getElementById("toast");
+  if(!toast) return;
+
+  toast.innerText = msg;
+  toast.classList.add("show");
+
+  setTimeout(()=>{
+    toast.classList.remove("show");
+  },3000);
 }
 
 // --- AUTO LOAD UCAPAN (REALTIME) ---
