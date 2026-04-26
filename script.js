@@ -1,18 +1,34 @@
 "use strict";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCr2VF6hZ3pLWU5eORdrtdM1c5L_AcLVH4",
-  authDomain: "undangan-pernikahan-f6d5e.firebaseapp.com",
-  databaseURL: "https://undangan-pernikahan-f6d5e-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "undangan-pernikahan-f6d5e"
+  apiKey: "AIzaSyCAxuBGwkoHDJfPYqfr2Ho_g0pc0i-rDDU",
+  authDomain: "undangan-charlyfitriani.firebaseapp.com",
+  databaseURL: "https://undangan-charlyfitriani-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "undangan-charlyfitriani"
 };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
+let sending = false;
+
+function clean(str){
+  return str
+    .replace(/[<>]/g, "")
+    .replace(/script/gi, "")
+    .trim();
+}
+
+function resetButton(btn){
+  if(btn){
+    btn.disabled = false;
+    btn.innerHTML = "Kirim Ucapan";
+  }
+}
+
 // --- DEVICE & IP HARDEN ---
 const deviceId = localStorage.device || 
-  ("dev-" + Math.random().toString(36).substr(2,9));
+  ("dev-" + Date.now() + Math.random().toString(36).slice(2,7));
 localStorage.device = deviceId;
 
 fetch("https://api.ipify.org?format=json")
@@ -38,47 +54,68 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // --- 2. LOGIKA BUKA UNDANGAN ---
-btnOpen.onclick = () => {
-  document.querySelector(".book").classList.add("open");
+if(btnOpen){
+  btnOpen.onclick = () => {
+    document.querySelector(".book").classList.add("open");
 
-  setTimeout(()=>{
-    document.querySelector(".intro-book").style.display="none";
-    document.body.classList.remove("lock");
-    musik.volume = 0;
-    musik.play().catch(()=>{});
-
-    let vol = 0;
-    const fade = setInterval(()=>{
-      if(vol < 0.5){
-        vol += 0.02;
-        musik.volume = vol;
-      }else{
-        clearInterval(fade);
+    setTimeout(()=>{
+      document.querySelector(".intro-book").style.display="none";
+      document.body.classList.remove("lock");
+      
+      if(musik){
+        musik.volume = 0;
+        musik.play().catch(()=>{});
       }
-    },100);
     
-    musicControl.style.display="flex";
-    AOS.init({ once:true });
-  },1800);
-};
+      if(musik){
+        let vol = 0;
+        const fade = setInterval(()=>{
+          if(vol < 0.5){
+            vol += 0.02;
+            musik.volume = vol;
+          }else{
+            clearInterval(fade);
+          }
+        },100);
+      }
+    
+      if(musicBtn){
+        musicBtn.style.display = "flex";
+      }
+    
+      AOS.init({ once:true });
+    
+    },1800);
+  };
+}
 
 // --- 3. KONTROL MUSIK ---
 function playMusic() {
+    if(!musik) return;
+
     musik.volume = 0.5;
     musik.play().then(() => {
-        musicBtn.classList.remove("paused");
+    if(musicBtn){
+      musicBtn.classList.remove("paused");
+    }
     }).catch((error) => {
         console.log("Autoplay blocked, waiting for interaction");
     });
 }
 
 function toggleMusic() {
+    if (!musik) return;
+
     if (musik.paused) {
         musik.play();
-        musicBtn.classList.remove("paused");
+        if(musicBtn){
+          musicBtn.classList.remove("paused");
+        }
     } else {
         musik.pause();
-        musicBtn.classList.add("paused");
+        if(musicBtn){
+          musicBtn.classList.add("paused");
+        }
     }
 }
 
@@ -104,20 +141,28 @@ if (pantunEl) {
 // --- 6. HITUNG MUNDUR (COUNTDOWN) ---
 const weddingDate = new Date("2026-02-15T07:00:00").getTime();
 setInterval(() => {
+    const dEl = document.getElementById("d");
+    const hEl = document.getElementById("h");
+    const mEl = document.getElementById("m");
+    const sEl = document.getElementById("s");
+
+    if(!dEl || !hEl || !mEl || !sEl) return;
+
     const now = new Date().getTime();
     const distance = weddingDate - now;
 
     if (distance < 0) {
-        document.getElementById("d").innerText = "0";
-        document.getElementById("h").innerText = "0";
-        document.getElementById("m").innerText = "0";
-        document.getElementById("s").innerText = "0";
+        dEl.innerText = "0";
+        hEl.innerText = "0";
+        mEl.innerText = "0";
+        sEl.innerText = "0";
         return;
     }
-    document.getElementById("d").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-    document.getElementById("h").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    document.getElementById("m").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    document.getElementById("s").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+
+    dEl.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+    hEl.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    mEl.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    sEl.innerText = Math.floor((distance % (1000 * 60)) / 1000);
 }, 1000);
 
 // --- 7. FUNGSI COPY TEXT ---
@@ -215,24 +260,78 @@ function openEnvelope(){
 
 // --- KIRIM UCAPAN (LIMIT 1X) ---
 function kirimUcapan(){
-  const nama = document.getElementById("namaPengirim").value.trim();
-  const pesan = document.getElementById("pesanUcapan").value.trim();
-  const status = document.querySelector('input[name="rsvp"]:checked');
-  const jumlah = document.getElementById("jumlahTamu").value || 0;
 
-  if(nama.length < 3 || pesan.length < 5 || !status){
-    alert("Nama, status kehadiran & ucapan wajib diisi 🙏");
+  if(sending) return;
+  sending = true;
+
+  const btn = document.getElementById("btnKirim");
+  if(btn){
+    btn.disabled = true;
+    btn.innerHTML = "<span class='spinner'></span> Mengirim...";
+  }
+  
+  const nama = clean(document.getElementById("namaPengirim").value);
+  const pesan = clean(document.getElementById("pesanUcapan").value);
+  const status = document.querySelector('input[name="rsvp"]:checked');
+  const jumlah = parseInt(document.getElementById("jumlahTamu").value) || 0;
+
+  if(jumlah < 0){
+    alert("Jumlah tamu tidak valid");
+    sending = false;
+    resetButton(btn);
     return;
   }
 
-  if(!status){
-    alert("Silakan pilih konfirmasi kehadiran");
+  if(nama.length < 3 || pesan.length < 5 || !status){
+    alert("Nama, status kehadiran & ucapan wajib diisi 🙏");
+    sending = false;
+    resetButton(btn);
+    return;
+  }
+
+  if(nama.length > 30 || pesan.length > 300){
+    alert("Terlalu panjang 🙏");
+    sending = false;
+    resetButton(btn);
+    return;
+  }
+
+  if(!/^[\p{L}0-9\s.,'-]+$/u.test(nama)){
+    alert("Nama tidak valid");
+    sending = false;
+    resetButton(btn);
+    return;
+  }
+
+  const lowerPesan = pesan.toLowerCase().replace(/\s/g,'');
+
+  if(lowerPesan.includes("http") || lowerPesan.includes("www")){
+    alert("Pesan tidak boleh mengandung link");
+    sending = false;
+    resetButton(btn);
+    return;
+  }
+
+  if(jumlah > 10){
+    alert("Jumlah tamu terlalu banyak");
+    sending = false;
+    resetButton(btn);
     return;
   }
 
   const lastSend = localStorage.lastSend || 0;
+  
+  if(Date.now() - lastSend < 5000){
+    alert("Tunggu sebentar sebelum kirim lagi");
+    sending = false;
+    resetButton(btn);
+    return;
+  }
+
   if(Date.now() - lastSend < 24*60*60*1000){
     alert("Ucapan hanya dapat dikirim 1 kali 🙏");
+    sending = false;
+    resetButton(btn);
     return;
   }
 
@@ -241,28 +340,39 @@ function kirimUcapan(){
   : status.value;
 
   const ip = localStorage.ip || "unknown";
-
-  try{
+  
     db.ref("ucapan").push({
       nama,
       pesan,
       status: finalStatus,
       waktu: Date.now(),
-      ip
+      ip,
+      deviceId
+    })
+    .then(()=>{
+      localStorage.lastSend = Date.now();
+    
+      alert("Terima kasih, ucapan Anda terkirim 🤍");
+    
+      document.getElementById("namaPengirim").value="";
+      document.getElementById("pesanUcapan").value="";
+      document.getElementById("jumlahTamu").value="";
+
+      sending = false;
+      
+      setTimeout(() => {
+        resetButton(btn);
+      }, 1500);
+    })
+    .catch(e=>{
+      console.error(e);
+      alert("Gagal mengirim, coba lagi nanti 🙏");
+
+      sending = false;
+      resetButton(btn);
     });
-
-    localStorage.lastSend = Date.now();
-
-    alert("Terima kasih, ucapan Anda terkirim 🤍");
-
-    document.getElementById("namaPengirim").value="";
-    document.getElementById("pesanUcapan").value="";
-
-  }catch(e){
-    console.error(e);
-    alert("Gagal mengirim ucapan");
-  }
-}
+    
+    }
 
 function toggleGuestInput(show){
   document.getElementById("guestCountBox").style.display = show ? "block" : "none";
@@ -271,49 +381,30 @@ function toggleGuestInput(show){
 // --- AUTO LOAD UCAPAN (REALTIME) ---
 const list = document.getElementById("displayUcapan");
 
-db.ref("ucapan")
-  .limitToLast(50)
-  .on("child_added", snap => {
-    const d = snap.val();
-    if(!d || !list) return;
+if(list){
+  db.ref("ucapan")
+    .limitToLast(50)
+    .on("child_added", snap => {
+      const d = snap.val();
+      if(!d) return;
 
-    const div = document.createElement("div");
-    div.className = "ucapan-item";
-    db.ref("ucapan")
-  .limitToLast(50)
-  .on("child_added", snap => {
-    const d = snap.val();
-    if(!d || !list) return;
+      const statusText = d.status || "Belum Pasti";
 
-    const statusText = d.status || "Belum Pasti";
+      const div = document.createElement("div");
+      div.className = "ucapan-item";
 
-    const div = document.createElement("div");
-    div.className = "ucapan-item";
+      div.innerHTML = `
+        <strong>${d.nama}</strong>
+        <small class="status ${statusText.replace(/\s/g,'')}">
+          ${statusText}
+        </small>
+        <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
+        <p>${d.pesan}</p>
+      `;
 
-    div.innerHTML = `
-      <strong>${d.nama}</strong>
-      <small class="status ${statusText.replace(/\s/g,'')}">
-        ${statusText}
-      </small>
-      <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
-      <p>${d.pesan}</p>
-    `;
-
-    list.prepend(div);
-  });
-    ${statusText}
-         </small>
-         <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
-         <p>${d.pesan}</p>
-       `;>
-        ${d.status}
-      </small>
-      <small>${new Date(d.waktu).toLocaleString("id-ID")}</small>
-      <p>${d.pesan}</p>
-    `;
-
-    list.prepend(div);
-  });
+      list.prepend(div);
+    });
+}
 
 db.ref("ucapan").on("value", snap=>{
   let hadir=0, tidak=0, ragu=0;
